@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfApp3">
+    <Style x:Key="TB" TargetType="TextBox">
+        <Setter Property="Background" Value="White"></Setter>
+        <Setter Property="Height" Value="35"></Setter>
+        <Setter Property="Foreground" Value="#FFDF2C2C"></Setter>
+        <Setter Property="FontSize" Value="13"></Setter>
+        <Setter Property="BorderBrush" Value="#FFDA3838"></Setter>
+        <Setter Property="Padding" Value="10,0,0,0"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid x:Name="root" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" SnapsToDevicePixels="True">
+                        <Border x:Name="background" BorderThickness="2" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"></Border>
+                        <ScrollViewer x:Name="PART_ContentHost" BorderThickness="0" Padding="{TemplateBinding Padding}" IsTabStop="False" Background="{x:Null}" TextElement.Foreground="{TemplateBinding Foreground}"></ScrollViewer>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Azure"></Setter>
+
+                        </Trigger>
+                        <!--<Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" Value="#FFE2EDED"></Setter>
+                                <Setter Property="BorderBrush" Value="DarkOrchid"/>              ДОДЕЛАТЬ ФОКУС
+                            </Trigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="Text" TargetType="TextBlock">
+        <!--Foreground="#FFEE2020" FontSize="29" FontWeight="Bold"-->
+        <Setter Property="Foreground" Value="#FFEE2020"/>
+        <Setter Property="FontSize" Value="29"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+
+
+    </Style>
+
+
+ 
+
+</ResourceDictionary>
