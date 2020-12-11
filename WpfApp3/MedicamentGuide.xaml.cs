@@ -11,28 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using BL;
 namespace WpfApp3
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для MedicamentGuide.xaml
     /// </summary>
-    public partial class MainPage : Window
+    public partial class MedicamentGuide : Window
     {
-        public MainPage()
+        Globals Globals = new Globals();
+        public MedicamentGuide()
         {
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MedicineReference medicineReference = new MedicineReference();
-            medicineReference.Show();
+           
+
         }
     }
 }

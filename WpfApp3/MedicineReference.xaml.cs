@@ -15,24 +15,13 @@ using System.Windows.Shapes;
 namespace WpfApp3
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для MedicineReference.xaml
     /// </summary>
-    public partial class MainPage : Window
+    public partial class MedicineReference : Window
     {
-        public MainPage()
+        public MedicineReference()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MedicineReference medicineReference = new MedicineReference();
-            medicineReference.Show();
         }
     }
 }
