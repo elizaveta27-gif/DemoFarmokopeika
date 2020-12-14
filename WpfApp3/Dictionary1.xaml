@@ -42,16 +42,6 @@
     </Style>
 
 
-    <Image x:Key="resourceImage" Source="Resources/searchmagnifieroutline_80737.png"/>
-
-    <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <ContentPresenter/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+ 
 
 </ResourceDictionary>
