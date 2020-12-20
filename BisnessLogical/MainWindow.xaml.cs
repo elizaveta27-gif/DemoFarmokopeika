@@ -10,29 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp3
+namespace BisnessLogical
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainPage : Window
+    public partial class MainWindow : Window
     {
-        public MainPage()
+        public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var form = new Medicament();
-            form.Show();
         }
     }
 }

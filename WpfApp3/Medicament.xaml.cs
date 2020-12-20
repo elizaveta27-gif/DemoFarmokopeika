@@ -11,28 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using BisnessLogical;
 namespace WpfApp3
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для Medicament.xaml
     /// </summary>
-    public partial class MainPage : Window
+    public partial class Medicament : Window
     {
-        public MainPage()
+        public Medicament()
         {
             InitializeComponent();
+            DgridMedicament.ItemsSource = FARMOKAIPKAEntities.GetContext().MEDICAMENTs.ToList();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var form = new Medicament();
-            form.Show();
+            AddForm addForm = new AddForm();
+            addForm.Show();
         }
     }
 }

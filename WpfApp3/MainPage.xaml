@@ -44,7 +44,7 @@
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFEE2020" FontSize="29" FontWeight="Bold" Margin="30,3,29.6,-4.6">ДОБРО ПОЖАЛОВАТЬ В СПРАВОЧНУЮ СИСТЕМУ</TextBlock>
         </Grid>
         <TextBox Grid.Row="1" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True" Text="Введите название лекарства, производителя или симптом" Margin="90,26.6,24.6,0" VerticalAlignment="Top"></TextBox>
-        <Button Content="{StaticResource resourceImage}" Background="#FFB71111" Margin="714,26.6,24.6,10.4" Grid.Row="1">
+        <Button Content="{StaticResource resourceImage}" Background="#FFB71111" Margin="714,26.6,24.6,10.4" Grid.Row="1" Click="Button_Click">
             <Button.Style>
                 <Style TargetType="Button">
 
