@@ -1,0 +1,44 @@
+﻿<Window x:Class="WpfApp3.dataMedicament"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="dataMedicament" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="53*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="0,8,-0.4,339" Grid.RowSpan="2">
+            <Menu IsMainMenu="True">
+                <MenuItem Header="Основная информация" Click="MenuItem_Click"></MenuItem>
+                <MenuItem Header="Состав" ></MenuItem>
+                <MenuItem Header="Фармакодинамика"></MenuItem>
+                <MenuItem Header="Показания"></MenuItem>
+                <MenuItem Header="Способ применения"></MenuItem>
+                <MenuItem Header="Побочнве эффекты"></MenuItem>
+                <MenuItem Header="Форма выпуска"></MenuItem>
+            </Menu>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="124*"/>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="209*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="174*"/>
+                <ColumnDefinition Width="619*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Название" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="61,54,60.4,54" Width="53"></TextBlock>
+            <TextBox Name="col" Grid.Row="0" Grid.ColumnSpan="2" Margin="174,0,-0.4,0"/>
+            <TextBlock Text="ATX" Grid.Column="0" Grid.Row="1" Margin="0,0,0.4,0.4"></TextBlock>
+            <TextBox Name="col2" Grid.Row="1" Grid.ColumnSpan="2" Margin="174,0,-0.4,0"/>
+            <TextBlock Grid.Row="2" Text="Производитель"></TextBlock>
+            <TextBox Name="col3" Grid.Row="2" Grid.ColumnSpan="2" Margin="174,0,-0.4,0"/>
+        </Grid>
+    </Grid>
+
+</Window>

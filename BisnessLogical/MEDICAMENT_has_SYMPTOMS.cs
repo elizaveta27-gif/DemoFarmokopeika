@@ -15,7 +15,7 @@ namespace BisnessLogical
     public partial class MEDICAMENT_has_SYMPTOMS
     {
         public int ID { get; set; }
-        public int M_ID { get; set; }
+        public int M_ID { get; set; } 
         public int S_ID { get; set; }
     
         public virtual MEDICAMENT MEDICAMENT { get; set; }

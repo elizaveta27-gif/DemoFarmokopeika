@@ -24,29 +24,49 @@ namespace WpfApp3
         {
             InitializeComponent();
             DataContext = medicament;
+            using (FARMOKAIPKAEntities db = new FARMOKAIPKAEntities())
+            {
+                var medicaments = db.MEDICAMENTs.Join(db.ATXes,
+                    m => m.ATX_A_ID,
+                    a => a.A_ID,
+                    (m, a) => new
+                    {
+                        Name = m.M_NAME,
+                        Composition = m.M_COMPOSITION,
+                        pharmacologicalAction = m.M_PHARMACOLOGICAL__ACTION,
+                        methodUseDosage = m.M_METHOD_USE_DOSAGE,
+                        drugInteractions = m.M_DRUG_INTERACTIONS,
+                        specificInduction = m.M_SPECIFIC_INDUCTION,
+                        storageConditions = m.M_STORAGE_CONDITIONS,
+                        expityDate = m.M_EXPITY_DATE,
+                        availability_pr = m.M_AVAILABILITY_PRESCRIPTIONS,
+                        appearance = m.M_APPEARANCE,
+                        overdose = m.M_OVERDOSE,
+                        mrId = m.MR_ID,
+                        atx= a.A_ID
+                        
+                    });
+            }
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
 
-            if(string.IsNullOrWhiteSpace(medicament.M_NAME))
-            {
-                errors.AppendLine("Введите название лекарства");
-            }
-            if (string.IsNullOrWhiteSpace(medicament.M_COMPOSITION))
-            {
-                errors.AppendLine("Введите название состав лекарства");
-            }
-            if (string.IsNullOrWhiteSpace(medicament.M_PHARMACOLOGICAL__ACTION) || string.IsNullOrWhiteSpace(medicament.M_METHOD_USE_DOSAGE ) || string.IsNullOrWhiteSpace(medicament.M_DRUG_INTERACTIONS))
-            {
-                errors.AppendLine("Нельзя оставлять это поле пустым");
-            }
+            //if(string.IsNullOrWhiteSpace(medicament.M_NAME))
+            //{
+            //    errors.AppendLine("Введите название лекарства");
+            //}
+            //if (string.IsNullOrWhiteSpace(medicament.M_COMPOSITION))
+            //{
+            //    errors.AppendLine("Введите название состав лекарства");
+            //}
+            //if (string.IsNullOrWhiteSpace(medicament.M_PHARMACOLOGICAL__ACTION) || string.IsNullOrWhiteSpace(medicament.M_METHOD_USE_DOSAGE ) || string.IsNullOrWhiteSpace(medicament.M_DRUG_INTERACTIONS))
+            //{
+            //    errors.AppendLine("Нельзя оставлять это поле пустым");
+            //}
 
-            foreach (var item in medicament)
-            {
-
-            }
+           
             if (errors.Length>0)
             {
                 MessageBox.Show(errors.ToString());

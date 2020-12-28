@@ -31,7 +31,7 @@ namespace WpfApp3
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var form = new Medicament();
+            var form = new dataMedicament();
             form.Show();
         }
     }

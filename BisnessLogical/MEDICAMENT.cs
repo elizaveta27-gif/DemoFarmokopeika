@@ -10,9 +10,10 @@
 namespace BisnessLogical
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     
-    public partial class MEDICAMENT
+    public partial class MEDICAMENT:IEnumerable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MEDICAMENT()
@@ -51,5 +52,15 @@ namespace BisnessLogical
         public virtual ICollection<Sell> Sells { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SIDE_EFFECT_has_MEDICAMENT> SIDE_EFFECT_has_MEDICAMENT { get; set; }
+
+        public IEnumerator GetEnumerator()
+        {
+            return ((IEnumerable)M_NAME).GetEnumerator();
+        }
+
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

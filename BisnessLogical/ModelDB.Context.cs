@@ -23,16 +23,14 @@ namespace BisnessLogical
         {
         }
 
-            public static FARMOKAIPKAEntities GetContext()
+        public static FARMOKAIPKAEntities GetContext()
+        {
+            if(_context==null)
             {
-                if(_context==null)
-                {
-                    _context = new FARMOKAIPKAEntities();
-
-                }
-            return _context;
-                
+                _context = new FARMOKAIPKAEntities();
             }
+            return _context;
+        }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

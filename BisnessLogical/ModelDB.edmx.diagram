@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="FARMOKAIPKAModel.ATX" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.CHECK" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.CONTRAINDICATION" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FARMOKAIPKAModel.CONTRAINDICATIONS_has_MEDICAMENT" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FARMOKAIPKAModel.CONTRAINDICATIONS_has_MEDICAMENT" Width="2.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.CUSTOMER" Width="1.5" PointX="3.75" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.DISEASE" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.Group" Width="1.5" PointX="3" PointY="22.125" IsExpanded="true" />
