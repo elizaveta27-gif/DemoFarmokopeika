@@ -11,7 +11,10 @@
         Title="MainPage" Height="450" Width="800">
     <Window.Resources>
         <Image x:Key="resourceImage" Source="Resources/searchmagnifieroutline_80737.png"/>
+        <Image x:Key="res" Source="Resources/medication_pills_icon_150136.png"/>
     </Window.Resources>
+    
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -33,7 +36,9 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="Resources/medication_pills_icon_150136.png" Grid.Row="0" Grid.Column="0" MinHeight="60" Margin="86,0,73.4,8.8" MinWidth="75"></Image>
+            <Button Background="White" Click="Button_Click_1" Foreground="White" BorderBrush="White" >
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="Resources/medication_pills_icon_150136.png" Grid.Row="0" Grid.Column="0" MinHeight="60" Margin="86,0,73.4,8.8" MinWidth="75"></Image>
+            </Button> 
             <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center"  Foreground="#FF514F4F">Лекарства и БАД</TextBlock>
             <Label Grid.Column="1">Другой текст</Label>
             <TextBlock Grid.Column="2" Padding="5">Элемент TextBlock</TextBlock>
@@ -43,7 +48,19 @@
         <Grid Name="LogoContainer"  Grid.Row="0" Margin="0,0,-0.4,1.4">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFEE2020" FontSize="29" FontWeight="Bold" Margin="30,3,29.6,-4.6">ДОБРО ПОЖАЛОВАТЬ В СПРАВОЧНУЮ СИСТЕМУ</TextBlock>
         </Grid>
-        <TextBox Grid.Row="1" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True" Text="Введите название лекарства, производителя или симптом" Margin="90,26.6,24.6,0" VerticalAlignment="Top"></TextBox>
+        <TextBox Grid.Row="1" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="90,26.6,24.6,0" VerticalAlignment="Top" Name="wordFind"></TextBox>
+        <TextBlock Text="Введите название лекарства, симптома или болезни" Grid.Row="1" Margin="102,36.4,225.6,12.6" Foreground="#FFE42121" IsHitTestVisible="False" FontSize="14">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text,ElementName=wordFind}" Value="">
+                            <Setter Property="Visibility" Value="Visible"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
         <Button Content="{StaticResource resourceImage}" Background="#FFB71111" Margin="714,26.6,24.6,10.4" Grid.Row="1" Click="Button_Click">
             <Button.Style>
                 <Style TargetType="Button">

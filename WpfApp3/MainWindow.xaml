@@ -96,9 +96,32 @@
 
         <TextBlock Text="Логин" Grid.Row="2" Margin="20,61.2,24.6,89.2" FontSize="16" Grid.RowSpan="2"/>
         <TextBlock Text="Пароль" Grid.Row="2" Margin="20,104,24.6,89.2" FontSize="16" Grid.RowSpan="2"/>
-        <TextBox Grid.Row="2" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True" Text="Введите логин" Margin="90,49,24.6,0" VerticalAlignment="Top"></TextBox>
-        <TextBox Grid.Row="2" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True" Text="Введите пароль" Margin="90,100,25,0" VerticalAlignment="Top"></TextBox>
-
+        <TextBox Grid.Row="2" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True" Margin="90,49,24.6,0" VerticalAlignment="Top" Name="login"></TextBox>
+        <TextBlock IsHitTestVisible="False" FontSize="14" Text="Введите логин" Grid.Row="2" Margin="99,57.2,139.6,196" Foreground="#FFE42121" >
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text,ElementName=login}" Value="">
+                            <Setter Property="Visibility" Value="Visible"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBox Grid.Row="2" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="90,100,25,0" VerticalAlignment="Top" Name="password"></TextBox>
+        <TextBlock IsHitTestVisible="False" FontSize="14" Text="Введите пароль" Grid.Row="2" Margin="99,108.2,139.6,145" Foreground="#FFE42121" >
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text,ElementName=password}" Value="">
+                            <Setter Property="Visibility" Value="Visible"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
         <Border Name="ButtonBorder" Grid.Row="2" Height="35"  HorizontalAlignment="Center"
                 VerticalAlignment="Bottom" Margin="54,0,54.6,44.2"  CornerRadius="0" BorderThickness="1" Background="#FFF13838" Width="253" >

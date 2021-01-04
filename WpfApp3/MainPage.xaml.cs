@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.ExtendedProperties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace WpfApp3
     /// </summary>
     public partial class MainPage : Window
     {
+        //public static string word;
+        public static bool flag;
         public MainPage()
         {
             InitializeComponent();
+           
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -31,7 +35,19 @@ namespace WpfApp3
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var form = new dataMedicament();
+            string word = wordFind.Text;
+            var form = new Medicament(word);
+            form.Show();
+            flag = false;
+   
+
+            
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            flag = true;
+            var form = new Medicament();
             form.Show();
         }
     }
