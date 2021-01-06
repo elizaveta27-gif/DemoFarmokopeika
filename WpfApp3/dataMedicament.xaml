@@ -10,10 +10,17 @@
 
 
     <Grid>
-        <TabControl   Margin="0,49,-0.4,0"   >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="401*"/>
+        </Grid.RowDefinitions>
+        <TabControl   Margin="0"  Grid.Row="1" >
+
             <TabItem Header="Основная информация">
                 <Grid x:Name="mainGrid" Grid.Row="2" IsEnabled="True" >
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -27,16 +34,20 @@
                         <ColumnDefinition Width="619*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Вид лекарства" Grid.Column="0" Grid.Row="0" Name="col22"></TextBlock>
-                    <TextBox Name="Med_Type" Grid.Row="0" Grid.Column="1" Margin="0" HorizontalContentAlignment="Center" TextChanged="Med_Type_TextChanged"/>
+                    <TextBox Name="Med_Type" Grid.Row="0" Grid.Column="1" Margin="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" TextChanged="Med_Type_TextChanged" BorderBrush="White" Style="{StaticResource TBDetail}"/>
 
-                    <TextBlock Grid.Row="1" Text="Производитель" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
-                    <TextBox Name="MedManafacturer" Grid.Row="1" Grid.Column="1" Margin="0"/>
-                    <TextBlock Grid.Row="2" Text="Наличие рецепта" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
-                    <TextBox Name="MedRecep" Grid.Row="2" Grid.Column="1" Margin="0"/>
+                    <TextBlock Grid.Row="1" Text="Производитель" VerticalAlignment="Center" HorizontalAlignment="Center"  ></TextBlock>
+                    <TextBox Name="MedManafacturer" Grid.Row="1" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="2" Text="Наличие рецепта" VerticalAlignment="Center" HorizontalAlignment="Center"  ></TextBlock>
+                    <TextBox Name="MedRecep" Grid.Row="2" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
                     <TextBlock Grid.Row="3" Text="Форма выпуска" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
-                    <TextBox Name="MedApperence" Grid.Row="3" Grid.Column="1" Margin="0"/>
+                    <TextBox Name="MedApperence" Grid.Row="3" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
                     <TextBlock Grid.Row="4" Text="Срок годности" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
-                    <TextBox Name="Date" Grid.Row="4" Grid.Column="1" Margin="0"/>
+                    <TextBox Name="Date" Grid.Row="4" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="5" Text="Действующее вещество" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
+                    <TextBox Name="ActiveIn" Grid.Row="5" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="6" Text="Цена" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
+                    <TextBox Name="Price" Grid.Row="6" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
                 </Grid>
 
             </TabItem>
@@ -45,18 +56,9 @@
                     <Label Content="Состав" MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
 
                 </TabItem.Header>
-                <Grid x:Name="Composition_grid" Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="174*"/>
-                        <ColumnDefinition Width="619*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="174*"/>
-                        <RowDefinition Height="619*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Состав" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                
                     <TextBox Grid.Row="0" Grid.Column="1" Name="Composition"></TextBox>
-                </Grid>
+                
             </TabItem>
 
             <TabItem>
@@ -105,7 +107,7 @@
                 <TabItem.Header>
                     <Label Content="Передозировка" MouseLeftButtonDown="Label_MouseLeftButtonDown_6"/>
                 </TabItem.Header>
-                <TextBox Name="overDose"></TextBox>
+                <TextBox Name="overDose" TextChanged="OverDose_TextChanged"></TextBox>
             </TabItem>
 
             <TabItem>
@@ -116,12 +118,17 @@
 
             </TabItem>
 
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Болезнь" MouseLeftButtonDown="Label_MouseLeftButtonDown_7"/>
+                </TabItem.Header>
+                <TextBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="DINTERACTIONS" />
+
+            </TabItem>
+
         </TabControl>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Название" VerticalAlignment="Top" Margin="10,10,0,0"/>
-        <TextBox HorizontalAlignment="Center" Height="23" Margin="81,9,442.6,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Name="medName" TextChanged="MedName_TextChanged"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Поиск" VerticalAlignment="Top" Margin="386,9,0,0"/>
-        <TextBox HorizontalAlignment="Center" Height="23" Margin="437,8,86.6,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="270" x:Name="findText" TextChanged="MedName_TextChanged"/>
-        <Button Content="Найти" HorizontalAlignment="Right" Margin="0,7,-0.4,0" VerticalAlignment="Top" Width="63" Height="21" RenderTransformOrigin="0.347,1.153" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Название" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Row="0" Height="16" Width="53" RenderTransformOrigin="0.675,0.4"  />
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,3,0,3.6" TextWrapping="Wrap" VerticalAlignment="Center" Name="findText" TextChanged="MedName_TextChanged" Width="328" Grid.Row="0"/>
     </Grid>
 
 

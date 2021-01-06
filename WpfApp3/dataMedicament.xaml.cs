@@ -33,7 +33,7 @@ namespace WpfApp3
             InitializeComponent();
             //var dbContext = FARMOKAIPKAEntities.GetContext();
             str = wordFind;
-            medName.Text = str;
+            findText.Text = str;
             var transactions = from m in dbContext.MEDICAMENTs
                                join a in dbContext.ATXes on m.ATX_A_ID equals a.A_ID
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
@@ -53,7 +53,8 @@ namespace WpfApp3
                                    manafacturer = manafactur.NAME,
                                    prescript = m.M_AVAILABILITY_PRESCRIPTIONS,
                                    appearance = m.M_APPEARANCE,
-                                   expDate = m.M_EXPITY_DATE
+                                   expDate = m.M_EXPITY_DATE,
+                                   price = m.M_PRICE
 
                                };
 
@@ -81,6 +82,7 @@ namespace WpfApp3
                 MedManafacturer.Text = item.manafacturer;
                 MedApperence.Text = item.appearance;
                 Date.Text = item.expDate;
+                Price.Text = item.price.ToString();
 
 
             }
@@ -94,12 +96,21 @@ namespace WpfApp3
             }
             Med_Type.Text = SumStr;
 
-    
+            var activeIn = from AI in dbContext.MEDICAMENT_HAS_ACTIVESUBSTANCE
+                        where AI.MEDICAMENT.M_NAME.ToUpper() == str.ToUpper() || AI.MEDICAMENT.M_NAME == str.ToUpper()
+                        select new
+                        {
+                            name = AI.Active_Substance.AS_NAME
+                        };
+            foreach (var item in activeIn)
+            {
+                ActiveIn.Text += $"{item.name} \n";
+            }
 
         }
 
 
-
+        
         public void convertStr(string str,TextBox textBox)
         {
             int count = 300; // Количество строк
@@ -348,6 +359,11 @@ namespace WpfApp3
         }
 
         private void Med_Type_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void OverDose_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

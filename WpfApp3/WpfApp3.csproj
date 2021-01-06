@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="cartUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="dataMedicament.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +99,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="cartUI.xaml.cs">
+      <DependentUpon>cartUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="dataMedicament.xaml.cs">
       <DependentUpon>dataMedicament.xaml</DependentUpon>
@@ -167,6 +174,9 @@
       <Project>{c680c52c-70bf-48a4-b9b3-497fe4d07700}</Project>
       <Name>BisnessLogical</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\2849829-interface-magnifier-magnifying-multimedia-search-zoom_107980.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

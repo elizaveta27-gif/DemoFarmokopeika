@@ -24,7 +24,7 @@ namespace WpfApp3
         public ObservableCollection<MEDICAMENT> Employees;
 
         public static string word { get; set; } 
-        public bool flag = MainPage.flag;
+        //public bool flag = MainPage.flag;
         public static FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
        
         public Medicament(string wordFind)
@@ -149,6 +149,11 @@ namespace WpfApp3
         }
 
         private void DgridMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }

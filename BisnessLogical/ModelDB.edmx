@@ -4,13 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище FARMOKAIPKAModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище FARMOKAIPKAModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Access_Seller">
           <Key>
             <PropertyRef Name="AS_ID" />
           </Key>
           <Property Name="AS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NAME" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Active_Substance">
+          <Key>
+            <PropertyRef Name="AS_ID" />
+          </Key>
+          <Property Name="AS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AS_NAME" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ATX">
           <Key>
@@ -57,7 +64,7 @@
             <PropertyRef Name="D_ID" />
           </Key>
           <Property Name="D_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NAME" Type="nchar" MaxLength="1000" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -78,7 +85,7 @@
             <PropertyRef Name="M_ID" />
           </Key>
           <Property Name="M_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="M_NAME" Type="nvarchar" MaxLength="500" />
+          <Property Name="M_NAME" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="M_COMPOSITION" Type="nvarchar(max)" Nullable="false" />
           <Property Name="M_PHARMACOLOGICAL _ACTION" Type="nvarchar(max)" Nullable="false" />
           <Property Name="M_METHOD_USE_DOSAGE" Type="nvarchar(max)" Nullable="false" />
@@ -91,6 +98,23 @@
           <Property Name="M_OVERDOSE" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MR_ID" Type="int" Nullable="false" />
           <Property Name="ATX_A_ID" Type="int" Nullable="false" />
+          <Property Name="M_PRICE" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="MEDICAMENT_HAS_ACTIVESUBSTANCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="M_ID" Type="int" />
+          <Property Name="AS_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="MEDICAMENT_has_ATX">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="M_ID" Type="int" />
+          <Property Name="A_ID" Type="int" />
         </EntityType>
         <EntityType Name="MEDICAMENT_has_SYMPTOMS">
           <Key>
@@ -219,15 +243,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEDICAMENT_ATX">
-          <End Role="ATX" Type="Self.ATX" Multiplicity="1" />
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="*" />
+        <Association Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance">
+          <End Role="Active_Substance" Type="Self.Active_Substance" Multiplicity="0..1" />
+          <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" Type="Self.MEDICAMENT_HAS_ACTIVESUBSTANCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Active_Substance">
+              <PropertyRef Name="AS_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT_HAS_ACTIVESUBSTANCE">
+              <PropertyRef Name="AS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT">
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="0..1" />
+          <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" Type="Self.MEDICAMENT_HAS_ACTIVESUBSTANCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDICAMENT">
+              <PropertyRef Name="M_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT_HAS_ACTIVESUBSTANCE">
+              <PropertyRef Name="M_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEDICAMENT_has_ATX_ATX">
+          <End Role="ATX" Type="Self.ATX" Multiplicity="0..1" />
+          <End Role="MEDICAMENT_has_ATX" Type="Self.MEDICAMENT_has_ATX" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ATX">
               <PropertyRef Name="A_ID" />
             </Principal>
-            <Dependent Role="MEDICAMENT">
-              <PropertyRef Name="ATX_A_ID" />
+            <Dependent Role="MEDICAMENT_has_ATX">
+              <PropertyRef Name="A_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEDICAMENT_has_ATX_MEDICAMENT">
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="0..1" />
+          <End Role="MEDICAMENT_has_ATX" Type="Self.MEDICAMENT_has_ATX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDICAMENT">
+              <PropertyRef Name="M_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT_has_ATX">
+              <PropertyRef Name="M_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -252,18 +312,6 @@
             </Principal>
             <Dependent Role="MEDICAMENT_has_SYMPTOMS">
               <PropertyRef Name="S_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MEDICAMENT_MANUFACTURER">
-          <End Role="MANUFACTURER" Type="Self.MANUFACTURER" Multiplicity="1" />
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MANUFACTURER">
-              <PropertyRef Name="MR_ID" />
-            </Principal>
-            <Dependent Role="MEDICAMENT">
-              <PropertyRef Name="MR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -408,6 +456,7 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище FARMOKAIPKAModelContainer">
           <EntitySet Name="Access_Seller" EntityType="Self.Access_Seller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Active_Substance" EntityType="Self.Active_Substance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ATX" EntityType="Self.ATX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHECK" EntityType="Self.CHECK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONTRAINDICATIONS" EntityType="Self.CONTRAINDICATIONS" Schema="dbo" store:Type="Tables" />
@@ -417,6 +466,8 @@
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MANUFACTURER" EntityType="Self.MANUFACTURER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEDICAMENT" EntityType="Self.MEDICAMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEDICAMENT_HAS_ACTIVESUBSTANCE" EntityType="Self.MEDICAMENT_HAS_ACTIVESUBSTANCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEDICAMENT_has_ATX" EntityType="Self.MEDICAMENT_has_ATX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEDICAMENT_has_SYMPTOMS" EntityType="Self.MEDICAMENT_has_SYMPTOMS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEDICAMENTOS_has_GROUP" EntityType="Self.MEDICAMENTOS_has_GROUP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEDICATION" EntityType="Self.MEDICATION" Schema="dbo" store:Type="Tables" />
@@ -442,9 +493,21 @@
             <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
             <End Role="CONTRAINDICATIONS_has_MEDICAMENT" EntitySet="CONTRAINDICATIONS_has_MEDICAMENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_MEDICAMENT_ATX" Association="Self.FK_MEDICAMENT_ATX">
-            <End Role="ATX" EntitySet="ATX" />
+          <AssociationSet Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance" Association="Self.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance">
+            <End Role="Active_Substance" EntitySet="Active_Substance" />
+            <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" EntitySet="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT" Association="Self.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT">
             <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+            <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" EntitySet="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEDICAMENT_has_ATX_ATX" Association="Self.FK_MEDICAMENT_has_ATX_ATX">
+            <End Role="ATX" EntitySet="ATX" />
+            <End Role="MEDICAMENT_has_ATX" EntitySet="MEDICAMENT_has_ATX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEDICAMENT_has_ATX_MEDICAMENT" Association="Self.FK_MEDICAMENT_has_ATX_MEDICAMENT">
+            <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+            <End Role="MEDICAMENT_has_ATX" EntitySet="MEDICAMENT_has_ATX" />
           </AssociationSet>
           <AssociationSet Name="FK_MEDICAMENT_has_SYMPTOMS_MEDICAMENT" Association="Self.FK_MEDICAMENT_has_SYMPTOMS_MEDICAMENT">
             <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
@@ -453,10 +516,6 @@
           <AssociationSet Name="FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS" Association="Self.FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS">
             <End Role="SYMPTOMS" EntitySet="SYMPTOMS" />
             <End Role="MEDICAMENT_has_SYMPTOMS" EntitySet="MEDICAMENT_has_SYMPTOMS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MEDICAMENT_MANUFACTURER" Association="Self.FK_MEDICAMENT_MANUFACTURER">
-            <End Role="MANUFACTURER" EntitySet="MANUFACTURER" />
-            <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
           </AssociationSet>
           <AssociationSet Name="FK_MEDICAMENTOS_has_GROUP_Group" Association="Self.FK_MEDICAMENTOS_has_GROUP_Group">
             <End Role="Group" EntitySet="Group" />
@@ -495,8 +554,7 @@
             <End Role="SIDE_EFFECT_has_MEDICAMENT" EntitySet="SIDE_EFFECT_has_MEDICAMENT" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FARMOKAIPKAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -515,6 +573,7 @@
           <Property Name="A_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="MEDICAMENTs" Relationship="Self.FK_MEDICAMENT_ATX" FromRole="ATX" ToRole="MEDICAMENT" />
+          <NavigationProperty Name="MEDICAMENT_has_ATX" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_ATX" FromRole="ATX" ToRole="MEDICAMENT_has_ATX" />
         </EntityType>
         <EntityType Name="CHECK">
           <Key>
@@ -561,7 +620,7 @@
             <PropertyRef Name="D_ID" />
           </Key>
           <Property Name="D_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="MEDICATIONs" Relationship="Self.FK_MEDICATION_DISEASE" FromRole="DISEASE" ToRole="MEDICATION" />
         </EntityType>
         <EntityType Name="Group">
@@ -585,7 +644,7 @@
             <PropertyRef Name="M_ID" />
           </Key>
           <Property Name="M_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="M_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="M_NAME" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="M_COMPOSITION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="M_PHARMACOLOGICAL__ACTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="M_METHOD_USE_DOSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -605,6 +664,9 @@
           <NavigationProperty Name="MEDICAMENTOS_has_GROUP" Relationship="Self.FK_MEDICAMENTOS_has_GROUP_MEDICAMENT" FromRole="MEDICAMENT" ToRole="MEDICAMENTOS_has_GROUP" />
           <NavigationProperty Name="Sells" Relationship="Self.FK_Sell_MEDICAMENT" FromRole="MEDICAMENT" ToRole="Sell" />
           <NavigationProperty Name="SIDE_EFFECT_has_MEDICAMENT" Relationship="Self.FK_SIDE_EFFECT_has_MEDICAMENT_MEDICAMENT" FromRole="MEDICAMENT" ToRole="SIDE_EFFECT_has_MEDICAMENT" />
+          <NavigationProperty Name="MEDICAMENT_HAS_ACTIVESUBSTANCE" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT" FromRole="MEDICAMENT" ToRole="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
+          <NavigationProperty Name="MEDICAMENT_has_ATX" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_MEDICAMENT" FromRole="MEDICAMENT" ToRole="MEDICAMENT_has_ATX" />
+          <Property Name="M_PRICE" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="MEDICAMENT_has_SYMPTOMS">
           <Key>
@@ -1022,6 +1084,25 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Active_Substance" EntityType="FARMOKAIPKAModel.Active_Substance" />
+          <EntitySet Name="MEDICAMENT_HAS_ACTIVESUBSTANCE" EntityType="FARMOKAIPKAModel.MEDICAMENT_HAS_ACTIVESUBSTANCE" />
+          <AssociationSet Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance" Association="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance">
+            <End Role="Active_Substance" EntitySet="Active_Substance" />
+            <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" EntitySet="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT" Association="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT">
+            <End Role="MEDICAMENT" EntitySet="MEDICAMENTs" />
+            <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" EntitySet="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
+          </AssociationSet>
+          <EntitySet Name="MEDICAMENT_has_ATX" EntityType="FARMOKAIPKAModel.MEDICAMENT_has_ATX" />
+          <AssociationSet Name="FK_MEDICAMENT_has_ATX_ATX" Association="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_ATX">
+            <End Role="ATX" EntitySet="ATXes" />
+            <End Role="MEDICAMENT_has_ATX" EntitySet="MEDICAMENT_has_ATX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEDICAMENT_has_ATX_MEDICAMENT" Association="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_MEDICAMENT">
+            <End Role="MEDICAMENT" EntitySet="MEDICAMENTs" />
+            <End Role="MEDICAMENT_has_ATX" EntitySet="MEDICAMENT_has_ATX" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1034,6 +1115,82 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Active_Substance">
+          <Key>
+            <PropertyRef Name="AS_ID" />
+          </Key>
+          <Property Name="AS_ID" Type="Int32" Nullable="false" />
+          <Property Name="AS_NAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MEDICAMENT_HAS_ACTIVESUBSTANCE" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance" FromRole="Active_Substance" ToRole="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
+        </EntityType>
+        <EntityType Name="MEDICAMENT_HAS_ACTIVESUBSTANCE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="M_ID" Type="Int32" />
+          <Property Name="AS_ID" Type="Int32" />
+          <NavigationProperty Name="Active_Substance" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance" FromRole="MEDICAMENT_HAS_ACTIVESUBSTANCE" ToRole="Active_Substance" />
+          <NavigationProperty Name="MEDICAMENT" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT" FromRole="MEDICAMENT_HAS_ACTIVESUBSTANCE" ToRole="MEDICAMENT" />
+        </EntityType>
+        <Association Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance">
+          <End Type="FARMOKAIPKAModel.Active_Substance" Role="Active_Substance" Multiplicity="0..1" />
+          <End Type="FARMOKAIPKAModel.MEDICAMENT_HAS_ACTIVESUBSTANCE" Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Active_Substance">
+              <PropertyRef Name="AS_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT_HAS_ACTIVESUBSTANCE">
+              <PropertyRef Name="AS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT">
+          <End Type="FARMOKAIPKAModel.MEDICAMENT" Role="MEDICAMENT" Multiplicity="0..1" />
+          <End Type="FARMOKAIPKAModel.MEDICAMENT_HAS_ACTIVESUBSTANCE" Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDICAMENT">
+              <PropertyRef Name="M_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT_HAS_ACTIVESUBSTANCE">
+              <PropertyRef Name="M_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MEDICAMENT_has_ATX">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="M_ID" Type="Int32" />
+          <Property Name="A_ID" Type="Int32" />
+          <NavigationProperty Name="ATX" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_ATX" FromRole="MEDICAMENT_has_ATX" ToRole="ATX" />
+          <NavigationProperty Name="MEDICAMENT" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_MEDICAMENT" FromRole="MEDICAMENT_has_ATX" ToRole="MEDICAMENT" />
+        </EntityType>
+        <Association Name="FK_MEDICAMENT_has_ATX_ATX">
+          <End Type="FARMOKAIPKAModel.ATX" Role="ATX" Multiplicity="0..1" />
+          <End Type="FARMOKAIPKAModel.MEDICAMENT_has_ATX" Role="MEDICAMENT_has_ATX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATX">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT_has_ATX">
+              <PropertyRef Name="A_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEDICAMENT_has_ATX_MEDICAMENT">
+          <End Type="FARMOKAIPKAModel.MEDICAMENT" Role="MEDICAMENT" Multiplicity="0..1" />
+          <End Type="FARMOKAIPKAModel.MEDICAMENT_has_ATX" Role="MEDICAMENT_has_ATX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDICAMENT">
+              <PropertyRef Name="M_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT_has_ATX">
+              <PropertyRef Name="M_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1120,6 +1277,7 @@
           <EntitySetMapping Name="MEDICAMENTs">
             <EntityTypeMapping TypeName="FARMOKAIPKAModel.MEDICAMENT">
               <MappingFragment StoreEntitySet="MEDICAMENT">
+                <ScalarProperty Name="M_PRICE" ColumnName="M_PRICE" />
                 <ScalarProperty Name="M_ID" ColumnName="M_ID" />
                 <ScalarProperty Name="M_NAME" ColumnName="M_NAME" />
                 <ScalarProperty Name="M_COMPOSITION" ColumnName="M_COMPOSITION" />
@@ -1249,6 +1407,32 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище FARMOKAIPKAModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище FARMOKAIPKAModel.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Active_Substance">
+            <EntityTypeMapping TypeName="FARMOKAIPKAModel.Active_Substance">
+              <MappingFragment StoreEntitySet="Active_Substance">
+                <ScalarProperty Name="AS_NAME" ColumnName="AS_NAME" />
+                <ScalarProperty Name="AS_ID" ColumnName="AS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEDICAMENT_HAS_ACTIVESUBSTANCE">
+            <EntityTypeMapping TypeName="FARMOKAIPKAModel.MEDICAMENT_HAS_ACTIVESUBSTANCE">
+              <MappingFragment StoreEntitySet="MEDICAMENT_HAS_ACTIVESUBSTANCE">
+                <ScalarProperty Name="AS_ID" ColumnName="AS_ID" />
+                <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEDICAMENT_has_ATX">
+            <EntityTypeMapping TypeName="FARMOKAIPKAModel.MEDICAMENT_has_ATX">
+              <MappingFragment StoreEntitySet="MEDICAMENT_has_ATX">
+                <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+                <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -12,13 +12,13 @@ namespace BisnessLogical
     using System;
     using System.Collections.Generic;
     
-    public partial class MEDICAMENT_has_SYMPTOMS
+    public partial class MEDICAMENT_HAS_ACTIVESUBSTANCE
     {
         public int ID { get; set; }
-        public int M_ID { get; set; }
-        public int S_ID { get; set; }
+        public Nullable<int> M_ID { get; set; }
+        public Nullable<int> AS_ID { get; set; }
     
+        public virtual Active_Substance Active_Substance { get; set; }
         public virtual MEDICAMENT MEDICAMENT { get; set; }
-        public virtual SYMPTOM SYMPTOM { get; set; }
     }
 }

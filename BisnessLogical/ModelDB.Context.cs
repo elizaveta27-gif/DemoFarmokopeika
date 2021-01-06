@@ -17,11 +17,11 @@ namespace BisnessLogical
     
     public partial class FARMOKAIPKAEntities : DbContext
     {
-        private static FARMOKAIPKAEntities _context;
         public FARMOKAIPKAEntities()
             : base("name=FARMOKAIPKAEntities")
         {
         }
+        public static FARMOKAIPKAEntities _context;
 
         public static FARMOKAIPKAEntities GetContext()
         {
@@ -56,6 +56,9 @@ namespace BisnessLogical
         public virtual DbSet<SIDE_EFFECT_has_MEDICAMENT> SIDE_EFFECT_has_MEDICAMENT { get; set; }
         public virtual DbSet<SYMPTOM> SYMPTOMS { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Active_Substance> Active_Substance { get; set; }
+        public virtual DbSet<MEDICAMENT_HAS_ACTIVESUBSTANCE> MEDICAMENT_HAS_ACTIVESUBSTANCE { get; set; }
+        public virtual DbSet<MEDICAMENT_has_ATX> MEDICAMENT_has_ATX { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

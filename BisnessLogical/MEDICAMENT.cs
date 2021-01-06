@@ -10,10 +10,9 @@
 namespace BisnessLogical
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     
-    public partial class MEDICAMENT:IEnumerable
+    public partial class MEDICAMENT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MEDICAMENT()
@@ -23,6 +22,8 @@ namespace BisnessLogical
             this.MEDICAMENTOS_has_GROUP = new HashSet<MEDICAMENTOS_has_GROUP>();
             this.Sells = new HashSet<Sell>();
             this.SIDE_EFFECT_has_MEDICAMENT = new HashSet<SIDE_EFFECT_has_MEDICAMENT>();
+            this.MEDICAMENT_HAS_ACTIVESUBSTANCE = new HashSet<MEDICAMENT_HAS_ACTIVESUBSTANCE>();
+            this.MEDICAMENT_has_ATX = new HashSet<MEDICAMENT_has_ATX>();
         }
     
         public int M_ID { get; set; }
@@ -39,6 +40,7 @@ namespace BisnessLogical
         public string M_OVERDOSE { get; set; }
         public int MR_ID { get; set; }
         public int ATX_A_ID { get; set; }
+        public Nullable<decimal> M_PRICE { get; set; }
     
         public virtual ATX ATX { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -52,15 +54,9 @@ namespace BisnessLogical
         public virtual ICollection<Sell> Sells { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SIDE_EFFECT_has_MEDICAMENT> SIDE_EFFECT_has_MEDICAMENT { get; set; }
-
-        public IEnumerator GetEnumerator()
-        {
-            return ((IEnumerable)M_NAME).GetEnumerator();
-        }
-
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MEDICAMENT_HAS_ACTIVESUBSTANCE> MEDICAMENT_HAS_ACTIVESUBSTANCE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MEDICAMENT_has_ATX> MEDICAMENT_has_ATX { get; set; }
     }
 }

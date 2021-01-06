@@ -10,65 +10,142 @@
         
         Title="MainPage" Height="450" Width="800">
     <Window.Resources>
-        <Image x:Key="resourceImage" Source="Resources/searchmagnifieroutline_80737.png"/>
+        <Image x:Key="resourceImage" Source="Resources/2849829-interface-magnifier-magnifying-multimedia-search-zoom_107980.png"/>
         <Image x:Key="res" Source="Resources/medication_pills_icon_150136.png"/>
+
     </Window.Resources>
-    
-    
+
+
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="50"/>
-            <RowDefinition MinHeight="72"/>
-            <RowDefinition Height="240*" />
-            <RowDefinition  />
+            <RowDefinition  Height="34*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="300*" />
+            <RowDefinition Height="22" />
 
         </Grid.RowDefinitions>
-        <Grid Grid.Row="2" Margin="45,45.4,44.6,25.2">
+        <Grid Grid.Row="2" Margin="0,43,-0.4,4.6">
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="227*"></RowDefinition>
+
+
+            </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition SharedSizeGroup="SomeText"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0.4,-0.4,10.2"  EnableColumnVirtualization="True" Grid.Row="1"  HorizontalContentAlignment="Center">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*" >
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Категория" Binding="{Binding Group}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Производитель" Binding="{Binding MR}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="ATX" Binding="{Binding ATX}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Симптом" Binding="{Binding sym}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Болезнь" Binding="{Binding disease}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Категория" Binding="{Binding Group}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Подробнее" Name ="BtnEdit" Click="BtnEdit_Click" Style="{StaticResource ButRoundCorner}"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+
+
+        </Grid>
+
+        <Grid Name="LogoContainer"  Grid.Row="0" Margin="0,0,-0.4,1.6">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFEE2020" FontSize="22" FontWeight="Bold" Margin="0">ДОБРО ПОЖАЛОВАТЬ В СПРАВОЧНУЮ СИСТЕМУ</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="10,0.4,9.6,0.6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="399*"/>
+                <ColumnDefinition Width="70"/>
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Background="White" Click="Button_Click_1" Foreground="White" BorderBrush="White" >
-                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="Resources/medication_pills_icon_150136.png" Grid.Row="0" Grid.Column="0" MinHeight="60" Margin="86,0,73.4,8.8" MinWidth="75"></Image>
-            </Button> 
-            <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center"  Foreground="#FF514F4F">Лекарства и БАД</TextBlock>
-            <Label Grid.Column="1">Другой текст</Label>
-            <TextBlock Grid.Column="2" Padding="5">Элемент TextBlock</TextBlock>
 
+            <TextBox Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="0" VerticalAlignment="Center" Name="wordFind" Grid.ColumnSpan="2" Grid.Row="0" LostMouseCapture="WordFind_LostMouseCapture" ></TextBox>
+            <Button Content="{StaticResource resourceImage}"  Margin="0" Click="Button_Click" Style="{StaticResource RoundCorner}" Grid.Row="0" VerticalAlignment="Center" Height="35" Grid.Column="1"/>
+            <TextBlock Text="Введите название лекарства, симптома или болезни" Margin="0" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="#FFE42121" IsHitTestVisible="False" FontSize="14" Grid.ColumnSpan="2"  Name="explation" >
+
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text,ElementName=wordFind}" Value="">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
 
         </Grid>
-        <Grid Name="LogoContainer"  Grid.Row="0" Margin="0,0,-0.4,1.4">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFEE2020" FontSize="29" FontWeight="Bold" Margin="30,3,29.6,-4.6">ДОБРО ПОЖАЛОВАТЬ В СПРАВОЧНУЮ СИСТЕМУ</TextBlock>
-        </Grid>
-        <TextBox Grid.Row="1" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="90,26.6,24.6,0" VerticalAlignment="Top" Name="wordFind"></TextBox>
-        <TextBlock Text="Введите название лекарства, симптома или болезни" Grid.Row="1" Margin="102,36.4,225.6,12.6" Foreground="#FFE42121" IsHitTestVisible="False" FontSize="14">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"></Setter>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text,ElementName=wordFind}" Value="">
-                            <Setter Property="Visibility" Value="Visible"></Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <Button Content="{StaticResource resourceImage}" Background="#FFB71111" Margin="714,26.6,24.6,10.4" Grid.Row="1" Click="Button_Click">
-            <Button.Style>
-                <Style TargetType="Button">
 
-                </Style>
-            </Button.Style>
-        </Button>
-        <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="0" Grid.Row="2" TextWrapping="Wrap" Text="Каталог" VerticalAlignment="Top" Width="117"  />
+        <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="338,4.4,338.6,0" Grid.Row="2" TextWrapping="Wrap" Text="Каталог" VerticalAlignment="Top" Width="117" Height="39"  />
 
+        <Button Grid.Row="3" Margin="0" Width="200" HorizontalAlignment="Right" Content="Положить в корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_2"></Button>
+        <Button Grid.Row="3" Margin="0,0.4,119.6,0" Width="200" HorizontalAlignment="Left" Content="Посмотреть корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_3" />
     </Grid>
 </Window>

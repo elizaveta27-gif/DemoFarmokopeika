@@ -12,13 +12,18 @@ namespace BisnessLogical
     using System;
     using System.Collections.Generic;
     
-    public partial class MEDICAMENT_has_SYMPTOMS
+    public partial class Active_Substance
     {
-        public int ID { get; set; }
-        public int M_ID { get; set; }
-        public int S_ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Active_Substance()
+        {
+            this.MEDICAMENT_HAS_ACTIVESUBSTANCE = new HashSet<MEDICAMENT_HAS_ACTIVESUBSTANCE>();
+        }
     
-        public virtual MEDICAMENT MEDICAMENT { get; set; }
-        public virtual SYMPTOM SYMPTOM { get; set; }
+        public int AS_ID { get; set; }
+        public string AS_NAME { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MEDICAMENT_HAS_ACTIVESUBSTANCE> MEDICAMENT_HAS_ACTIVESUBSTANCE { get; set; }
     }
 }
