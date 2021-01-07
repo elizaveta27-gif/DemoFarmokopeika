@@ -130,7 +130,7 @@
                     <Setter Property="BorderBrush" Value="Bisque"></Setter>
                 </Style>
             </Border.Style>
-            <Button Content="Авторизоваться" FontSize="16" Foreground="Black" Click="Button_Click">
+            <Button Content="Авторизоваться" FontSize="16" Foreground="Black" Click="Button_Click" Style="{StaticResource RoundCorner}">
                 <!--<Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"></Setter>

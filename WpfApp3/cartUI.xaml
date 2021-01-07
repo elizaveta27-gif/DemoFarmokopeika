@@ -32,7 +32,7 @@
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Количество" Binding="{Binding Cout}" Width="*">
+                <DataGridTextColumn x:Name="priceCol" Header="Количество" Binding="{Binding Cout}" Width="*">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment"
@@ -41,7 +41,11 @@
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
             </DataGrid.Columns>
-            
+
         </DataGrid>
+        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,0,9.6,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" Name="Cost"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,1,144.6,0" Grid.Row="2" TextWrapping="Wrap" Text="Стоимость" VerticalAlignment="Center"/>
+        <Button Content="Провести" HorizontalAlignment="Left" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="Button_Click"/>
+
     </Grid>
 </Window>
