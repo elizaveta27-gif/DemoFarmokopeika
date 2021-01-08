@@ -1,0 +1,87 @@
+﻿<Window x:Class="WpfApp3.report"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="report" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="136*"/>
+            <RowDefinition Height="249*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Отчет" Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="0" Width="82" />
+        <TextBlock Text="Самый продаваемый товар" Grid.Row="1" HorizontalAlignment="Center" Margin="0,5,0,0" Grid.RowSpan="2" Width="152" ></TextBlock>
+        <Grid Grid.Row="1" Margin="0,29.8,-0.4,0.2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="267*"/>
+                <ColumnDefinition Width="526*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBox Text="Название" HorizontalContentAlignment="Center" Grid.Row="0"></TextBox>
+                <TextBox Text="Производитель" HorizontalContentAlignment="Center" Grid.Row="1"></TextBox>
+                <TextBox Text="Цена" HorizontalContentAlignment="Center" Grid.Row="2"></TextBox>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Name="TBName"></TextBox>
+                <TextBox Grid.Row="1" Name="TBMAnafacturer" ></TextBox>
+                <TextBox Grid.Row="2" Name="TBPrice" ></TextBox>
+            </Grid>
+        </Grid>
+        <TextBlock Grid.Row="2" Text="Рейтинг лекарств" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
+        <DataGrid x:Name="rating" Grid.Row="2" Margin="0,30,0,0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*" >
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Производитель" Binding="{Binding Manufacturer}" Width="*">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Cout}" Width="*">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

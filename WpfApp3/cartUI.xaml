@@ -24,7 +24,7 @@
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Цена" Binding="{Binding M_PRICE}" Width="*">
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment"
@@ -39,7 +39,9 @@
                                         Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    
                 </DataGridTextColumn>
+                
             </DataGrid.Columns>
 
         </DataGrid>

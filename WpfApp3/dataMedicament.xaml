@@ -56,9 +56,9 @@
                     <Label Content="Состав" MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
 
                 </TabItem.Header>
-                
-                    <TextBox Grid.Row="0" Grid.Column="1" Name="Composition"></TextBox>
-                
+
+                <TextBox Grid.Row="0" Grid.Column="1" Name="Composition"></TextBox>
+
             </TabItem>
 
             <TabItem>
@@ -111,20 +111,28 @@
             </TabItem>
 
             <TabItem>
-                <TabItem.Header>
-                    <Label Content="Болезнь" MouseLeftButtonDown="Label_MouseLeftButtonDown_7"/>
+                <TabItem.Header >
+                    <Label Content="Болезнь и симптомы" MouseLeftButtonDown="Label_MouseLeftButtonDown_8"/>
                 </TabItem.Header>
-                <TextBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="Disease" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="77*"/>
+                        <RowDefinition Height="247*"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="217*"/>
+                        <ColumnDefinition Width="571*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="Болезнь" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+                    <TextBox Text="Симптомы" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="0" Name="TBDisease" ></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Name="TBSymptom"  HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+                </Grid>
 
             </TabItem>
 
-            <TabItem>
-                <TabItem.Header>
-                    <Label Content="Болезнь" MouseLeftButtonDown="Label_MouseLeftButtonDown_7"/>
-                </TabItem.Header>
-                <TextBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="DINTERACTIONS" />
 
-            </TabItem>
 
         </TabControl>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Название" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Row="0" Height="16" Width="53" RenderTransformOrigin="0.675,0.4"  />

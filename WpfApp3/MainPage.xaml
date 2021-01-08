@@ -38,7 +38,7 @@
                 <ColumnDefinition/>
 
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0.4,-0.4,10.2"  EnableColumnVirtualization="True" Grid.Row="1"  HorizontalContentAlignment="Center">
+            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0.4,-0.4,10.2"  EnableColumnVirtualization="True" Grid.Row="1"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged">
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*" >
                         <DataGridTextColumn.HeaderStyle>

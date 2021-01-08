@@ -45,8 +45,17 @@ namespace WpfApp3
                             Cout = g.Count(),
                             price = g.Select(p => p.M_PRICE)
                         });
+
+            var transaction = from lm in trans
+                              join m in dbContext.MEDICAMENTs on lm.name equals m.M_NAME
+                              select new
+                              {
+                                  name = lm.name,
+                                  Cout = lm.Cout,
+                                  Price = m.M_PRICE
+                              };
             
-            foreach (var item in trans)
+            foreach (var item in transaction)
             {
                 ListMedicament.Items.Add(item);
                 

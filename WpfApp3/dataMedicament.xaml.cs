@@ -34,15 +34,12 @@ namespace WpfApp3
             //var dbContext = FARMOKAIPKAEntities.GetContext();
             str = wordFind;
             findText.Text = str;
-            var transactions = from m in dbContext.MEDICAMENTs
+            var transactions = from m in dbContext.MEDICAMENTs //объединение и запрос данных о лекарствах
                                join a in dbContext.ATXes on m.ATX_A_ID equals a.A_ID
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join manafactur in dbContext.MANUFACTURERs on m.MR_ID equals manafactur.MR_ID
-                               join med in dbContext.MEDICATIONs on s.S_ID equals med.D_ID
-                            
-
-
+                               join med in dbContext.MEDICATIONs on s.S_ID equals med.D_ID 
                                select new
                                {
                                    Name = m.M_NAME,
@@ -366,6 +363,40 @@ namespace WpfApp3
         private void OverDose_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Label_MouseLeftButtonDown_8(object sender, MouseButtonEventArgs e)
+        {
+            TBDisease.Text = "";
+            TBSymptom.Text = "";
+            var sym = from m in dbContext.MEDICAMENTs
+                      where m.M_NAME.ToUpper() == str.ToUpper()
+                      join s in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals s.M_ID
+                             select new
+                             {
+                                
+                                 Sname = s.SYMPTOM.S_NAME
+                             };
+            var disease = from m in dbContext.MEDICAMENTs
+                          where m.M_NAME.ToUpper() == str.ToUpper()
+                          join s in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals s.M_ID
+                          join d in dbContext.MEDICATIONs on s.S_ID equals d.S_ID
+                          select new
+                          {
+                              Dname = d.DISEASE.NAME
+
+                          };
+            
+            foreach (var item in sym.Distinct())
+            {
+                convertStr(item.Sname, TBSymptom);
+               
+            }
+            foreach (var item in disease.Distinct())
+            {
+                convertStr(item.Dname, TBDisease);
+
+            }
         }
     }
 }

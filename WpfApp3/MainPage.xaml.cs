@@ -178,21 +178,29 @@ namespace WpfApp3
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         { //сделать исключение
-           
+
             var nameMed = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;//название лекарства
-            var meds = dbContext.MEDICAMENTs.Where(m=>m.M_NAME == nameMed);
+            var meds = dbContext.MEDICAMENTs.Where(m => m.M_NAME == nameMed);
             foreach (var item in meds)
             {
                 cart.Add(item);
             }
 
-           
+            //var report = new report();
+            //report.Show();
+
+
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             var carts = new cartUI();
             carts.Show();
+        }
+
+        private void DgridMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
