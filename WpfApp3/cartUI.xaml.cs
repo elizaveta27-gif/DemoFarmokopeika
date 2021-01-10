@@ -27,7 +27,7 @@ namespace WpfApp3
             //добавить исключение
             listMed = MainPage.cart.GetAll();
 
-
+           
             var tr = from f in listMed
                      group f by f.M_NAME into g
                      select new
@@ -54,7 +54,7 @@ namespace WpfApp3
                                   Cout = lm.Cout,
                                   Price = m.M_PRICE
                               };
-            
+           
             foreach (var item in transaction)
             {
                 ListMedicament.Items.Add(item);
@@ -103,6 +103,45 @@ namespace WpfApp3
             ListMedicament.Items.Clear();
             Cost.Text = "0";
             this.Close();
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            //TODO: СДЕЛАТЬ ИЧКЛЮЧЕНИЕ
+            var nameMed = ((TextBlock)(this.ListMedicament.Columns[0].GetCellContent(ListMedicament.SelectedItem))).Text;//название лекарства
+            var medicament = dbContext.MEDICAMENTs.First(m=>m.M_NAME==nameMed);
+            MainPage.cart.Removes(medicament);
+            listMed.Remove(medicament);
+            ListMedicament.Items.Clear();
+            var trans = listMed.GroupBy(p => p.M_NAME)
+                        .Select(g => new
+                        {
+                            name = g.Key,
+                            Cout = g.Count(),
+                            price = g.Select(p => p.M_PRICE)
+                        });
+
+            var transaction = from lm in trans
+                              join m in dbContext.MEDICAMENTs on lm.name equals m.M_NAME
+                              select new
+                              {
+                                  name = lm.name,
+                                  Cout = lm.Cout,
+                                  Price = m.M_PRICE
+                              };
+
+            foreach (var item in transaction)
+            {
+                ListMedicament.Items.Add(item);
+
+            }
+            decimal cost = 0;
+            foreach (var item in listMed)
+            {
+                cost += (decimal)item.M_PRICE;
+            }
+            Cost.Text = cost.ToString();
 
         }
     }

@@ -69,9 +69,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAtx.xaml.cs">
+      <DependentUpon>AddAtx.xaml</DependentUpon>
+    </Compile>
     <Compile Include="report.xaml.cs">
       <DependentUpon>report.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddAtx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

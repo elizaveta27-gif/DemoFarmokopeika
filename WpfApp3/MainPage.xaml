@@ -15,17 +15,20 @@
 
     </Window.Resources>
 
-
+    <Grid>
+        <TabControl></TabControl>
+    </Grid>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition  Height="34*"/>
-            <RowDefinition Height="32*"/>
-            <RowDefinition Height="300*" />
-            <RowDefinition Height="22" />
+            <RowDefinition  Height="36*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="52*" />
+            <RowDefinition Height="259*" />
+            <RowDefinition Height="35*" />
 
         </Grid.RowDefinitions>
-        <Grid Grid.Row="2" Margin="0,43,-0.4,4.6">
+        <Grid Grid.Row="3" Margin="0,42.4,-0.4,2.8">
 
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -38,15 +41,18 @@
                 <ColumnDefinition/>
 
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0.4,-0.4,10.2"  EnableColumnVirtualization="True" Grid.Row="1"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged">
+            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0.4,-0.4,10.2"  EnableColumnVirtualization="True" Grid.Row="4"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged">
                 <DataGrid.Columns >
-                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*" >
+                    <DataGridTextColumn Header="Название" Width="*" >
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Name"></Binding>
+                        </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Категория" Binding="{Binding Group}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
@@ -88,14 +94,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Категория" Binding="{Binding Group}" Width="*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
+
                     <DataGridTemplateColumn Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -111,11 +110,11 @@
 
         </Grid>
 
-        <Grid Name="LogoContainer"  Grid.Row="0" Margin="0,0,-0.4,1.6">
+        <Grid Name="LogoContainer"  Grid.Row="0" Margin="0,0,-0.4,3">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFEE2020" FontSize="22" FontWeight="Bold" Margin="0">ДОБРО ПОЖАЛОВАТЬ В СПРАВОЧНУЮ СИСТЕМУ</TextBlock>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="10,0.4,9.6,0.6">
+        <Grid Grid.Row="2" Margin="0,0.4,-0.4,258.8" Grid.RowSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="399*"/>
                 <ColumnDefinition Width="70"/>
@@ -143,9 +142,10 @@
 
         </Grid>
 
-        <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="338,4.4,338.6,0" Grid.Row="2" TextWrapping="Wrap" Text="Каталог" VerticalAlignment="Top" Width="117" Height="39"  />
+       
+        <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="338,0.4,338.6,0" Grid.Row="3" TextWrapping="Wrap" Text="Каталог" VerticalAlignment="Top" Width="117" Height="39"  />
 
-        <Button Grid.Row="3" Margin="0" Width="200" HorizontalAlignment="Right" Content="Положить в корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_2"></Button>
-        <Button Grid.Row="3" Margin="0,0.4,119.6,0" Width="200" HorizontalAlignment="Left" Content="Посмотреть корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_3" />
+        <Button Grid.Row="4" Margin="0,3.2,-0.4,9" Width="200" HorizontalAlignment="Right" Content="Положить в корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_2"/>
+        <Button Grid.Row="4" Width="200" HorizontalAlignment="Left" Content="Посмотреть корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_3" Margin="0,3.2,0,9" />
     </Grid>
 </Window>

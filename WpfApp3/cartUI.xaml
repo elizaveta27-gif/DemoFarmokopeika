@@ -7,14 +7,18 @@
         mc:Ignorable="d"
         Title="cartUI" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="326*"/>
+            <ColumnDefinition Width="467*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="39*"/>
             <RowDefinition Height="301*"/>
             <RowDefinition Height="42*"/>
             <RowDefinition Height="38*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Корзина" Style="{StaticResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <DataGrid Grid.Row="1" Margin="10" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:Name="ListMedicament" AutoGenerateColumns="False">
+        <TextBlock Text="Корзина" Style="{StaticResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Margin="10.8,0,336.6,0.2"/>
+        <DataGrid Grid.Row="1" Margin="10,9.8,9.6,10" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:Name="ListMedicament" AutoGenerateColumns="False" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="*" >
                     <DataGridTextColumn.HeaderStyle>
@@ -32,22 +36,22 @@
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn x:Name="priceCol" Header="Количество" Binding="{Binding Cout}" Width="*">
+                <DataGridTextColumn x:Name="priceCol" Header="Количество" Binding="{Binding Cout}" Width="*" >
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
-                    
+
                 </DataGridTextColumn>
-                
+
             </DataGrid.Columns>
 
         </DataGrid>
-        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,0,9.6,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" Name="Cost"/>
-        <TextBlock HorizontalAlignment="Right" Margin="0,1,144.6,0" Grid.Row="2" TextWrapping="Wrap" Text="Стоимость" VerticalAlignment="Center"/>
-        <Button Content="Провести" HorizontalAlignment="Left" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="Button_Click"/>
-
+        <TextBox HorizontalAlignment="Right" Height="23" Margin="0,10,9.6,9.4" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" Name="Cost" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,14,143.6,12.4" Grid.Row="2" TextWrapping="Wrap" Text="Стоимость" VerticalAlignment="Center" Grid.Column="1"/>
+        <Button Content="Провести" HorizontalAlignment="Left" Margin="0,12,0,11.4" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="Button_Click"/>
+        <Button Content="Удалить" HorizontalAlignment="Left" Margin="104,14,0,10.4" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="Button_Click_1"/>
     </Grid>
 </Window>

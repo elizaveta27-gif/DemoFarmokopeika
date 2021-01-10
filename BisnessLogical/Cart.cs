@@ -51,6 +51,18 @@ namespace BisnessLogical
             }
             return result;
         }
+
+        public void Removes(MEDICAMENT medicament)
+        {
+            if (Lekarstvoes.TryGetValue(medicament, out int count))
+            {
+                Lekarstvoes[medicament] = --count;
+            }
+            else
+            {
+                Lekarstvoes.Remove(medicament);
+            }
+        }
     }
 }
 

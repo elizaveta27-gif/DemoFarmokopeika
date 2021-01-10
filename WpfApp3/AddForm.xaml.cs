@@ -20,10 +20,31 @@ namespace WpfApp3
     public partial class AddForm : Window    
     {
         private MEDICAMENT medicament = new MEDICAMENT();
-        public AddForm()
+        public static FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
+        public int idManufacturer=0;
+        public int idAtx = 0;
+        List<int> atxId = new List<int>();
+        //public List<MANUFACTURER> mANUFACTURERs = dbContext.MANUFACTURERs.ToList();
+        public AddForm(MEDICAMENT selectedMedicament)
         {
+
             InitializeComponent();
+            if (selectedMedicament != null)
+            {
+                medicament = selectedMedicament;
+            }
             DataContext = medicament;
+            listManafacturer.ItemsSource = FARMOKAIPKAEntities._context.MANUFACTURERs.ToList();
+            listATX.ItemsSource = FARMOKAIPKAEntities._context.ATXes.ToList();
+            var transaction = from m in dbContext.MEDICAMENTs
+                              join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
+                              join atx in dbContext.ATXes on m.ATX_A_ID equals atx.A_ID
+                              select new
+                              {
+                                  MR_ID = MR.MR_ID,
+                                  ATX_ID = atx.A_ID
+                              };
+            //mANUFACTURERs = FARMOKAIPKAEntities._context.MANUFACTURERs.ToList();
             using (FARMOKAIPKAEntities db = new FARMOKAIPKAEntities())
             {
                 var medicaments = db.MEDICAMENTs.Join(db.ATXes,
@@ -65,16 +86,62 @@ namespace WpfApp3
             //{
             //    errors.AppendLine("Нельзя оставлять это поле пустым");
             //}
+            if (dbContext.MEDICAMENTs.Where(m=>m.M_NAME.ToUpper() == TBName.Text.ToUpper()).Count() == 0)
+            {
+                var nameMR = listManafacturer.Text;
+                var nameAtx = listATX.Text;
 
+                var mANUFACTURERs = dbContext.MANUFACTURERs;
+                var ATX = dbContext.ATXes;
+                //сделать исключение 
+                idManufacturer = (int)(mANUFACTURERs.First(m => m.NAME == nameMR).MR_ID);
+                idAtx = (int)(ATX.First(m => m.NAME == nameAtx).A_ID);
+
+
+
+                MEDICAMENT medicament = new MEDICAMENT()
+                {
+                    M_NAME = TBName.Text,
+                    M_COMPOSITION = TBCOMPOSITION.Text,
+                    M_PHARMACOLOGICAL__ACTION = TBPHARMACOLOGICAL__ACTION.Text,
+                    M_METHOD_USE_DOSAGE = TBMethodUse.Text,
+                    M_DRUG_INTERACTIONS = TBDRUG_INTERACTIONS.Text,
+                    M_SPECIFIC_INDUCTION = TBSPECIFIC_INDUCTION.Text,
+                    M_STORAGE_CONDITIONS = TBSTORAGE_CONDITIONS.Text,
+                    M_EXPITY_DATE = TBEXPITY_DATE.Text,
+                    M_AVAILABILITY_PRESCRIPTIONS = TBAVAILABILITY_PRESCRIPTIONS.Text,
+                    M_APPEARANCE = TBAPPEARANCE.Text,
+                    M_OVERDOSE = TB_OVERDOSE.Text,
+                    MR_ID = idManufacturer,
+                    ATX_A_ID = idAtx
+
+
+
+
+                };
+
+                foreach (var item in atxId)
+                {
+                    var a = new MEDICAMENT_has_ATX()
+                    {
+                        A_ID = item,
+                        M_ID = medicament.M_ID
+
+                    };
+                    FARMOKAIPKAEntities.GetContext().MEDICAMENT_has_ATX.Add(a);
+                }
+            }
            
-            if (errors.Length>0)
+
+
+            if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
                 return;
             }
-       
 
-            if(medicament.M_ID == 0)
+
+            if (medicament.M_ID == 0)
             {
                 FARMOKAIPKAEntities.GetContext().MEDICAMENTs.Add(medicament);
             }
@@ -89,6 +156,20 @@ namespace WpfApp3
 
                 MessageBox.Show(ex.Message.ToString());
             }
+            
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var nameAtx = listATX.Text;
+            var ATX = dbContext.ATXes;
+            idAtx = (int)(ATX.First(m => m.NAME == nameAtx).A_ID);
+            listATX.Text = "";
+            atxId.Add(idAtx);
+           
+
+
         }
     }
 }

@@ -123,7 +123,7 @@
             </TextBlock.Style>
         </TextBlock>
 
-        <Border Name="ButtonBorder" Grid.Row="2" Height="35"  HorizontalAlignment="Center"
+        <!--<Border Name="ButtonBorder" Grid.Row="2" Height="35"  HorizontalAlignment="Center"
                 VerticalAlignment="Bottom" Margin="54,0,54.6,44.2"  CornerRadius="0" BorderThickness="1" Background="#FFF13838" Width="253" >
             <Border.Style>
                 <Style TargetType="{x:Type Border}">
@@ -131,7 +131,7 @@
                 </Style>
             </Border.Style>
             <Button Content="Авторизоваться" FontSize="16" Foreground="Black" Click="Button_Click" Style="{StaticResource RoundCorner}">
-                <!--<Button.Style>
+                --><!--<Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"></Setter>
                         <Setter Property="Background" Value="#FFDD4B4B"></Setter>
@@ -163,9 +163,10 @@
                         </Setter>
                         
                     </Style>
-                </Button.Style>-->
+                </Button.Style>--><!--
             </Button>
-        </Border>
+        </Border>-->
+        <Button Style="{StaticResource RoundCorner}" Grid.Row="2" Width="200" Height="40" Content="Авторизоваться" Foreground="White" VerticalAlignment="Top" Margin="0,200,0,0"  Click="Button_Click"/>
     </Grid>
 
 </Window>
