@@ -49,8 +49,8 @@
 
     <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
 
-        <!--<Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>-->
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <!--<Setter Property="Padding" Value="1"/>-->
         
         <Setter Property="Template">
@@ -58,9 +58,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid">
-                        <Border x:Name="border" CornerRadius="10" BorderBrush="#FFDA3838" BorderThickness="2">
+                        <Border x:Name="border" CornerRadius="10" BorderBrush="#FFDA3838" BorderThickness="1">
                             <Border.Background >
-                                <SolidColorBrush Color="#ED3334">
+                                <SolidColorBrush Color="#FFDA3838">
                                     
                                 </SolidColorBrush>
                               
@@ -76,14 +76,14 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="border">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="Azure"/>
+                                    <SolidColorBrush Color="#D81212"/>
 
 
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="#D81212"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
@@ -365,4 +365,12 @@
             </Popup>
         </StackPanel>
     </ControlTemplate>
+
+    <Style TargetType="TextBox" x:Key="AddFormTB">
+        <Setter Property="AcceptsReturn" Value="True"></Setter>
+        <Setter Property="VerticalScrollBarVisibility" Value="Visible"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="UndoLimit" Value="4000"/>
+    </Style>
+    
 </ResourceDictionary>

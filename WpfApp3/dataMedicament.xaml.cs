@@ -35,7 +35,7 @@ namespace WpfApp3
             str = wordFind;
             findText.Text = str;
             var transactions = from m in dbContext.MEDICAMENTs //объединение и запрос данных о лекарствах
-                               join a in dbContext.ATXes on m.ATX_A_ID equals a.A_ID
+                               join a in dbContext.MEDICAMENT_has_ATX on m.M_ID equals a.M_ID
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join manafactur in dbContext.MANUFACTURERs on m.MR_ID equals manafactur.MR_ID
@@ -44,7 +44,7 @@ namespace WpfApp3
                                {
                                    Name = m.M_NAME,
                                    Composition = m.M_COMPOSITION,
-                                   ATX = a.NAME,
+                                   ATX = a.ATX.NAME,
                                    MethodUse = m.M_METHOD_USE_DOSAGE,
                                    o = s.SYMPTOM.S_NAME,
                                    manafacturer = manafactur.NAME,
@@ -185,7 +185,7 @@ namespace WpfApp3
 
         private void MedName_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            str = findText.Text;
         }
 
         private void Label_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
@@ -398,5 +398,7 @@ namespace WpfApp3
 
             }
         }
+
+        
     }
 }

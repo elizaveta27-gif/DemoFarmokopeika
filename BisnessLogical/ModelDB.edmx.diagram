@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ed47cae0d8284ef1a8ff99b1ad6cba4f" Name="Diagram1" ZoomLevel="65">
+      <Diagram DiagramId="ed47cae0d8284ef1a8ff99b1ad6cba4f" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="FARMOKAIPKAModel.Access_Seller" Width="1.5" PointX="1.5" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FARMOKAIPKAModel.ATX" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FARMOKAIPKAModel.ATX" Width="1.5" PointX="0.5" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.CHECK" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.CONTRAINDICATION" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.CONTRAINDICATIONS_has_MEDICAMENT" Width="2.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
@@ -25,7 +25,6 @@
         <EntityTypeShape EntityType="FARMOKAIPKAModel.SYMPTOM" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="FARMOKAIPKAModel.sysdiagram" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
         <AssociationConnector Association="FARMOKAIPKAModel.FK_Seller_Access_Seller" ManuallyRouted="false" />
-        <AssociationConnector Association="FARMOKAIPKAModel.FK_MEDICAMENT_ATX" ManuallyRouted="false" />
         <AssociationConnector Association="FARMOKAIPKAModel.FK_CHECK_CUSTOMER" ManuallyRouted="false" />
         <AssociationConnector Association="FARMOKAIPKAModel.FK_CHECK_Seller" ManuallyRouted="false" />
         <AssociationConnector Association="FARMOKAIPKAModel.FK_Sell_CHECK" ManuallyRouted="false" />
@@ -45,7 +44,7 @@
         <EntityTypeShape EntityType="FARMOKAIPKAModel.MEDICAMENT_HAS_ACTIVESUBSTANCE" Width="1.5" PointX="10.25" PointY="10" />
         <AssociationConnector Association="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance" />
         <AssociationConnector Association="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT" />
-        <EntityTypeShape EntityType="FARMOKAIPKAModel.MEDICAMENT_has_ATX" Width="3.25" PointX="8.75" PointY="13.625" />
+        <EntityTypeShape EntityType="FARMOKAIPKAModel.MEDICAMENT_has_ATX" Width="3.25" PointX="9" PointY="14.625" />
         <AssociationConnector Association="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_ATX" />
         <AssociationConnector Association="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_MEDICAMENT" />
       </Diagram>

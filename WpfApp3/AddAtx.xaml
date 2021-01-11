@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
         Title="AddAtx" Height="200" Width="400">
-    <Grid>
+    <Grid Initialized="Grid_Initialized">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>

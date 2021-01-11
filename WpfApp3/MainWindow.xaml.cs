@@ -30,6 +30,10 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
+            using (var ctx = new FARMOKAIPKAEntities())
+            {
+                ctx.Database.Initialize(false);
+            }
         }
         
 

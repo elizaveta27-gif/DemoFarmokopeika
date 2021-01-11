@@ -31,13 +31,12 @@ namespace WpfApp3
         public void queryMainCatalog()
         {
             var transactions = from m in dbContext.MEDICAMENTs //запрос для заполнения главного каталога
-                               join a in dbContext.MEDICAMENT_has_ATX on m.ATX_A_ID equals a.A_ID
+                            
                                join atx in dbContext.MEDICAMENT_has_ATX on m.M_ID equals atx.M_ID
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
-                               //join med in dbContext.MEDICATIONs on s.S_ID equals med.D_ID
                                join g in dbContext.MEDICAMENTOS_has_GROUP on m.M_ID equals g.M_ID
                                join gr in dbContext.Groups on g.G_ID equals gr.G_ID
 
@@ -45,7 +44,7 @@ namespace WpfApp3
                                {
                                    Name = m.M_NAME,
                                    Composition = m.M_COMPOSITION,
-                                   ATX = a.ATX.NAME,
+                                   ATX = atx.ATX.NAME,
                                    MethodUse = m.M_METHOD_USE_DOSAGE,
                                    o = MS.SYMPTOM.S_NAME,
                                    disease = d.DISEASE.NAME,
@@ -89,7 +88,7 @@ namespace WpfApp3
 
                                   
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
-                               join a in dbContext.MEDICAMENT_has_ATX on m.ATX_A_ID equals a.A_ID
+                               join a in dbContext.MEDICAMENT_has_ATX on m.M_ID equals a.M_ID
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
@@ -180,10 +179,7 @@ namespace WpfApp3
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
-            var name = dbContext.MEDICAMENTs.First(m => m.M_NAME == firstSelectedCellContent);
-            var report = new AddForm(name);
-            report.Show();
+            
 
             var carts = new cartUI();
             carts.Show();
@@ -192,6 +188,73 @@ namespace WpfApp3
         private void DgridMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var cartUI = new cartUI();
+            cartUI.Show();
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            var report = new report();
+            report.Show();
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            var addForm = new AddForm(null);
+            addForm.Show();
+            this.Close();
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+                var name = dbContext.MEDICAMENTs.First(m => m.M_NAME == firstSelectedCellContent);
+                var editForm = new AddForm(name);
+                editForm.Show();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Выделите объект, который хотите редактировать", ex.Message);
+            }
+           
+
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+        {
+            
+            var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+            var name = dbContext.MEDICAMENTs.Where(m => m.M_NAME == firstSelectedCellContent);
+           
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {firstSelectedCellContent.Count()} элементов", 
+                "Внмимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    FARMOKAIPKAEntities._context.MEDICAMENTs.RemoveRange(name);
+                    FARMOKAIPKAEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные удалены");
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+            DgridMedicament.Items.Clear();
+            queryMainCatalog();
         }
     }
 }

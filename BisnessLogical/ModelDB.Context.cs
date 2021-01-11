@@ -17,19 +17,21 @@ namespace BisnessLogical
     
     public partial class FARMOKAIPKAEntities : DbContext
     {
-        public FARMOKAIPKAEntities()
-            : base("name=FARMOKAIPKAEntities")
-        {
-        }
         public static FARMOKAIPKAEntities _context;
 
         public static FARMOKAIPKAEntities GetContext()
         {
-            if(_context==null)
+            if (_context == null)
             {
                 _context = new FARMOKAIPKAEntities();
             }
             return _context;
+        }
+
+        public  FARMOKAIPKAEntities()
+            : base("name=FARMOKAIPKAEntities")
+        {
+            Database.SetInitializer<FARMOKAIPKAEntities>(null);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

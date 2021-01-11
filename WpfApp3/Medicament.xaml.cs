@@ -51,7 +51,7 @@ namespace WpfApp3
 
             
             var transactions = from m in dbContext.MEDICAMENTs
-                                                 join a in dbContext.ATXes on m.ATX_A_ID equals a.A_ID
+                                                
                                                  join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
                                                  join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                                  //join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
@@ -64,7 +64,7 @@ namespace WpfApp3
                                                  {
                                                      Name = m.M_NAME,
                                                      Composition = m.M_COMPOSITION,
-                                                     ATX = a.NAME,
+                                    
                                                      MethodUse = m.M_METHOD_USE_DOSAGE,
                                                      o = MS.SYMPTOM.S_NAME,
                                                      disease = d.DISEASE.NAME,
@@ -107,7 +107,7 @@ namespace WpfApp3
 
 
             var transactions = from m in dbContext.MEDICAMENTs
-                               join a in dbContext.ATXes on m.ATX_A_ID equals a.A_ID
+                       
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
@@ -118,7 +118,7 @@ namespace WpfApp3
                                {
                                    Name = m.M_NAME,
                                    Composition = m.M_COMPOSITION,
-                                   ATX = a.NAME,
+            
                                    MethodUse = m.M_METHOD_USE_DOSAGE,
                                    o = s.SYMPTOM.S_NAME,
                                    disease = d.DISEASE.NAME,

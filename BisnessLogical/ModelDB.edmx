@@ -97,7 +97,6 @@
           <Property Name="M_APPEARANCE" Type="nvarchar(max)" Nullable="false" />
           <Property Name="M_OVERDOSE" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MR_ID" Type="int" Nullable="false" />
-          <Property Name="ATX_A_ID" Type="int" Nullable="false" />
           <Property Name="M_PRICE" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="MEDICAMENT_HAS_ACTIVESUBSTANCE">
@@ -196,7 +195,9 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_CHECK_CUSTOMER">
-          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CHECK" Type="Self.CHECK" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CUSTOMER">
@@ -208,7 +209,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CHECK_Seller">
-          <End Role="Seller" Type="Self.Seller" Multiplicity="1" />
+          <End Role="Seller" Type="Self.Seller" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CHECK" Type="Self.CHECK" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seller">
@@ -220,7 +223,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONTRAINDICATIONS_has_MEDICAMENT_CONTRAINDICATIONS">
-          <End Role="CONTRAINDICATIONS" Type="Self.CONTRAINDICATIONS" Multiplicity="1" />
+          <End Role="CONTRAINDICATIONS" Type="Self.CONTRAINDICATIONS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CONTRAINDICATIONS_has_MEDICAMENT" Type="Self.CONTRAINDICATIONS_has_MEDICAMENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CONTRAINDICATIONS">
@@ -232,7 +237,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONTRAINDICATIONS_has_MEDICAMENT_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CONTRAINDICATIONS_has_MEDICAMENT" Type="Self.CONTRAINDICATIONS_has_MEDICAMENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -244,7 +251,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_Active_Substance">
-          <End Role="Active_Substance" Type="Self.Active_Substance" Multiplicity="0..1" />
+          <End Role="Active_Substance" Type="Self.Active_Substance" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" Type="Self.MEDICAMENT_HAS_ACTIVESUBSTANCE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Active_Substance">
@@ -256,7 +265,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="0..1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" Type="Self.MEDICAMENT_HAS_ACTIVESUBSTANCE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -268,7 +279,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENT_has_ATX_ATX">
-          <End Role="ATX" Type="Self.ATX" Multiplicity="0..1" />
+          <End Role="ATX" Type="Self.ATX" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENT_has_ATX" Type="Self.MEDICAMENT_has_ATX" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ATX">
@@ -280,7 +293,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENT_has_ATX_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="0..1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENT_has_ATX" Type="Self.MEDICAMENT_has_ATX" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -292,7 +307,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENT_has_SYMPTOMS_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENT_has_SYMPTOMS" Type="Self.MEDICAMENT_has_SYMPTOMS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -316,7 +333,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENTOS_has_GROUP_Group">
-          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENTOS_has_GROUP" Type="Self.MEDICAMENTOS_has_GROUP" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">
@@ -328,7 +347,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENTOS_has_GROUP_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENTOS_has_GROUP" Type="Self.MEDICAMENTOS_has_GROUP" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -340,7 +361,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICATION_DISEASE">
-          <End Role="DISEASE" Type="Self.DISEASE" Multiplicity="1" />
+          <End Role="DISEASE" Type="Self.DISEASE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICATION" Type="Self.MEDICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DISEASE">
@@ -364,7 +387,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sell_CHECK">
-          <End Role="CHECK" Type="Self.CHECK" Multiplicity="1" />
+          <End Role="CHECK" Type="Self.CHECK" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Sell" Type="Self.Sell" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CHECK">
@@ -376,7 +401,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sell_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Sell" Type="Self.Sell" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -388,7 +415,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Seller_Access_Seller">
-          <End Role="Access_Seller" Type="Self.Access_Seller" Multiplicity="1" />
+          <End Role="Access_Seller" Type="Self.Access_Seller" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Seller" Type="Self.Seller" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Access_Seller">
@@ -400,7 +429,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIDE_EFFECT_has_MEDICAMENT_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SIDE_EFFECT_has_MEDICAMENT" Type="Self.SIDE_EFFECT_has_MEDICAMENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -572,7 +603,6 @@
           </Key>
           <Property Name="A_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="MEDICAMENTs" Relationship="Self.FK_MEDICAMENT_ATX" FromRole="ATX" ToRole="MEDICAMENT" />
           <NavigationProperty Name="MEDICAMENT_has_ATX" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_ATX" FromRole="ATX" ToRole="MEDICAMENT_has_ATX" />
         </EntityType>
         <EntityType Name="CHECK">
@@ -656,8 +686,6 @@
           <Property Name="M_APPEARANCE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="M_OVERDOSE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MR_ID" Type="Int32" Nullable="false" />
-          <Property Name="ATX_A_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ATX" Relationship="Self.FK_MEDICAMENT_ATX" FromRole="MEDICAMENT" ToRole="ATX" />
           <NavigationProperty Name="CONTRAINDICATIONS_has_MEDICAMENT" Relationship="Self.FK_CONTRAINDICATIONS_has_MEDICAMENT_MEDICAMENT" FromRole="MEDICAMENT" ToRole="CONTRAINDICATIONS_has_MEDICAMENT" />
           <NavigationProperty Name="MANUFACTURER" Relationship="Self.FK_MEDICAMENT_MANUFACTURER" FromRole="MEDICAMENT" ToRole="MANUFACTURER" />
           <NavigationProperty Name="MEDICAMENT_has_SYMPTOMS" Relationship="Self.FK_MEDICAMENT_has_SYMPTOMS_MEDICAMENT" FromRole="MEDICAMENT" ToRole="MEDICAMENT_has_SYMPTOMS" />
@@ -771,18 +799,6 @@
             </Principal>
             <Dependent Role="Seller">
               <PropertyRef Name="AS_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MEDICAMENT_ATX">
-          <End Role="ATX" Type="Self.ATX" Multiplicity="1" />
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ATX">
-              <PropertyRef Name="A_ID" />
-            </Principal>
-            <Dependent Role="MEDICAMENT">
-              <PropertyRef Name="ATX_A_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -989,10 +1005,6 @@
           <AssociationSet Name="FK_Seller_Access_Seller" Association="Self.FK_Seller_Access_Seller">
             <End Role="Access_Seller" EntitySet="Access_Seller" />
             <End Role="Seller" EntitySet="Sellers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MEDICAMENT_ATX" Association="Self.FK_MEDICAMENT_ATX">
-            <End Role="ATX" EntitySet="ATXes" />
-            <End Role="MEDICAMENT" EntitySet="MEDICAMENTs" />
           </AssociationSet>
           <AssociationSet Name="FK_CHECK_CUSTOMER" Association="Self.FK_CHECK_CUSTOMER">
             <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
@@ -1291,7 +1303,6 @@
                 <ScalarProperty Name="M_APPEARANCE" ColumnName="M_APPEARANCE" />
                 <ScalarProperty Name="M_OVERDOSE" ColumnName="M_OVERDOSE" />
                 <ScalarProperty Name="MR_ID" ColumnName="MR_ID" />
-                <ScalarProperty Name="ATX_A_ID" ColumnName="ATX_A_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

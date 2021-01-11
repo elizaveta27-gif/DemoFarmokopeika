@@ -39,10 +39,8 @@ namespace BisnessLogical
         public string M_APPEARANCE { get; set; }
         public string M_OVERDOSE { get; set; }
         public int MR_ID { get; set; }
-        public int ATX_A_ID { get; set; }
         public Nullable<decimal> M_PRICE { get; set; }
     
-        public virtual ATX ATX { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTRAINDICATIONS_has_MEDICAMENT> CONTRAINDICATIONS_has_MEDICAMENT { get; set; }
         public virtual MANUFACTURER MANUFACTURER { get; set; }

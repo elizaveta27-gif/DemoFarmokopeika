@@ -17,15 +17,12 @@ namespace BisnessLogical
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ATX()
         {
-            this.MEDICAMENTs = new HashSet<MEDICAMENT>();
             this.MEDICAMENT_has_ATX = new HashSet<MEDICAMENT_has_ATX>();
         }
     
         public int A_ID { get; set; }
         public string NAME { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MEDICAMENT> MEDICAMENTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEDICAMENT_has_ATX> MEDICAMENT_has_ATX { get; set; }
     }
