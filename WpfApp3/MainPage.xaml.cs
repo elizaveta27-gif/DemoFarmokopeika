@@ -32,7 +32,7 @@ namespace WpfApp3
         {
             var transactions = from m in dbContext.MEDICAMENTs //запрос для заполнения главного каталога
                             
-                               join atx in dbContext.MEDICAMENT_has_ATX on m.M_ID equals atx.M_ID
+                             
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
@@ -44,8 +44,8 @@ namespace WpfApp3
                                {
                                    Name = m.M_NAME,
                                    Composition = m.M_COMPOSITION,
-                                   ATX = atx.ATX.NAME,
-                                   MethodUse = m.M_METHOD_USE_DOSAGE,
+                                  
+                                  
                                    o = MS.SYMPTOM.S_NAME,
                                    disease = d.DISEASE.NAME,
                                    MR = MR.NAME,
@@ -68,7 +68,11 @@ namespace WpfApp3
 
             InitializeComponent();
             queryMainCatalog();
-           
+            if (MainWindow.access != "Администратор")
+            {
+                EditItem.IsEnabled = false;
+            }
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,7 +92,7 @@ namespace WpfApp3
 
                                   
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
-                               join a in dbContext.MEDICAMENT_has_ATX on m.M_ID equals a.M_ID
+                        
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
@@ -101,9 +105,6 @@ namespace WpfApp3
                                {
                                    Name = m.M_NAME,
                                    Composition = m.M_COMPOSITION,
-                                   ATX = a.ATX.NAME,
-                                   MethodUse = m.M_METHOD_USE_DOSAGE,
-                                   o = MS.SYMPTOM.S_NAME,
                                    disease = d.DISEASE.NAME,
                                    MR = MR.NAME,
                                    sym = s.SYMPTOM.S_NAME,
@@ -134,7 +135,7 @@ namespace WpfApp3
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             
-            var form = new Medicament();
+            var form = new Medicament("");
             form.Show();
         }
 
@@ -171,8 +172,7 @@ namespace WpfApp3
             }
             
 
-            var report = new AddForm(null);
-            report.Show();
+            
 
 
         }

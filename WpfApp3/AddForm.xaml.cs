@@ -73,106 +73,113 @@ namespace WpfApp3
             //if (string.IsNullOrWhiteSpace(medicament.M_PHARMACOLOGICAL__ACTION) || string.IsNullOrWhiteSpace(medicament.M_METHOD_USE_DOSAGE ) || string.IsNullOrWhiteSpace(medicament.M_DRUG_INTERACTIONS))
             //{
             //    errors.AppendLine("Нельзя оставлять это поле пустым");
-            var mANUFACTURERs = dbContext.MANUFACTURERs;
-            var nameMR = listManafacturer.Text;
-            //}
-            if (dbContext.MEDICAMENTs.Where(m=>m.M_NAME.ToUpper() == TBName.Text.ToUpper()).Count() == 0)
-            {
-              
-                var nameAtx = listATX.Text;
-                var nameSym = listSym.Text;
-               
-                var ATX = dbContext.ATXes;
-                var sYMPTOMs = dbContext.SYMPTOMS;
-                var groupId = dbContext.Groups; 
-                //сделать исключение 
-                int idManufacturer = (int)(mANUFACTURERs.First(m => m.NAME == nameMR).MR_ID);
-                //idAtx = (int)(ATX.First(m => m.NAME == nameAtx).A_ID);
-                //int idSym = (int)(sYMPTOMs.First(m => m.S_NAME == nameSym).S_ID);(int)(mANUFACTURERs.First(m => m.NAME == nameMR).MR_ID)
-                //int idGroup = (int)(groupId.First(m => m.NAME == nameSym).G_ID);
-
-
-                MEDICAMENT medicament = new MEDICAMENT()
-                {
-                    M_NAME = TBName.Text,
-                    M_COMPOSITION = TBCOMPOSITION.Text,
-                    M_PHARMACOLOGICAL__ACTION = TBPHARMACOLOGICAL__ACTION.Text,
-                    M_METHOD_USE_DOSAGE = TBMethodUse.Text,
-                    M_DRUG_INTERACTIONS = TBDRUG_INTERACTIONS.Text,
-                    M_SPECIFIC_INDUCTION = TBSPECIFIC_INDUCTION.Text,
-                    M_STORAGE_CONDITIONS = TBSTORAGE_CONDITIONS.Text,
-                    M_EXPITY_DATE = TBEXPITY_DATE.Text,
-                    M_AVAILABILITY_PRESCRIPTIONS = TBAVAILABILITY_PRESCRIPTIONS.Text,
-                    M_APPEARANCE = TBAPPEARANCE.Text,
-                    M_OVERDOSE = TB_OVERDOSE.Text,
-                    MR_ID = 2,
-                    M_PRICE = Convert.ToDecimal(TBPrice.Text)
-
-
-
-
-
-                };
-
-               
-            }
-            medicament.MR_ID = (int)(mANUFACTURERs.First(m => m.NAME == nameMR).MR_ID);
-            foreach (var item in atxId)
-            {
-                var a = new MEDICAMENT_has_ATX()
-                {
-                    A_ID = item,
-                    M_ID = medicament.M_ID
-
-                };
-                FARMOKAIPKAEntities.GetContext().MEDICAMENT_has_ATX.Add(a);
-            }
-
-            foreach (var item in symList)
-            {
-                var a = new MEDICAMENT_has_SYMPTOMS()
-                {
-                    S_ID = item,
-                    M_ID = medicament.M_ID
-
-                };
-                FARMOKAIPKAEntities.GetContext().MEDICAMENT_has_SYMPTOMS.Add(a);
-            }
-
-            foreach (var item in groupList)
-            {
-                var a = new MEDICAMENTOS_has_GROUP()
-                {
-                    G_ID = item,
-                    M_ID = medicament.M_ID
-
-                };
-                FARMOKAIPKAEntities.GetContext().MEDICAMENTOS_has_GROUP.Add(a);
-            }
-
-            if (errors.Length > 0)
-            {
-                MessageBox.Show(errors.ToString());
-                return;
-            }
-
-            
-            if (medicament.M_ID == 0)
-            {
-                FARMOKAIPKAEntities.GetContext().MEDICAMENTs.Add(medicament);
-            }
-
             try
             {
-                FARMOKAIPKAEntities.GetContext().SaveChanges();
-                MessageBox.Show("Информация сохранена");
+                var mANUFACTURERs = dbContext.MANUFACTURERs;
+                var nameMR = listManafacturer.Text;
+                //}
+                if (dbContext.MEDICAMENTs.Where(m => m.M_NAME.ToUpper() == TBName.Text.ToUpper()).Count() == 0)
+                {
+
+                    var nameAtx = listATX.Text;
+                    var nameSym = listSym.Text;
+
+                    var ATX = dbContext.ATXes;
+                    var sYMPTOMs = dbContext.SYMPTOMS;
+                    var groupId = dbContext.Groups;
+                    //сделать исключение 
+                    int idManufacturer = (int)(mANUFACTURERs.First(m => m.NAME == nameMR).MR_ID);
+
+
+
+                    MEDICAMENT medicament = new MEDICAMENT()
+                    {
+                        M_NAME = TBName.Text,
+                        M_COMPOSITION = TBCOMPOSITION.Text,
+                        M_PHARMACOLOGICAL__ACTION = TBPHARMACOLOGICAL__ACTION.Text,
+                        M_METHOD_USE_DOSAGE = TBMethodUse.Text,
+                        M_DRUG_INTERACTIONS = TBDRUG_INTERACTIONS.Text,
+                        M_SPECIFIC_INDUCTION = TBSPECIFIC_INDUCTION.Text,
+                        M_STORAGE_CONDITIONS = TBSTORAGE_CONDITIONS.Text,
+                        M_EXPITY_DATE = TBEXPITY_DATE.Text,
+                        M_AVAILABILITY_PRESCRIPTIONS = TBAVAILABILITY_PRESCRIPTIONS.Text,
+                        M_APPEARANCE = TBAPPEARANCE.Text,
+                        M_OVERDOSE = TB_OVERDOSE.Text,
+                        MR_ID = 2,
+                        M_PRICE = Convert.ToDecimal(TBPrice.Text)
+
+
+
+
+
+                    };
+
+
+                }
+                medicament.MR_ID = (int)(mANUFACTURERs.First(m => m.NAME == nameMR).MR_ID);
+                foreach (var item in atxId)
+                {
+                    var a = new MEDICAMENT_has_ATX()
+                    {
+                        A_ID = item,
+                        M_ID = medicament.M_ID
+
+                    };
+                    FARMOKAIPKAEntities.GetContext().MEDICAMENT_has_ATX.Add(a);
+                }
+
+                foreach (var item in symList)
+                {
+                    var a = new MEDICAMENT_has_SYMPTOMS()
+                    {
+                        S_ID = item,
+                        M_ID = medicament.M_ID
+
+                    };
+                    FARMOKAIPKAEntities.GetContext().MEDICAMENT_has_SYMPTOMS.Add(a);
+                }
+
+                foreach (var item in groupList)
+                {
+                    var a = new MEDICAMENTOS_has_GROUP()
+                    {
+                        G_ID = item,
+                        M_ID = medicament.M_ID
+
+                    };
+                    FARMOKAIPKAEntities.GetContext().MEDICAMENTOS_has_GROUP.Add(a);
+                }
+
+                if (errors.Length > 0)
+                {
+                    MessageBox.Show(errors.ToString());
+                    return;
+                }
+
+
+                if (medicament.M_ID == 0)
+                {
+                    FARMOKAIPKAEntities.GetContext().MEDICAMENTs.Add(medicament);
+                }
+
+                try
+                {
+                    FARMOKAIPKAEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Информация сохранена");
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message.ToString());
             }
-            
+           
             
         }
 

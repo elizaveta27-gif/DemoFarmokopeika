@@ -41,15 +41,17 @@ namespace WpfApp3
               .Select(y => new { Element = y.Key, Counter = y.Count()} );//количество проданного товара
 
             int maxElem = 0;//товар, который продали больше всего
+            int maxCout = 0;
             foreach (var item in query)
             {
-                int maxCout = 0;
+                
                 if (maxElem<item.Counter)
                 {
                     maxCout = item.Counter;
+                    maxElem = item.Element;
 
                 }
-                maxElem = item.Element;
+                
                
             }
 

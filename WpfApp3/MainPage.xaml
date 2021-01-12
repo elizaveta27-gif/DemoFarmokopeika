@@ -38,7 +38,7 @@
                 <MenuItem Header="Корзина" Click="MenuItem_Click">
 
                 </MenuItem>
-                <MenuItem Header="Редактирование данных">
+                <MenuItem Header="Редактирование данных" Name="EditItem">
                     <MenuItem Header="Добавить" Click="MenuItem_Click_2"></MenuItem>
                     <MenuItem Header="Редактировать" Click="MenuItem_Click_3"></MenuItem>
                     <MenuItem Header="Удалить" Click="MenuItem_Click_5" ></MenuItem>
@@ -90,14 +90,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="ATX" Binding="{Binding ATX}" Width="*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
+                    
                     <DataGridTextColumn Header="Симптом" Binding="{Binding sym}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">

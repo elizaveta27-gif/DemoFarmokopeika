@@ -12,7 +12,7 @@
             <RowDefinition Height="136*"/>
             <RowDefinition Height="249*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Рейтинг" Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="0" Width="82" />
+        <TextBlock Text="Рейтинг" Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="0"  />
         <TextBlock Text="Самый продаваемый товар" Grid.Row="1" HorizontalAlignment="Center" Margin="0,5,0,0" Grid.RowSpan="2" Width="152" ></TextBlock>
         <Grid Grid.Row="1" Margin="0,29.8,-0.4,0.2">
             <Grid.ColumnDefinitions>

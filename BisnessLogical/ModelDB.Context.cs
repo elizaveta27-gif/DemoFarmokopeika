@@ -31,7 +31,7 @@ namespace BisnessLogical
         public  FARMOKAIPKAEntities()
             : base("name=FARMOKAIPKAEntities")
         {
-            Database.SetInitializer<FARMOKAIPKAEntities>(null);
+            //Database.SetInitializer<FARMOKAIPKAEntities>(null);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

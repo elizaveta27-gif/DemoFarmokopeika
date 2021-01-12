@@ -27,12 +27,15 @@ namespace WpfApp3
         public static string NameSeller;
 
         public static Seller seller;
+        public static string access;
         public MainWindow()
         {
+             
             InitializeComponent();
+
             using (var ctx = new FARMOKAIPKAEntities())
             {
-                ctx.Database.Initialize(false);
+                ctx.Database.Initialize(true);
             }
         }
         
@@ -62,46 +65,47 @@ namespace WpfApp3
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
-            //string Login = login.Text;
-            //string Password = password.Text;
-            //var transaction = from user in dbContext.Sellers
-            //                  where user.S_LOGIN == Login && user.S_PASSWORD == Password
-            //                  select new
-            //                  {
-            //                      name = user.S_FIRST_NAME,
-            //                      last_name = user.S_LAST_NAME,
-            //                      patranymic = user.S_PATRONYMIC,
-            //                      login = user.S_LOGIN,
-            //                      password = user.S_PASSWORD
-            //                  };
+            FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
+            string Login = login.Text;
+            string Password = password.Text;
+            var transaction = from user in dbContext.Sellers
+                              where user.S_LOGIN == Login && user.S_PASSWORD == Password
+                              select new
+                              {
+                                  name = user.S_FIRST_NAME,
+                                  last_name = user.S_LAST_NAME,
+                                  patranymic = user.S_PATRONYMIC,
+                                  login = user.S_LOGIN,
+                                  password = user.S_PASSWORD
+                              };
 
-            
-            //foreach (var item in transaction)
-            //{
-            //    NameSeller = $"{item.last_name} {item.name} {item.patranymic}";
-                
-            //}
 
-            //if (transaction.Count() ==0)
-            //{
-            //    MessageBox.Show("Пользователь не найден");
-                
-            //}
-            //else
-            //{
-            //    var sel = dbContext.Sellers.Where(s=>s.S_LOGIN==Login);
-            //    foreach (var item in sel)
-            //    {
-            //        seller = item;
-            //    }
-            //    MessageBox.Show("Пользователь авторизовался");
+            foreach (var item in transaction)
+            {
+                NameSeller = $"{item.last_name} {item.name} {item.patranymic}";
+
+            }
+
+            if (transaction.Count() == 0)
+            {
+                MessageBox.Show("Пользователь не найден");
+
+            }
+            else
+            {
+                var sel = dbContext.Sellers.Where(s => s.S_LOGIN == Login);
+                foreach (var item in sel)
+                {
+                    seller = item;
+                }
+                MessageBox.Show("Пользователь авторизовался");
+                access = seller.Access_Seller.NAME;
                 var MainPage = new MainPage();
                 MainPage.Show();
                 this.Close();
-            //}
-            
-            
+            }
+
+
         }
     }
 }
