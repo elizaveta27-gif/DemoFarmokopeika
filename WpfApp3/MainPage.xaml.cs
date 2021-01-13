@@ -27,7 +27,7 @@ namespace WpfApp3
         public static FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
         string findWord = ""; //слово, которое используется в поиске
         Seller seller = new Seller();
-        //string firstSelectedCellContent = null;
+        
 
         public void queryMainCatalog()
         {
@@ -67,6 +67,8 @@ namespace WpfApp3
                           sym = m.SYMPTOM.S_NAME,
                      
                       };
+
+            
             foreach (var item in med)
             {
                 DgridMedicament.Items.Add(item);
@@ -86,11 +88,13 @@ namespace WpfApp3
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DgridMedicament.Items.Clear();
-            if (!explation.IsHitTestVisible)
-            {
-                queryMainCatalog();
-            }
+                DgridMedicament.Items.Clear();
+                if (!explation.IsHitTestVisible)
+                {
+                    queryMainCatalog();
+                }
+           
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -99,13 +103,13 @@ namespace WpfApp3
             findWord = wordFind.Text;
             var transactions = from m in dbContext.MEDICAMENTs
 
-                                  
+
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
-                        
+
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
-                               
+
                                where m.M_NAME.ToLower().Contains(findWord.ToLower()) || MR.NAME.ToLower().Contains(findWord.ToLower()) || d.DISEASE.NAME.ToLower().Contains(findWord.ToLower()) || s.SYMPTOM.S_NAME.ToLower().Contains(findWord.ToLower())
 
 
@@ -115,29 +119,33 @@ namespace WpfApp3
                                    sym = s.SYMPTOM.S_NAME,
                                    MR = MR.NAME,
                                    Price = m.M_PRICE
-                                   
+
                                };
+
+
             if (transactions.Count() == 0)
             {
                 MessageBox.Show("Поиск не дал результата.");
             }
             else
             {
-                DgridMedicament.Items.Clear();
-                foreach (var item in transactions.Distinct().GroupBy(t=>t.name))
+                if (DgridMedicament.Items != null)
+                {
+                    DgridMedicament.Items.Clear();
+                }
+                foreach (var item in transactions.Distinct().GroupBy(n => n.name))
                 {
                     DgridMedicament.Items.Add(item);
                 }
-               
+
+
 
             }
 
 
 
-
-
-
         }
+
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -181,9 +189,11 @@ namespace WpfApp3
 
                 MessageBox.Show("Выделите товар, который хотите положить в корзину");
             }
-            
 
-            
+        
+
+
+
 
 
         }
@@ -196,76 +206,42 @@ namespace WpfApp3
 
         private void DgridMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //try
-            //{
 
-            //    //if (!string.IsNullOrEmpty(((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text) || !string.IsNullOrWhiteSpace(((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text))
-            //    //{
-            //        //var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
-            //        var transactions = from m in dbContext.MEDICAMENTs //запрос для заполнения главного каталога
-            //                           join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
-            //                           join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
-            //                           join d in dbContext.MEDICATIONs on s.S_ID equals d.S_ID
-            //                           join g in dbContext.MEDICAMENTOS_has_GROUP on m.M_ID equals g.M_ID
-            //                           select new
-            //                           {
-            //                               Name = m.M_NAME,
-            //                               sym = s.SYMPTOM.S_NAME,
-            //                               d = d.DISEASE.NAME,
-            //                               gr = g.Group.NAME
-            //                           };
-
-            //        DgridSym.Items.Clear();
-            //        DgridDisease.Items.Clear();
-            //        DgridGroup.Items.Clear();
-            //        foreach (var item in transactions)
-            //        {
-
-            //            DgridDisease.Items.Add(item);
-
-            //        }
-            //        foreach (var item in transactions)
-            //        {
-            //            DgridSym.Items.Add(item);
-
-            //        }
-            //        foreach (var item in transactions)
-            //        {
-            //            DgridGroup.Items.Add(item);
-
-            //        }
-            //}
-
-
-
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    //MessageBox.Show(ex.Message.ToString());
-            //    Console.WriteLine($"{ex.Message.ToString()}");
-            //}
-            var selected = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
-            var transactions = from m in dbContext.MEDICAMENTs //запрос для заполнения главного каталога
-                               join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
-                               join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
-                               select new
-                               {
-                                   name = m.M_NAME,
-                                   sym = MS.SYMPTOM.S_NAME,
-                                   d = d.DISEASE.NAME
-                               };
-            DgridSym.Items.Clear();
-            DgridDisease.Items.Clear();
-            foreach (var item in transactions.Where(t=>t.name == selected.ToString()).Distinct().GroupBy(t=>t.sym))
+            if (DgridMedicament.SelectedCells!=null && DgridMedicament.SelectedCells.Count > 0)
             {
-                DgridSym.Items.Add(item);
                
-            }
-
-            foreach (var item in transactions.Where(t => t.name == selected.ToString()).GroupBy(t=>t.d))
-            {
-                DgridDisease.Items.Add(item);
+                    var cell = DgridMedicament.SelectedCells[0];
+                    var row = DgridMedicament.ItemContainerGenerator.ContainerFromItem(cell.Item) as DataGridRow;
+                    if (row != null && row.IsSelected)
+                    {
+                    var selectStr = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;//название лекарства
+                    DgridSym.Items.Clear();
+                    var symptom = from s in dbContext.MEDICAMENT_has_SYMPTOMS
+                                  where s.MEDICAMENT.M_NAME == selectStr
+                                  select new
+                                  {
+                                      name = s.MEDICAMENT.M_NAME,
+                                      sym = s.SYMPTOM.S_NAME
+                                  };
+                    foreach (var item in symptom.GroupBy(m => m.sym))
+                    {
+                        DgridSym.Items.Add(item);
+                    }
+                    var diasese = from s in dbContext.MEDICATIONs
+                                  join d in dbContext.MEDICAMENT_has_SYMPTOMS on s.S_ID equals d.S_ID
+                                  where d.MEDICAMENT.M_NAME == selectStr
+                                  select new
+                                  {
+                                      d = s.DISEASE.NAME
+                                  };
+                    DgridDisease.Items.Clear();
+                    foreach (var item in diasese)
+                    {
+                        DgridDisease.Items.Add(item);
+                    }
+                }
+                  
+                
             }
 
 
@@ -408,5 +384,7 @@ namespace WpfApp3
         {
             strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
         }
+
+       
     }
 }
