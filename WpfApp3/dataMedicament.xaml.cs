@@ -51,8 +51,8 @@ namespace WpfApp3
                                    prescript = m.M_AVAILABILITY_PRESCRIPTIONS,
                                    appearance = m.M_APPEARANCE,
                                    expDate = m.M_EXPITY_DATE,
-                                   price = m.M_PRICE
-
+                                   price = m.M_PRICE,
+                              
                                };
 
             string SumStr = "";
@@ -70,7 +70,7 @@ namespace WpfApp3
                         {
                             mgroup = MG.Group.NAME
                         };
-
+            
 
             foreach (var item in transactions.Where(t => t.o.ToUpper() == str.ToUpper() || t.Name.ToUpper() == str.ToUpper()))
             {
@@ -80,6 +80,7 @@ namespace WpfApp3
                 MedApperence.Text = item.appearance;
                 Date.Text = item.expDate;
                 Price.Text = item.price.ToString();
+              
 
 
             }
@@ -99,11 +100,22 @@ namespace WpfApp3
                         {
                             name = AI.Active_Substance.AS_NAME
                         };
+            var disease = from s in dbContext.MEDICAMENT_has_SYMPTOMS
+                          join d in dbContext.MEDICATIONs on s.S_ID  equals d.S_ID
+                           where s.MEDICAMENT.M_NAME.ToUpper() == str.ToUpper() || s.MEDICAMENT.M_NAME.ToUpper() == str.ToUpper()
+                           select new
+                           {
+                               nameDisease = d.DISEASE.NAME
+                           };
             foreach (var item in activeIn)
             {
                 ActiveIn.Text += $"{item.name} \n";
             }
 
+            foreach (var item in disease)
+            {
+                Disease.Text += $"{item.nameDisease}\n";
+            }
         }
 
 

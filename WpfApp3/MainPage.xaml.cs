@@ -27,31 +27,17 @@ namespace WpfApp3
         public static FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
         string findWord = ""; //слово, которое используется в поиске
         Seller seller = new Seller();
+        //string firstSelectedCellContent = null;
 
         public void queryMainCatalog()
         {
             var transactions = from m in dbContext.MEDICAMENTs //запрос для заполнения главного каталога
-                            
-                             
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
-                               join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
-                               join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
-                               join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
-                               join g in dbContext.MEDICAMENTOS_has_GROUP on m.M_ID equals g.M_ID
-                               join gr in dbContext.Groups on g.G_ID equals gr.G_ID
-
                                select new
                                {
-                                   Name = m.M_NAME,
-                                   Composition = m.M_COMPOSITION,
-                                  
-                                  
-                                   o = MS.SYMPTOM.S_NAME,
-                                   disease = d.DISEASE.NAME,
+                                   name = m.M_NAME,
                                    MR = MR.NAME,
-                                   sym = s.SYMPTOM.S_NAME,
-                                   Group = gr.NAME
-
+                                   Price = m.M_PRICE
                                };
 
             foreach (var item in transactions.Distinct())
@@ -67,11 +53,34 @@ namespace WpfApp3
         {
 
             InitializeComponent();
-            queryMainCatalog();
+            var med = from m in dbContext.MEDICAMENTs
+                      join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
+                      select new
+                      {
+                            name = m.M_NAME,
+                            MR = MR.NAME,
+                            Price = m.M_PRICE
+                      };
+            var sym = from m in dbContext.MEDICAMENT_has_SYMPTOMS
+                      select new
+                      {
+                          sym = m.SYMPTOM.S_NAME,
+                     
+                      };
+            foreach (var item in med)
+            {
+                DgridMedicament.Items.Add(item);
+            }
+
+            foreach (var item in sym.Distinct())
+            {
+                DgridSym.Items.Add(item);
+            }
             if (MainWindow.access != "Администратор")
             {
                 EditItem.IsEnabled = false;
             }
+
 
         }
 
@@ -96,19 +105,17 @@ namespace WpfApp3
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
-                               join g in dbContext.MEDICAMENTOS_has_GROUP on m.M_ID equals g.M_ID
-                               join gr in dbContext.Groups on g.G_ID equals gr.G_ID
+                               
                                where m.M_NAME.ToLower().Contains(findWord.ToLower()) || MR.NAME.ToLower().Contains(findWord.ToLower()) || d.DISEASE.NAME.ToLower().Contains(findWord.ToLower()) || s.SYMPTOM.S_NAME.ToLower().Contains(findWord.ToLower())
 
 
                                select new
                                {
-                                   Name = m.M_NAME,
-                                   Composition = m.M_COMPOSITION,
-                                   disease = d.DISEASE.NAME,
-                                   MR = MR.NAME,
+                                   name = m.M_NAME,
                                    sym = s.SYMPTOM.S_NAME,
-                                   Group = gr.NAME
+                                   MR = MR.NAME,
+                                   Price = m.M_PRICE
+                                   
                                };
             if (transactions.Count() == 0)
             {
@@ -117,7 +124,7 @@ namespace WpfApp3
             else
             {
                 DgridMedicament.Items.Clear();
-                foreach (var item in transactions.Distinct())
+                foreach (var item in transactions.Distinct().GroupBy(t=>t.name))
                 {
                     DgridMedicament.Items.Add(item);
                 }
@@ -164,6 +171,10 @@ namespace WpfApp3
                 {
                     cart.Add(item);
                 }
+
+
+
+
             }
             catch (Exception)
             {
@@ -179,14 +190,84 @@ namespace WpfApp3
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            
-
             var carts = new cartUI();
             carts.Show();
         }
 
         private void DgridMedicament_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //try
+            //{
+
+            //    //if (!string.IsNullOrEmpty(((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text) || !string.IsNullOrWhiteSpace(((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text))
+            //    //{
+            //        //var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+            //        var transactions = from m in dbContext.MEDICAMENTs //запрос для заполнения главного каталога
+            //                           join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
+            //                           join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
+            //                           join d in dbContext.MEDICATIONs on s.S_ID equals d.S_ID
+            //                           join g in dbContext.MEDICAMENTOS_has_GROUP on m.M_ID equals g.M_ID
+            //                           select new
+            //                           {
+            //                               Name = m.M_NAME,
+            //                               sym = s.SYMPTOM.S_NAME,
+            //                               d = d.DISEASE.NAME,
+            //                               gr = g.Group.NAME
+            //                           };
+
+            //        DgridSym.Items.Clear();
+            //        DgridDisease.Items.Clear();
+            //        DgridGroup.Items.Clear();
+            //        foreach (var item in transactions)
+            //        {
+
+            //            DgridDisease.Items.Add(item);
+
+            //        }
+            //        foreach (var item in transactions)
+            //        {
+            //            DgridSym.Items.Add(item);
+
+            //        }
+            //        foreach (var item in transactions)
+            //        {
+            //            DgridGroup.Items.Add(item);
+
+            //        }
+            //}
+
+
+
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    //MessageBox.Show(ex.Message.ToString());
+            //    Console.WriteLine($"{ex.Message.ToString()}");
+            //}
+            var selected = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+            var transactions = from m in dbContext.MEDICAMENTs //запрос для заполнения главного каталога
+                               join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
+                               join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
+                               select new
+                               {
+                                   name = m.M_NAME,
+                                   sym = MS.SYMPTOM.S_NAME,
+                                   d = d.DISEASE.NAME
+                               };
+            DgridSym.Items.Clear();
+            DgridDisease.Items.Clear();
+            foreach (var item in transactions.Where(t=>t.name == selected.ToString()).Distinct().GroupBy(t=>t.sym))
+            {
+                DgridSym.Items.Add(item);
+               
+            }
+
+            foreach (var item in transactions.Where(t => t.name == selected.ToString()).GroupBy(t=>t.d))
+            {
+                DgridDisease.Items.Add(item);
+            }
+
 
         }
 
@@ -221,7 +302,8 @@ namespace WpfApp3
             catch (Exception ex)
             {
 
-                MessageBox.Show("Выделите объект, который хотите редактировать", ex.Message);
+                //MessageBox.Show("Выделите объект, который хотите редактировать", ex.Message);
+                Console.WriteLine("");
             }
            
 
@@ -255,6 +337,76 @@ namespace WpfApp3
             }
             DgridMedicament.Items.Clear();
             queryMainCatalog();
+        }
+
+        private void DgridMedicament_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+          
+        }
+
+        private void MenuItem_MouseLeave_1(object sender, MouseEventArgs e)
+        {
+           
+        }
+
+        private void MenuItem_MouseEnter_2(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Нажмите, чтобы добавить информацию в таблицу";
+        }
+
+        private void MenuItem_MouseLeave_2(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+        }
+
+        private void MenuItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Выберите элемент и нажмите, чтобы отредактировать его";
+        }
+
+        private void MenuItem_MouseLeave(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+        }
+
+        private void MenuItem_MouseEnter_1(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Выберите элемент и нажмите, чтобы удалить его";
+        }
+
+        private void MenuItem_MouseLeave_3(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+        }
+
+        private void MenuItem_MouseEnter_3(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Нажмите, чтобы посмотреть содержимое корзины";
+        }
+
+        private void MenuItem_MouseLeave_4(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Введите название, лекарства, симптома и нажмите, чтобы получить список лекарств";
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+        }
+
+        private void Button_MouseEnter_1(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Выделите объект и нажмите, чтобы добавить в корзину";
+        }
+
+        private void Button_MouseLeave_1(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
         }
     }
 }

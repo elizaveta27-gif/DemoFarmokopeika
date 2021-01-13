@@ -13,7 +13,7 @@
             <RowDefinition Height="249*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Рейтинг" Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="0"  />
-        <TextBlock Text="Самый продаваемый товар" Grid.Row="1" HorizontalAlignment="Center" Margin="0,5,0,0" Grid.RowSpan="2" Width="152" ></TextBlock>
+        <TextBlock Text="Самый продаваемый товар" Grid.Row="1" HorizontalAlignment="Center" Margin="0,5,0,0" Width="185" FontSize="14" FontWeight="DemiBold"></TextBlock>
         <Grid Grid.Row="1" Margin="0,29.8,-0.4,0.2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="267*"/>
@@ -44,7 +44,7 @@
                 <TextBox Grid.Row="2" Name="TBPrice" ></TextBox>
             </Grid>
         </Grid>
-        <TextBlock Grid.Row="2" Text="Рейтинг лекарств" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Row="2" Text="Рейтинг лекарств" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" FontWeight="ExtraBlack"></TextBlock>
         <DataGrid x:Name="rating" Grid.Row="2" Margin="0,30,0,0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*" >

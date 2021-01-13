@@ -36,7 +36,7 @@ namespace WpfApp3
             if (selectedMedicament != null)
             {
                 medicament = selectedMedicament;
-              
+                listManafacturer.Text = medicament.MANUFACTURER.NAME;
                 var listatx = medicament.MEDICAMENT_has_ATX;
             }
             DataContext = medicament;
@@ -197,21 +197,38 @@ namespace WpfApp3
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var nameSymptom = listSym.Text;
-            var SymptomTable = dbContext.SYMPTOMS;
-            idSym = (int)(SymptomTable.First(m => m.S_NAME == nameSymptom).S_ID);
-            listSym.Text = "";
-            symList.Add(idSym);
+            try
+            {
+                var nameSymptom = listSym.Text;
+                var SymptomTable = dbContext.SYMPTOMS;
+                idSym = (int)(SymptomTable.First(m => m.S_NAME == nameSymptom).S_ID);
+                listSym.Text = "";
+                symList.Add(idSym);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"{ex.Message.ToString()}");
+            }
+          
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var nameGroup = listGroup.Text;
+                var GroupTable = dbContext.Groups;
+                idGroup = (int)(GroupTable.First(m => m.NAME == nameGroup).G_ID);
+                listGroup.Text = "";
+                groupList.Add(idGroup);
+            }
+            catch (Exception ex)
+            {
 
-            var nameGroup = listGroup.Text;
-            var GroupTable = dbContext.Groups;
-            idGroup = (int)(GroupTable.First(m => m.NAME == nameGroup).G_ID);
-            listGroup.Text = "";
-            groupList.Add(idGroup);
+                MessageBox.Show($"{ex.Message.ToString()}");
+            }
+           
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -220,6 +237,11 @@ namespace WpfApp3
             mainPage.Show();
             this.Close();
             
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         
         
-        Title="MainPage" Height="450" Width="800">
+        Title="Каталог" Height="450" Width="800">
     <Window.Resources>
         <Image x:Key="resourceImage" Source="Resources/2849829-interface-magnifier-magnifying-multimedia-search-zoom_107980.png"/>
         <Image x:Key="res" Source="Resources/medication_pills_icon_150136.png"/>
@@ -18,50 +18,70 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition  Height="23*"/>
-            <RowDefinition Height="33*"/>
-            <RowDefinition Height="44*" />
-            <RowDefinition Height="283*" />
-            <RowDefinition Height="37" />
+            <RowDefinition  Height="39"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="55*" />
+            <RowDefinition Height="265*" />
+            <RowDefinition Height="42" />
+
 
         </Grid.RowDefinitions>
 
 
-        <Grid Grid.Row="0" Margin="0,0,-0.4,2.2">
+        <Grid Grid.Row="0" Margin="0,0,-0.4,0.4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
 
             </Grid.RowDefinitions>
-            <Menu FontSize="15">
-                <MenuItem Header="Рейтинг лекарств" Click="MenuItem_Click_1">
-                </MenuItem>
-                <MenuItem Header="Корзина" Click="MenuItem_Click">
+            <StackPanel >
 
-                </MenuItem>
-                <MenuItem Header="Редактирование данных" Name="EditItem">
-                    <MenuItem Header="Добавить" Click="MenuItem_Click_2"></MenuItem>
-                    <MenuItem Header="Редактировать" Click="MenuItem_Click_3"></MenuItem>
-                    <MenuItem Header="Удалить" Click="MenuItem_Click_5" ></MenuItem>
+                <Menu FontSize="15" Style="{StaticResource menuMain}"   VerticalContentAlignment="Center"  Margin="0" >
 
-                </MenuItem>
-                <MenuItem Header="Выйти" Click="MenuItem_Click_4"></MenuItem>
-            </Menu>
+                    <MenuItem Header="Рейтинг лекарств" Click="MenuItem_Click_1" Style="{StaticResource menuItemMain}" Margin="5,0,0,0" >
+                        <MenuItem.Icon>
+                            <Image Source="Resources/star_rating_bookmark_favourite_save_priority_icon_145931.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="33" Margin="-2,-4,-6,-4" Width="34" ></Image>
+                        </MenuItem.Icon>
+
+                    </MenuItem>
+                    <MenuItem Header="Корзина" Click="MenuItem_Click" Style="{StaticResource menuItemMain}" MouseEnter="MenuItem_MouseEnter_3" MouseLeave="MenuItem_MouseLeave_4">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/cart1.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Margin="-2,-4,-8,-6" Width="30" ></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Редактирование данных" Name="EditItem" Style="{StaticResource menuItemMain}" >
+                        <MenuItem.Icon>
+                            <Image Source="Resources/edit_icon.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="26" Margin="-2,-4,-6,-4" Width="26" ></Image>
+                        </MenuItem.Icon>
+                        <MenuItem Header="Добавить" Click="MenuItem_Click_2" MouseEnter="MenuItem_MouseEnter_2" MouseLeave="MenuItem_MouseLeave_2"></MenuItem>
+                        <MenuItem Header="Редактировать" Click="MenuItem_Click_3" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave"></MenuItem>
+                        <MenuItem Header="Удалить" Click="MenuItem_Click_5" ToolTip="Выделите строку,чтобы удалить данные" MouseEnter="MenuItem_MouseEnter_1" MouseLeave="MenuItem_MouseLeave_3"></MenuItem>
+
+                    </MenuItem>
+                    <MenuItem Header="Выйти" Click="MenuItem_Click_4" Style="{StaticResource menuItemMain}"  Margin="0,4"  >
+                        <MenuItem.Icon>
+                            <Image Source="Resources/exit.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Margin="-2,-4,-6,-4" Width="30" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+
         </Grid>
 
-        <Grid Grid.Row="3" Margin="0,47,-0.4,1.2">
+        <Grid Grid.Row="3" Margin="5,50,5,10">
 
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="227*"></RowDefinition>
-
-
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="68*"/>
+                <RowDefinition Height="84*" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0.4,-0.4,10.2"  EnableColumnVirtualization="True" Grid.Row="4"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged">
+            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,-0.4,0.2"  EnableColumnVirtualization="True" Grid.Row="0"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="0"  Grid.ColumnSpan="3" Grid.RowSpan="2" >
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Название" Width="*" >
                         <DataGridTextColumn.HeaderStyle>
@@ -71,17 +91,10 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.Binding>
-                            <Binding Path="Name"></Binding>
+                            <Binding Path="name"></Binding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Категория" Binding="{Binding Group}" Width="*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
+
                     <DataGridTextColumn Header="Производитель" Binding="{Binding MR}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -90,8 +103,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    
-                    <DataGridTextColumn Header="Симптом" Binding="{Binding sym}" Width="*">
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment"
@@ -99,14 +111,8 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Болезнь" Binding="{Binding disease}" Width="*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
+
+
 
                     <DataGridTemplateColumn Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
@@ -119,15 +125,63 @@
                 </DataGrid.Columns>
             </DataGrid>
 
+            <DataGrid x:Name="DgridSym" AutoGenerateColumns="False" IsReadOnly="True" Margin="0"  EnableColumnVirtualization="True" Grid.Row="2"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="1" BorderBrush="#F0F0F0">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Симптомы" Width="*" >
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="sym"></Binding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
 
+                </DataGrid.Columns>
+            </DataGrid>
 
+            <DataGrid x:Name="DgridDisease" AutoGenerateColumns="False" IsReadOnly="True" Margin="0"  EnableColumnVirtualization="True" Grid.Row="2"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="0"  BorderBrush="#F0F0F0"  >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Показания к применению" Width="*" >
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="d"></Binding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid x:Name="DgridGroup" AutoGenerateColumns="False" IsReadOnly="True" Margin="0"  EnableColumnVirtualization="True" Grid.Row="2"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="2" BorderBrush="#F0F0F0" >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Группа" Width="*" >
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="gr"></Binding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
 
-        <Grid Name="LogoContainer"  Grid.Row="1" Margin="0,4.8,-0.4,4">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFEE2020" FontSize="22" FontWeight="Bold" Margin="0" >ДОБРО ПОЖАЛОВАТЬ В СПРАВОЧНУЮ СИСТЕМУ</TextBlock>
+        <Grid Name="LogoContainer"  Grid.Row="1" Margin="0">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFEE2020" FontSize="20" FontWeight="Bold" Margin="0,3,0,0" >ДОБРО ПОЖАЛОВАТЬ В СПРАВОЧНУЮ СИСТЕМУ</TextBlock>
         </Grid>
 
-        <Grid Grid.Row="2" Margin="0,1,-0.4,2" >
+        <Grid Grid.Row="2" Margin="20,0,20,0"  >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="399*"/>
                 <ColumnDefinition Width="70"/>
@@ -137,8 +191,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBox Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="0" VerticalAlignment="Center" Name="wordFind" Grid.ColumnSpan="2" Grid.Row="0" LostMouseCapture="WordFind_LostMouseCapture" ></TextBox>
-            <Button Content="{StaticResource resourceImage}"  Margin="0" Click="Button_Click" Style="{StaticResource RoundCorner}" Grid.Row="0" VerticalAlignment="Center" Height="35" Grid.Column="1"/>
+            <TextBox Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="0" VerticalAlignment="Center" Name="wordFind" Grid.ColumnSpan="2" Grid.Row="0" LostMouseCapture="WordFind_LostMouseCapture" Height="30"></TextBox>
+            <Button Content="{StaticResource resourceImage}"  Margin="0" Click="Button_Click" Style="{StaticResource RoundCorner}" Grid.Row="0" VerticalAlignment="Center" Height="30" Grid.Column="1" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
             <TextBlock Text="Введите название лекарства, симптома или болезни" Margin="0" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="#FFE42121" IsHitTestVisible="False" FontSize="14" Grid.ColumnSpan="2"  Name="explation" >
 
                 <TextBlock.Style>
@@ -156,8 +210,12 @@
         </Grid>
 
 
-        <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Каталог" VerticalAlignment="Top" Width="117" Height="39"  />
+        <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Каталог" VerticalAlignment="Top" Width="117" Height="39"   />
 
-        <Button Grid.Row="4" Margin="0,4.8,-0.4,9" Width="200" HorizontalAlignment="Right" Content="Положить в корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_2"/>
+        <Grid Grid.Row="4" Margin="10">
+            <Button Margin="0" Width="200" HorizontalAlignment="Right" Content="Положить в корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_2" VerticalAlignment="Bottom" Height="20" MouseEnter="Button_MouseEnter_1" MouseLeave="Button_MouseLeave_1"/>
+            <TextBlock Grid.Row="4" HorizontalAlignment="Left" Name="strStates"  VerticalAlignment="Center">Наведите на элемент, о которм хотите получить информацию</TextBlock>
+        </Grid>
+
     </Grid>
 </Window>

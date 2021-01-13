@@ -14,7 +14,7 @@
             <RowDefinition Height="30*"/>
             <RowDefinition Height="401*"/>
         </Grid.RowDefinitions>
-        <TabControl   Margin="0"  Grid.Row="1" >
+        <TabControl   Margin="-10,1.4,9.6,-1"  Grid.Row="1" >
 
             <TabItem Header="Основная информация">
                 <Grid x:Name="mainGrid" Grid.Row="2" IsEnabled="True" >
@@ -46,8 +46,10 @@
                     <TextBox Name="Date" Grid.Row="4" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
                     <TextBlock Grid.Row="5" Text="Действующее вещество" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
                     <TextBox Name="ActiveIn" Grid.Row="5" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
-                    <TextBlock Grid.Row="6" Text="Цена" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
+                    <TextBlock Grid.Row="6" Text="Цена" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.358,3.132" ></TextBlock>
                     <TextBox Name="Price" Grid.Row="6" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="7" Text="Болезни" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.358,3.132" Margin="0" />
+                    <TextBox Name="Disease" Grid.Row="7" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
                 </Grid>
 
             </TabItem>
@@ -116,18 +118,16 @@
                 </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="77*"/>
-                        <RowDefinition Height="247*"/>
-
+                        <RowDefinition Height="44*"/>
+                        <RowDefinition Height="117*"/>
+                        <RowDefinition Height="44*"/>
+                        <RowDefinition Height="119*"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="217*"/>
-                        <ColumnDefinition Width="571*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Text="Болезнь" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-                    <TextBox Text="Симптомы" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="0" Name="TBDisease" ></TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="1" Name="TBSymptom"  HorizontalContentAlignment="Left" VerticalContentAlignment="Center"></TextBox>
+
+                    <TextBlock Text="Болезнь"  Grid.Row="0" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="26" Width="78"></TextBlock>
+                    <TextBlock Text="Симптомы"  Grid.Row="2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="27" Width="109"></TextBlock>
+                    <TextBox Grid.Row="1" Name="TBDisease" Margin="0,4,0,4.8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox  Grid.Row="3" Name="TBSymptom"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,2.2,0,0"></TextBox>
                 </Grid>
 
             </TabItem>

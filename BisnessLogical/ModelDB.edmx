@@ -332,6 +332,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MEDICAMENT_MANUFACTURER">
+          <End Role="MANUFACTURER" Type="Self.MANUFACTURER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANUFACTURER">
+              <PropertyRef Name="MR_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT">
+              <PropertyRef Name="MR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MEDICAMENTOS_has_GROUP_Group">
           <End Role="Group" Type="Self.Group" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -547,6 +561,10 @@
           <AssociationSet Name="FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS" Association="Self.FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS">
             <End Role="SYMPTOMS" EntitySet="SYMPTOMS" />
             <End Role="MEDICAMENT_has_SYMPTOMS" EntitySet="MEDICAMENT_has_SYMPTOMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEDICAMENT_MANUFACTURER" Association="Self.FK_MEDICAMENT_MANUFACTURER">
+            <End Role="MANUFACTURER" EntitySet="MANUFACTURER" />
+            <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
           </AssociationSet>
           <AssociationSet Name="FK_MEDICAMENTOS_has_GROUP_Group" Association="Self.FK_MEDICAMENTOS_has_GROUP_Group">
             <End Role="Group" EntitySet="Group" />
