@@ -45,7 +45,7 @@ namespace WpfApp3
             foreach (var item in query)
             {
                 
-                if (maxElem<item.Counter)
+                if (maxCout<item.Counter)
                 {
                     maxCout = item.Counter;
                     maxElem = item.Element;
@@ -85,6 +85,11 @@ namespace WpfApp3
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Rating_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

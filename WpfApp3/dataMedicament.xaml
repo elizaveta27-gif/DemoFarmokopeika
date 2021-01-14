@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <TabControl   Margin="-10,1.4,9.6,-1"  Grid.Row="1" >
 
-            <TabItem Header="Основная информация">
+            <TabItem Header="Основная информация" MouseLeftButtonDown="TabItem_MouseLeftButtonDown" >
                 <Grid x:Name="mainGrid" Grid.Row="2" IsEnabled="True" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -30,26 +30,26 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="174*"/>
-                        <ColumnDefinition Width="619*"/>
+                        <ColumnDefinition Width="173*"/>
+                        <ColumnDefinition Width="29*"/>
+                        <ColumnDefinition Width="586*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Вид лекарства" Grid.Column="0" Grid.Row="0" Name="col22"></TextBlock>
-                    <TextBox Name="Med_Type" Grid.Row="0" Grid.Column="1" Margin="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" TextChanged="Med_Type_TextChanged" BorderBrush="White" Style="{StaticResource TBDetail}"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Вид лекарства" Grid.Column="0" Grid.Row="0" Name="col22" Margin="47,10,46.8,10"></TextBlock>
+                    <TextBox Name="Med_Type" Grid.Row="0" Grid.Column="1" Margin="0.2,9,0,9" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" TextChanged="Med_Type_TextChanged" BorderBrush="White" Style="{StaticResource TBDetail}"/>
 
-                    <TextBlock Grid.Row="1" Text="Производитель" VerticalAlignment="Center" HorizontalAlignment="Center"  ></TextBlock>
-                    <TextBox Name="MedManafacturer" Grid.Row="1" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
-                    <TextBlock Grid.Row="2" Text="Наличие рецепта" VerticalAlignment="Center" HorizontalAlignment="Center"  ></TextBlock>
-                    <TextBox Name="MedRecep" Grid.Row="2" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
-                    <TextBlock Grid.Row="3" Text="Форма выпуска" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
-                    <TextBox Name="MedApperence" Grid.Row="3" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
-                    <TextBlock Grid.Row="4" Text="Срок годности" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
-                    <TextBox Name="Date" Grid.Row="4" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
-                    <TextBlock Grid.Row="5" Text="Действующее вещество" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
-                    <TextBox Name="ActiveIn" Grid.Row="5" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
-                    <TextBlock Grid.Row="6" Text="Цена" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.358,3.132" ></TextBlock>
-                    <TextBox Name="Price" Grid.Row="6" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
-                    <TextBlock Grid.Row="7" Text="Болезни" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.358,3.132" Margin="0" />
-                    <TextBox Name="Disease" Grid.Row="7" Grid.Column="1" Margin="0" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="1" Text="Производитель" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="44,10,42.8,10"  ></TextBlock>
+                    <TextBox Name="MedManafacturer" Grid.Row="1" Grid.Column="1" Margin="0.2,9,0,9" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="2" Text="Наличие рецепта" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="38,10,37.8,10"  ></TextBlock>
+                    <TextBox Name="MedRecep" Grid.Row="2" Grid.Column="1" Margin="0.2,9,0,9" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="3" Text="Форма выпуска" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="43,10,43.8,10" ></TextBlock>
+                    <TextBox Name="MedApperence" Grid.Row="3" Grid.Column="1" Margin="0.2,9,0,9" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="4" Text="Срок годности" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="46,10,45.8,10" ></TextBlock>
+                    <TextBox Name="Date" Grid.Row="4" Grid.Column="1" Margin="0.2,9,0,9" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="5" Text="Действующее вещество" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,10,19.8,10" ></TextBlock>
+                    <TextBox Name="ActiveIn" Grid.Row="5" Grid.Column="1" Margin="0.2,9,0,9" Style="{StaticResource TBDetail}"/>
+                    <TextBlock Grid.Row="6" Text="Цена" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.358,3.132" Margin="72,10,71.8,10" ></TextBlock>
+                    <TextBox Name="Price" Grid.Row="6" Grid.Column="1" Margin="0.2,9,0,9" Style="{StaticResource TBDetail}"/>
+
                 </Grid>
 
             </TabItem>
@@ -136,7 +136,7 @@
 
         </TabControl>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Название" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Row="0" Height="16" Width="53" RenderTransformOrigin="0.675,0.4"  />
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,3,0,3.6" TextWrapping="Wrap" VerticalAlignment="Center" Name="findText" TextChanged="MedName_TextChanged" Width="328" Grid.Row="0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,3,0,3.6" TextWrapping="Wrap" VerticalAlignment="Center" Name="findText" TextChanged="MedName_TextChanged" Width="328" Grid.Row="0" BorderBrush="White"/>
     </Grid>
 
 

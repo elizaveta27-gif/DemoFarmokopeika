@@ -45,7 +45,7 @@
             </Grid>
         </Grid>
         <TextBlock Grid.Row="2" Text="Рейтинг лекарств" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" FontWeight="ExtraBlack"></TextBlock>
-        <DataGrid x:Name="rating" Grid.Row="2" Margin="0,30,0,0" >
+        <DataGrid x:Name="rating" Grid.Row="2" Margin="0,30,0,0" SelectionChanged="Rating_SelectionChanged" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*" >
                     <DataGridTextColumn.HeaderStyle>

@@ -68,42 +68,56 @@ namespace WpfApp3
             FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
             string Login = login.Text;
             string Password = password.Text;
-            var transaction = from user in dbContext.Sellers
-                              where user.S_LOGIN == Login && user.S_PASSWORD == Password
-                              select new
-                              {
-                                  name = user.S_FIRST_NAME,
-                                  last_name = user.S_LAST_NAME,
-                                  patranymic = user.S_PATRONYMIC,
-                                  login = user.S_LOGIN,
-                                  password = user.S_PASSWORD
-                              };
-
-
-            foreach (var item in transaction)
+            if (string.IsNullOrEmpty(Login))
             {
-                NameSeller = $"{item.last_name} {item.name} {item.patranymic}";
+                MessageBox.Show("Введите логин");
 
-            }
-
-            if (transaction.Count() == 0)
+            }else if (string.IsNullOrEmpty(Password))
             {
-                MessageBox.Show("Пользователь не найден");
-
+                MessageBox.Show("Введите пароль");
             }
             else
             {
-                var sel = dbContext.Sellers.Where(s => s.S_LOGIN == Login);
-                foreach (var item in sel)
+                var transaction = from user in dbContext.Sellers
+                                  where user.S_LOGIN == Login && user.S_PASSWORD == Password
+                                  select new
+                                  {
+                                      name = user.S_FIRST_NAME,
+                                      last_name = user.S_LAST_NAME,
+                                      patranymic = user.S_PATRONYMIC,
+                                      login = user.S_LOGIN,
+                                      password = user.S_PASSWORD
+                                  };
+
+
+                foreach (var item in transaction)
                 {
-                    seller = item;
+                    NameSeller = $"{item.last_name} {item.name} {item.patranymic}";
+
                 }
-                MessageBox.Show("Пользователь авторизовался");
-                access = seller.Access_Seller.NAME;
-                var MainPage = new MainPage();
-                MainPage.Show();
-                this.Close();
+
+                if (transaction.Count() == 0)
+                {
+                    MessageBox.Show("Пользователь не найден");
+
+                }
+                else
+                {
+
+                    var sel = dbContext.Sellers.Where(s => s.S_LOGIN == Login);
+                    foreach (var item in sel)
+                    {
+                        seller = item;
+                    }
+                    MessageBox.Show("Пользователь авторизовался");
+                    access = seller.Access_Seller.NAME;
+                    var MainPage = new MainPage();
+                    MainPage.Show();
+                    this.Close();
+                }
+
             }
+
 
 
         }

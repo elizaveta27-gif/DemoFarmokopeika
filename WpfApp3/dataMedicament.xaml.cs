@@ -100,22 +100,13 @@ namespace WpfApp3
                         {
                             name = AI.Active_Substance.AS_NAME
                         };
-            var disease = from s in dbContext.MEDICAMENT_has_SYMPTOMS
-                          join d in dbContext.MEDICATIONs on s.S_ID  equals d.S_ID
-                           where s.MEDICAMENT.M_NAME.ToUpper() == str.ToUpper() || s.MEDICAMENT.M_NAME.ToUpper() == str.ToUpper()
-                           select new
-                           {
-                               nameDisease = d.DISEASE.NAME
-                           };
+            
             foreach (var item in activeIn)
             {
                 ActiveIn.Text += $"{item.name} \n";
             }
 
-            foreach (var item in disease)
-            {
-                Disease.Text += $"{item.nameDisease}\n";
-            }
+           
         }
 
 
@@ -411,6 +402,9 @@ namespace WpfApp3
             }
         }
 
-        
+        private void TabItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

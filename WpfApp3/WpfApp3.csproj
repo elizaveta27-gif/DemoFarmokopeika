@@ -51,6 +51,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,6 +72,9 @@
     </ApplicationDefinition>
     <Compile Include="AddAtx.xaml.cs">
       <DependentUpon>AddAtx.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="registration.xaml.cs">
+      <DependentUpon>registration.xaml</DependentUpon>
     </Compile>
     <Compile Include="report.xaml.cs">
       <DependentUpon>report.xaml</DependentUpon>
@@ -124,6 +128,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Medicament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="registration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,6 +217,39 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\star_rating_bookmark_favourite_save_priority_icon_145931.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\far.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\group_81033.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\3289557-clan-group-partners-peers-people_107100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\user_check_icon_128710.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add_icon-icons.com_52393.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\delete_delete_exit_1577.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\edit_icon-icons.com_52382.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\usergroup_81006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\usergroup_87485.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

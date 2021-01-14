@@ -272,7 +272,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FFDA3838"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
@@ -309,7 +309,7 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Height" Value="auto"/>
-        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Margin" Value="8"/>
         <!--<Setter Property="Width" Value="150"/>-->
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="Black"/>
@@ -398,5 +398,49 @@
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
         <Setter Property="UndoLimit" Value="4000"/>
     </Style>
-    
+
+    <Style x:Key="MouseOverButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid">
+                        <Border x:Name="border" CornerRadius="2" BorderBrush="#fff" BorderThickness="2">
+                            <Border.Background >
+                                <SolidColorBrush Color="White">
+
+                                </SolidColorBrush>
+
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="Bold">
+                            </ContentPresenter>
+                        </Border>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="White"/>
+
+
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="#fff"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
 </ResourceDictionary>

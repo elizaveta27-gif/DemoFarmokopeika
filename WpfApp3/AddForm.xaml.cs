@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -29,8 +30,10 @@ namespace WpfApp3
         List<int> symList = new List<int>();
         List<int> groupList = new List<int>();
         //public List<MANUFACTURER> mANUFACTURERs = dbContext.MANUFACTURERs.ToList();
-        public AddForm(MEDICAMENT selectedMedicament)
+        public MainPage mainPage;
+        public AddForm(MEDICAMENT selectedMedicament,MainPage mainPage)
         {
+            this.mainPage = mainPage; 
 
             InitializeComponent();
             if (selectedMedicament != null)
@@ -166,6 +169,13 @@ namespace WpfApp3
                 {
                     FARMOKAIPKAEntities.GetContext().SaveChanges();
                     MessageBox.Show("Информация сохранена");
+                    mainPage.Close();
+                    MainPage mainPage2 = new MainPage();
+                    mainPage2.WindowState = (WindowState)System.Windows.Forms.FormWindowState.Maximized;
+
+                    mainPage2.Show();
+                    
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
@@ -179,8 +189,8 @@ namespace WpfApp3
 
                 MessageBox.Show(ex.Message.ToString());
             }
-           
-            
+
+          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,52 @@
+﻿<Window x:Class="WpfApp3.registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="registration" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="23*"/>
+            
+            <RowDefinition Height="35*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270*"/>
+            <ColumnDefinition Width="523*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Регистрация" HorizontalAlignment="Center" Style="{StaticResource Text}" FontSize="20"   Width="122" Grid.ColumnSpan="2" Margin="0,1,0,0" />
+        <TextBlock  Grid.Row="1" Grid.RowSpan="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="15" Margin="0" Width="25">Имя</TextBlock>
+        <TextBlock  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="0" Width="51">Фамилия"</TextBlock>
+        <TextBlock  Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="0" Width="54">Отчество</TextBlock>
+        <TextBlock  Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="0" Width="64">Должность</TextBlock>
+        <TextBlock  Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="0" Width="54">Телефон</TextBlock>
+        <TextBlock  Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="0" Width="37">Адрес</TextBlock>
+        <TextBlock  Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="0" Width="43">Пароль</TextBlock>
+        <TextBlock  Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="0" Width="37">Логин</TextBlock>
+        <TextBlock  Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Center" Height="16" Margin="0" Width="42">Доступ</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="1"  Margin="9.6,3.8,9.6,6.4"  x:Name="TBName"   />
+        <TextBox Grid.Column="1" Grid.Row="2"  Margin="9.6,3.6,9.6,6.4"  x:Name="TBSurname"/>
+        <TextBox Grid.Column="1" Grid.Row="3"  Margin="9.6,3.6,9.6,5.6"  x:Name="TBLastName"/>
+        <TextBox Grid.Column="1" Grid.Row="4"  Margin="9.6,4.4,9.6,5.6"  x:Name="TBPhone"/>
+        <TextBox Grid.Column="1" Grid.Row="5"  Margin="9.6,4.4,9.6,5.8"  x:Name="TBpost"/>
+        <TextBox Grid.Column="1" Grid.Row="7"  Margin="9.6,4,9.6,5.2"  x:Name="TBPassword"/>
+        <TextBox Grid.Column="1" Grid.Row="8"  Margin="9.6,3.8,9.6,5.4"  x:Name="TBLogin"/>
+        <TextBox Grid.Column="1" Grid.Row="6"  Margin="9.6,4.2,9.6,6"  x:Name="TBAdress"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="9" VerticalAlignment="Center" Width="333" x:Name="listAccess" DisplayMemberPath="NAME" Margin="9.6,0,0,0" Height="25"/>
+        <Button Style="{StaticResource ButRoundCorner}" Grid.Row="17" x:Name="BtnBack" Click="BtnSave_Click" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="115" Height="30" Content="Сохранить"/>
+
+    </Grid>
+</Window>

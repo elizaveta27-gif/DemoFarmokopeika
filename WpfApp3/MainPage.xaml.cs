@@ -29,7 +29,7 @@ namespace WpfApp3
         Seller seller = new Seller();
         
 
-        public void queryMainCatalog()
+        public  void queryMainCatalog()
         {
             var transactions = from m in dbContext.MEDICAMENTs //запрос для заполнения главного каталога
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
@@ -48,8 +48,55 @@ namespace WpfApp3
 
         }
 
+        public  void querySubdirectory()
+        {
+            var sym = from m in dbContext.MEDICAMENT_has_SYMPTOMS
+                      select new
+                      {
+                          sym = m.SYMPTOM.S_NAME,
 
-        public MainPage()
+                      };
+            var gr = from g in dbContext.MEDICAMENTOS_has_GROUP
+                     group g by g.Group.NAME into gg
+                     select new
+                     {
+                         gr = gg.Key
+                     };
+            var diasese = from s in dbContext.MEDICATIONs
+                          join d in dbContext.MEDICAMENT_has_SYMPTOMS on s.S_ID equals d.S_ID
+
+                          select new
+                          {
+                              d = s.DISEASE.NAME
+                          };
+
+            foreach (var item in diasese.GroupBy(d => d.d))
+            {
+                DgridDisease.Items.Add(item);
+            }
+
+            foreach (var item in gr)
+            {
+                DgridGroup.Items.Add(item);
+            }
+
+            
+
+            foreach (var item in sym.Distinct())
+            {
+                DgridSym.Items.Add(item);
+            }
+        }
+
+        public void  clearDataGrid()
+        {
+            DgridMedicament.Items.Clear();
+            DgridGroup.Items.Clear();
+            DgridDisease.Items.Clear();
+            DgridSym.Items.Clear();
+        }
+
+        public  MainPage()
         {
 
             InitializeComponent();
@@ -67,8 +114,30 @@ namespace WpfApp3
                           sym = m.SYMPTOM.S_NAME,
                      
                       };
+            var gr = from g in dbContext.MEDICAMENTOS_has_GROUP
+                     group g by g.Group.NAME into gg
+                     select new
+                     {
+                         gr = gg.Key
+                     };
+            var diasese = from s in dbContext.MEDICATIONs
+                          join d in dbContext.MEDICAMENT_has_SYMPTOMS on s.S_ID equals d.S_ID
+                    
+                          select new
+                          {
+                              d = s.DISEASE.NAME
+                          };
+           
+            foreach (var item in diasese.GroupBy(d => d.d))
+            {
+                DgridDisease.Items.Add(item);
+            }
 
-            
+            foreach (var item in gr)
+            {
+                DgridGroup.Items.Add(item);
+            }
+
             foreach (var item in med)
             {
                 DgridMedicament.Items.Add(item);
@@ -80,7 +149,7 @@ namespace WpfApp3
             }
             if (MainWindow.access != "Администратор")
             {
-                EditItem.IsEnabled = false;
+                //EditItem.IsEnabled = false;
             }
 
 
@@ -88,10 +157,11 @@ namespace WpfApp3
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-                DgridMedicament.Items.Clear();
+            clearDataGrid();
                 if (!explation.IsHitTestVisible)
                 {
                     queryMainCatalog();
+                    querySubdirectory();
                 }
            
            
@@ -110,7 +180,7 @@ namespace WpfApp3
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
 
-                               where m.M_NAME.ToLower().Contains(findWord.ToLower()) || MR.NAME.ToLower().Contains(findWord.ToLower()) || d.DISEASE.NAME.ToLower().Contains(findWord.ToLower()) || s.SYMPTOM.S_NAME.ToLower().Contains(findWord.ToLower())
+                               //where m.M_NAME.ToLower().Contains(findWord.ToLower()) || MR.NAME.ToLower().Contains(findWord.ToLower()) || d.DISEASE.NAME.ToLower().Contains(findWord.ToLower()) || s.SYMPTOM.S_NAME.ToLower().Contains(findWord.ToLower())
 
 
                                select new
@@ -121,7 +191,7 @@ namespace WpfApp3
                                    Price = m.M_PRICE
 
                                };
-
+          
 
             if (transactions.Count() == 0)
             {
@@ -129,11 +199,10 @@ namespace WpfApp3
             }
             else
             {
-                if (DgridMedicament.Items != null)
-                {
-                    DgridMedicament.Items.Clear();
-                }
-                foreach (var item in transactions.Distinct().GroupBy(n => n.name))
+
+                DgridMedicament.Items.Clear();
+                var tr = transactions.ToList().FindAll(i=> i.sym.ToLower().Contains(findWord.ToLower()) || i.name.ToLower().Contains(findWord.ToLower()));
+                foreach (var item in tr.Distinct().GroupBy(m=>m.name))
                 {
                     DgridMedicament.Items.Add(item);
                 }
@@ -190,12 +259,6 @@ namespace WpfApp3
                 MessageBox.Show("Выделите товар, который хотите положить в корзину");
             }
 
-        
-
-
-
-
-
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -212,33 +275,46 @@ namespace WpfApp3
                
                     var cell = DgridMedicament.SelectedCells[0];
                     var row = DgridMedicament.ItemContainerGenerator.ContainerFromItem(cell.Item) as DataGridRow;
-                    if (row != null && row.IsSelected)
+                if (row != null && row.IsSelected)
                     {
-                    var selectStr = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;//название лекарства
-                    DgridSym.Items.Clear();
-                    var symptom = from s in dbContext.MEDICAMENT_has_SYMPTOMS
-                                  where s.MEDICAMENT.M_NAME == selectStr
-                                  select new
-                                  {
-                                      name = s.MEDICAMENT.M_NAME,
-                                      sym = s.SYMPTOM.S_NAME
-                                  };
-                    foreach (var item in symptom.GroupBy(m => m.sym))
+                        var selectStr = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;//название лекарства
+                        DgridSym.Items.Clear();
+                        var symptom = from s in dbContext.MEDICAMENT_has_SYMPTOMS
+                                      where s.MEDICAMENT.M_NAME == selectStr
+                                      select new
+                                      {
+                                          name = s.MEDICAMENT.M_NAME,
+                                          sym = s.SYMPTOM.S_NAME
+                                      };
+                        foreach (var item in symptom.GroupBy(m => m.sym))
+                        {
+                            DgridSym.Items.Add(item);
+                        }
+                        var diasese = from s in dbContext.MEDICATIONs
+                                      join d in dbContext.MEDICAMENT_has_SYMPTOMS on s.S_ID equals d.S_ID
+                                      where d.MEDICAMENT.M_NAME == selectStr
+                                      select new
+                                      {
+                                          d = s.DISEASE.NAME
+                                      };
+                        DgridDisease.Items.Clear();
+                        foreach (var item in diasese.GroupBy(d=>d.d))
+                        {
+                            DgridDisease.Items.Add(item);
+                        }
+                        var gr = from g in dbContext.MEDICAMENTOS_has_GROUP
+                                      where g.MEDICAMENT.M_NAME == selectStr
+                                      group g by g.Group.NAME into gg
+                                      select new
+                                      {
+                                          gr = gg.Key
+                                      };
+                    DgridGroup.Items.Clear();
+                    foreach (var item in gr)
                     {
-                        DgridSym.Items.Add(item);
+                        DgridGroup.Items.Add(item);
                     }
-                    var diasese = from s in dbContext.MEDICATIONs
-                                  join d in dbContext.MEDICAMENT_has_SYMPTOMS on s.S_ID equals d.S_ID
-                                  where d.MEDICAMENT.M_NAME == selectStr
-                                  select new
-                                  {
-                                      d = s.DISEASE.NAME
-                                  };
-                    DgridDisease.Items.Clear();
-                    foreach (var item in diasese)
-                    {
-                        DgridDisease.Items.Add(item);
-                    }
+
                 }
                   
                 
@@ -261,9 +337,9 @@ namespace WpfApp3
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            var addForm = new AddForm(null);
+            var addForm = new AddForm(null,this);
             addForm.Show();
-            this.Close();
+           
         }
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
@@ -272,14 +348,14 @@ namespace WpfApp3
             {
                 var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
                 var name = dbContext.MEDICAMENTs.First(m => m.M_NAME == firstSelectedCellContent);
-                var editForm = new AddForm(name);
+                var editForm = new AddForm(name,this);
                 editForm.Show();
             }
             catch (Exception ex)
             {
 
-                //MessageBox.Show("Выделите объект, который хотите редактировать", ex.Message);
-                Console.WriteLine("");
+                MessageBox.Show("Выделите объект, который хотите редактировать");
+              
             }
            
 
@@ -287,32 +363,43 @@ namespace WpfApp3
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             this.Close();
+            
         }
 
         private void MenuItem_Click_5(object sender, RoutedEventArgs e)
         {
-            
-            var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
-            var name = dbContext.MEDICAMENTs.Where(m => m.M_NAME == firstSelectedCellContent);
-           
-            if (MessageBox.Show($"Вы точно хотите удалить следующие {firstSelectedCellContent.Count()} элементов", 
-                "Внмимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            try
             {
-                try
-                {
-                    FARMOKAIPKAEntities._context.MEDICAMENTs.RemoveRange(name);
-                    FARMOKAIPKAEntities.GetContext().SaveChanges();
-                    MessageBox.Show("Данные удалены");
-                }
-                catch (Exception ex)
-                {
+                var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+                var name = dbContext.MEDICAMENTs.Where(m => m.M_NAME == firstSelectedCellContent);
 
-                    MessageBox.Show(ex.Message.ToString());
+                if (MessageBox.Show($"Вы точно хотите удалить следующие {firstSelectedCellContent.Count()} элементов",
+                    "Внмимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        FARMOKAIPKAEntities._context.MEDICAMENTs.RemoveRange(name);
+                        FARMOKAIPKAEntities.GetContext().SaveChanges();
+                        MessageBox.Show("Данные удалены");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message.ToString());
+                    }
                 }
+                DgridMedicament.Items.Clear();
+                queryMainCatalog(); 
             }
-            DgridMedicament.Items.Clear();
-            queryMainCatalog();
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Выделите строку, которую хотите удалить");
+            }
+          
         }
 
         private void DgridMedicament_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
@@ -332,7 +419,7 @@ namespace WpfApp3
 
         private void MenuItem_MouseLeave_2(object sender, MouseEventArgs e)
         {
-            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+            strStates.Text = "Наведите на элемент, о котором хотите получить информацию";
         }
 
         private void MenuItem_MouseEnter(object sender, MouseEventArgs e)
@@ -342,7 +429,7 @@ namespace WpfApp3
 
         private void MenuItem_MouseLeave(object sender, MouseEventArgs e)
         {
-            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+            strStates.Text = "Наведите на элемент, о котором хотите получить информацию";
         }
 
         private void MenuItem_MouseEnter_1(object sender, MouseEventArgs e)
@@ -352,7 +439,7 @@ namespace WpfApp3
 
         private void MenuItem_MouseLeave_3(object sender, MouseEventArgs e)
         {
-            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+            strStates.Text = "Наведите на элемент, о котором хотите получить информацию";
         }
 
         private void MenuItem_MouseEnter_3(object sender, MouseEventArgs e)
@@ -372,7 +459,7 @@ namespace WpfApp3
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
-            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+            strStates.Text = "Наведите на элемент, о котором хотите получить информацию";
         }
 
         private void Button_MouseEnter_1(object sender, MouseEventArgs e)
@@ -382,9 +469,126 @@ namespace WpfApp3
 
         private void Button_MouseLeave_1(object sender, MouseEventArgs e)
         {
-            strStates.Text = "Наведите на элемент, о которм хотите получить информацию";
+            strStates.Text = "Наведите на элемент, о котором хотите получить информацию";
         }
 
-       
+        private void MenuItem_MouseEnter_4(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Нажмите, чтобы выйти из системы";
+        }
+
+        private void MenuItem_MouseEnter_5(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_MouseEnter_6(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click_6(object sender, RoutedEventArgs e)
+        {
+            registration registration = new registration();
+            registration.Show();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            var addForm = new AddForm(null, this);
+            addForm.Show();
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+                var name = dbContext.MEDICAMENTs.Where(m => m.M_NAME == firstSelectedCellContent);
+
+                if (MessageBox.Show($"Вы точно хотите удалить следующие {firstSelectedCellContent.Count()} элементов",
+                    "Внмимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        FARMOKAIPKAEntities._context.MEDICAMENTs.RemoveRange(name);
+                        FARMOKAIPKAEntities.GetContext().SaveChanges();
+                        MessageBox.Show("Данные удалены");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                }
+                DgridMedicament.Items.Clear();
+                queryMainCatalog();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Выделите строку, которую хотите удалить");
+            }
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+                var name = dbContext.MEDICAMENTs.First(m => m.M_NAME == firstSelectedCellContent);
+                var editForm = new AddForm(name, this);
+                editForm.Show();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Выделите строку, который хотите редактировать");
+
+            }
+
+        }
+
+        private void DgridMedicament_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+                var name = dbContext.MEDICAMENTs.First(m => m.M_NAME == firstSelectedCellContent);
+                var editForm = new AddForm(name, this);
+                editForm.Show();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Выделите объект, который хотите редактировать");
+
+            }
+        }
+
+        private void Button_MouseEnter_2(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Нажмите, чтобы добавить информацию в таблицу";
+        }
+
+        private void Button_MouseLeave_2(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Наведите на элемент, о котором хотите получить информацию";
+        }
+
+        private void Button_MouseEnter_3(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Выберите элемент и нажмите, чтобы удалить его";
+        }
+
+        private void Button_MouseLeave_3(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Выберите элемент и нажмите, чтобы удалить его";
+        }
+
+        private void Button_MouseEnter_4(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

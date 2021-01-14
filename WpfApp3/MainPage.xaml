@@ -8,17 +8,20 @@
         mc:Ignorable="d"
         
         
-        Title="Каталог" Height="450" Width="800">
+        Title="Каталог" Height="560" Width="900">
     <Window.Resources>
         <Image x:Key="resourceImage" Source="Resources/2849829-interface-magnifier-magnifying-multimedia-search-zoom_107980.png"/>
         <Image x:Key="res" Source="Resources/medication_pills_icon_150136.png"/>
-
+        <Image x:Key="resPlus" Source="Resources/add_icon-icons.com_52393.png"/>
+        <Image x:Key="resDel" Source="Resources/delete_delete_exit_1577.png"/>
+        <Image x:Key="resEdit" Source="Resources/edit_icon-icons.com_52382.png"/>
     </Window.Resources>
 
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition  Height="39"/>
+
+            <RowDefinition  Height="70"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="55*" />
             <RowDefinition Height="265*" />
@@ -28,14 +31,16 @@
         </Grid.RowDefinitions>
 
 
-        <Grid Grid.Row="0" Margin="0,0,-0.4,0.4">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
+        <Grid Grid.Row="0" Margin="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="450*"/>
+                <ColumnDefinition Width="190*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="Resources/fr.png" Grid.Row="0" Grid.Column="1" Margin="0" HorizontalAlignment="Right"/>
+            <Grid Margin="0">
 
-            </Grid.RowDefinitions>
-            <StackPanel >
 
-                <Menu FontSize="15" Style="{StaticResource menuMain}"   VerticalContentAlignment="Center"  Margin="0" >
+                <Menu FontSize="15" Style="{StaticResource menuMain}"   VerticalContentAlignment="Center"  Margin="0" Height="40"  Grid.Row="1">
 
                     <MenuItem Header="Рейтинг лекарств" Click="MenuItem_Click_1" Style="{StaticResource menuItemMain}" Margin="5,0,0,0" >
                         <MenuItem.Icon>
@@ -43,12 +48,12 @@
                         </MenuItem.Icon>
 
                     </MenuItem>
-                    <MenuItem Header="Корзина" Click="MenuItem_Click" Style="{StaticResource menuItemMain}" MouseEnter="MenuItem_MouseEnter_3" MouseLeave="MenuItem_MouseLeave_4">
+                    <MenuItem Header="Корзина" Click="MenuItem_Click" Style="{StaticResource menuItemMain}" MouseEnter="MenuItem_MouseEnter_3" MouseLeave="MenuItem_MouseLeave_4" HorizontalAlignment="Right" Height="32" Margin="0">
                         <MenuItem.Icon>
                             <Image Source="Resources/cart1.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Margin="-2,-4,-8,-6" Width="30" ></Image>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Редактирование данных" Name="EditItem" Style="{StaticResource menuItemMain}" >
+                    <!--<MenuItem Header="Редактирование данных" Name="EditItem" Style="{StaticResource menuItemMain}" >
                         <MenuItem.Icon>
                             <Image Source="Resources/edit_icon.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="26" Margin="-2,-4,-6,-4" Width="26" ></Image>
                         </MenuItem.Icon>
@@ -56,23 +61,30 @@
                         <MenuItem Header="Редактировать" Click="MenuItem_Click_3" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave"></MenuItem>
                         <MenuItem Header="Удалить" Click="MenuItem_Click_5" ToolTip="Выделите строку,чтобы удалить данные" MouseEnter="MenuItem_MouseEnter_1" MouseLeave="MenuItem_MouseLeave_3"></MenuItem>
 
-                    </MenuItem>
-                    <MenuItem Header="Выйти" Click="MenuItem_Click_4" Style="{StaticResource menuItemMain}"  Margin="0,4"  >
+                    </MenuItem>-->
+                    <MenuItem Header="Регистрация" Click="MenuItem_Click_6" Style="{StaticResource menuItemMain}"  Margin="0,4" MouseEnter="MenuItem_MouseEnter_6" >
                         <MenuItem.Icon>
-                            <Image Source="Resources/exit.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Margin="-2,-4,-6,-4" Width="30" />
+                            <Image Source="Resources/user_check_icon_128710.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Margin="-2,-4,-6,-4" Width="29" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Сменить пользователя" Click="MenuItem_Click_4" Style="{StaticResource menuItemMain}"  Margin="0" MouseEnter="MenuItem_MouseEnter_4"  Height="48" Width="218" HorizontalContentAlignment="Center" Padding="20,0,0,0">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/usergroup_87485.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="31"  Width="36" Margin="0,-6,-20,-9" RenderTransformOrigin="0.464,0.697" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </Menu>
-            </StackPanel>
+            </Grid>
 
         </Grid>
 
         <Grid Grid.Row="3" Margin="5,50,5,10">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="68*"/>
-                <RowDefinition Height="84*" />
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="80*" />
+                <RowDefinition Height="80*" />
+                <RowDefinition Height="18*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -81,8 +93,7 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,-0.4,0.2"  EnableColumnVirtualization="True" Grid.Row="0"  HorizontalContentAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="3" Grid.RowSpan="2" SelectionChanged="DgridMedicament_SelectionChanged"
->
+            <DataGrid x:Name="DgridMedicament" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,9.8,0.4"  EnableColumnVirtualization="True" Grid.Row="1"  HorizontalContentAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="2" Grid.RowSpan="3" SelectionChanged="DgridMedicament_SelectionChanged" MouseDoubleClick="DgridMedicament_MouseDoubleClick" >
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Название" Width="*" >
                         <DataGridTextColumn.HeaderStyle>
@@ -90,7 +101,7 @@
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
                                 <Setter Property="FontWeight"  Value="Black"/>
-                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontSize" Value="13"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.Binding>
@@ -104,7 +115,7 @@
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
                                 <Setter Property="FontWeight"  Value="Black"/>
-                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontSize" Value="13"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
@@ -114,7 +125,7 @@
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
                                 <Setter Property="FontWeight"  Value="Black"/>
-                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontSize" Value="13"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
@@ -132,15 +143,15 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid x:Name="DgridSym" AutoGenerateColumns="False" IsReadOnly="True" Margin="0"  EnableColumnVirtualization="True" Grid.Row="2"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="1" BorderBrush="#F0F0F0">
+            <DataGrid x:Name="DgridSym" AutoGenerateColumns="False" IsReadOnly="True" Margin="0.2,5.2,0.2,2.6"  EnableColumnVirtualization="True" Grid.Row="3"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="2" BorderBrush="#F0F0F0">
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Симптомы" Width="*" >
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
-                               <Setter Property="FontWeight"  Value="Black"/>
-                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight"  Value="Black"/>
+                                <Setter Property="FontSize" Value="13"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.Binding>
@@ -151,7 +162,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid x:Name="DgridDisease" AutoGenerateColumns="False" IsReadOnly="True" Margin="0"  EnableColumnVirtualization="True" Grid.Row="2"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="0"  BorderBrush="#F0F0F0"  >
+            <DataGrid x:Name="DgridDisease" AutoGenerateColumns="False" IsReadOnly="True" Margin="0.2,0,0.2,4"  EnableColumnVirtualization="True"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="2"  BorderBrush="#F0F0F0" Grid.Row="1"  >
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Показания к применению" Width="*" >
                         <DataGridTextColumn.HeaderStyle>
@@ -159,7 +170,7 @@
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
                                 <Setter Property="FontWeight"  Value="Black"/>
-                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontSize" Value="13"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.Binding>
@@ -170,15 +181,15 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid x:Name="DgridGroup" AutoGenerateColumns="False" IsReadOnly="True" Margin="0"  EnableColumnVirtualization="True" Grid.Row="2"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="2" BorderBrush="#F0F0F0" >
+            <DataGrid x:Name="DgridGroup" AutoGenerateColumns="False" IsReadOnly="True" Margin="0.2,6,0.2,4.8"  EnableColumnVirtualization="True" Grid.Row="2"  HorizontalContentAlignment="Center" SelectionChanged="DgridMedicament_SelectionChanged" Grid.Column="2" BorderBrush="#F0F0F0" >
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Группа" Width="*" >
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
-                               <Setter Property="FontWeight"  Value="Black"/>
-                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight"  Value="Black"/>
+                                <Setter Property="FontSize" Value="13"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.Binding>
@@ -188,6 +199,18 @@
 
                 </DataGrid.Columns>
             </DataGrid>
+            <Grid Grid.Row="4" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+                <Button Opacity="100" Click="Button_Click_4" Content="{StaticResource resPlus}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" MouseEnter="Button_MouseEnter_2" MouseLeave="Button_MouseLeave_2"/>
+                <Button Opacity="100" Click="Button_Click_5" Content="{StaticResource resDel}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" Grid.Column="1" MouseEnter="Button_MouseEnter_3" MouseLeave="Button_MouseLeave_3"/>
+                <Button Opacity="100" Click="Button_Click_6" Content="{StaticResource resEdit}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" Grid.Column="2" MouseEnter="Button_MouseEnter_4"/>
+            </Grid>
         </Grid>
 
         <Grid Name="LogoContainer"  Grid.Row="1" Margin="0">
