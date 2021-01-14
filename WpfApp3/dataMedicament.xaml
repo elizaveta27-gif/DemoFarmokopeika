@@ -9,14 +9,14 @@
         Title="dataMedicament" Height="450" Width="800">
 
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="30*"/>
             <RowDefinition Height="401*"/>
         </Grid.RowDefinitions>
-        <TabControl   Margin="-10,1.4,9.6,-1"  Grid.Row="1" >
+        <TabControl   Margin="0"  Grid.Row="1"  >
 
-            <TabItem Header="Основная информация" MouseLeftButtonDown="TabItem_MouseLeftButtonDown" >
+            <TabItem Header="Основная информация" MouseLeftButtonDown="TabItem_MouseLeftButtonDown" Style="{StaticResource tabItem}">
                 <Grid x:Name="mainGrid" Grid.Row="2" IsEnabled="True" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -31,7 +31,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="173*"/>
-                        <ColumnDefinition Width="29*"/>
+                       
                         <ColumnDefinition Width="586*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Вид лекарства" Grid.Column="0" Grid.Row="0" Name="col22" Margin="47,10,46.8,10"></TextBlock>
@@ -53,7 +53,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem>
+            <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
                     <Label Content="Состав" MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
 
@@ -63,7 +63,7 @@
 
             </TabItem>
 
-            <TabItem>
+            <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
                     <Label Content="Фармакологическое действие" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"/>
                 </TabItem.Header>
@@ -72,7 +72,7 @@
             </TabItem>
 
 
-            <TabItem>
+            <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
                     <Label Content="Особые указания" MouseLeftButtonDown="Label_MouseLeftButtonDown_2"/>
                 </TabItem.Header>
@@ -81,7 +81,7 @@
             </TabItem>
 
 
-            <TabItem>
+            <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
                     <Label Content="Противопоказания" MouseLeftButtonDown="Label_MouseLeftButtonDown_3"/>
                 </TabItem.Header>
@@ -89,7 +89,7 @@
 
             </TabItem>
 
-            <TabItem>
+            <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
                     <Label Content="Побочные эффекты" MouseLeftButtonDown="Label_MouseLeftButtonDown_5"/>
                 </TabItem.Header>
@@ -97,7 +97,7 @@
 
             </TabItem>
 
-            <TabItem>
+            <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
                     <Label Content="Способ применения и дозы" MouseLeftButtonDown="Label_MouseLeftButtonDown_4"/>
                 </TabItem.Header>
@@ -105,14 +105,14 @@
 
             </TabItem>
 
-            <TabItem>
+            <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
                     <Label Content="Передозировка" MouseLeftButtonDown="Label_MouseLeftButtonDown_6"/>
                 </TabItem.Header>
                 <TextBox Name="overDose" TextChanged="OverDose_TextChanged"></TextBox>
             </TabItem>
 
-            <TabItem>
+            <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header >
                     <Label Content="Болезнь и симптомы" MouseLeftButtonDown="Label_MouseLeftButtonDown_8"/>
                 </TabItem.Header>
@@ -124,8 +124,8 @@
                         <RowDefinition Height="119*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Болезнь"  Grid.Row="0" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="26" Width="78"></TextBlock>
-                    <TextBlock Text="Симптомы"  Grid.Row="2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="27" Width="109"></TextBlock>
+                    <TextBlock Text="Болезни"  Grid.Row="0" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Height="24" Width="75"></TextBlock>
+                    <TextBlock Text="Симптомы"  Grid.Row="2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Height="24" Width="93"></TextBlock>
                     <TextBox Grid.Row="1" Name="TBDisease" Margin="0,4,0,4.8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     <TextBox  Grid.Row="3" Name="TBSymptom"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,2.2,0,0"></TextBox>
                 </Grid>

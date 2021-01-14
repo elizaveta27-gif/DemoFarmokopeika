@@ -69,7 +69,7 @@
                     </MenuItem>
                     <MenuItem Header="Сменить пользователя" Click="MenuItem_Click_4" Style="{StaticResource menuItemMain}"  Margin="0" MouseEnter="MenuItem_MouseEnter_4"  Height="48" Width="218" HorizontalContentAlignment="Center" Padding="20,0,0,0">
                         <MenuItem.Icon>
-                            <Image Source="Resources/usergroup_87485.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="31"  Width="36" Margin="0,-6,-20,-9" RenderTransformOrigin="0.464,0.697" />
+                            <Image Source="Resources/usergroup_87485.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="36"  Width="33" Margin="0,-12,-17,-8" RenderTransformOrigin="0.464,0.697" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </Menu>
@@ -207,9 +207,9 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Button Opacity="100" Click="Button_Click_4" Content="{StaticResource resPlus}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" MouseEnter="Button_MouseEnter_2" MouseLeave="Button_MouseLeave_2"/>
-                <Button Opacity="100" Click="Button_Click_5" Content="{StaticResource resDel}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" Grid.Column="1" MouseEnter="Button_MouseEnter_3" MouseLeave="Button_MouseLeave_3"/>
-                <Button Opacity="100" Click="Button_Click_6" Content="{StaticResource resEdit}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" Grid.Column="2" MouseEnter="Button_MouseEnter_4"/>
+                <Button Opacity="100" Click="Button_Click_4" Content="{StaticResource resPlus}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" MouseEnter="Button_MouseEnter_2" MouseLeave="Button_MouseLeave_2" Name="AddBut"/>
+                <Button Opacity="100" Click="Button_Click_5" Content="{StaticResource resDel}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" Grid.Column="1" MouseEnter="Button_MouseEnter_3" MouseLeave="Button_MouseLeave_3" x:Name="DelBut"/>
+                <Button Opacity="100" Click="Button_Click_6" Content="{StaticResource resEdit}" Background="#fff" BorderBrush="White" Style="{StaticResource MouseOverButtonStyle}" Grid.Column="2" MouseEnter="Button_MouseEnter_4" MouseLeave="Button_MouseLeave_4" x:Name="EditBtn"/>
             </Grid>
         </Grid>
 
@@ -249,7 +249,7 @@
         <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Каталог" VerticalAlignment="Top" Width="117" Height="39"   />
 
         <Grid Grid.Row="4" Margin="10">
-            <Button Margin="0" Width="200" HorizontalAlignment="Right" Content="Положить в корзину" Style="{StaticResource RoundCorner}" Click="Button_Click_2" VerticalAlignment="Bottom" Height="20" MouseEnter="Button_MouseEnter_1" MouseLeave="Button_MouseLeave_1"/>
+            <Button Margin="0" Width="200" HorizontalAlignment="Right" Content="Положить в корзину" Style="{StaticResource ButRoundCorner}" Click="Button_Click_2" VerticalAlignment="Bottom" Height="21" MouseEnter="Button_MouseEnter_1" MouseLeave="Button_MouseLeave_1"/>
             <TextBlock Grid.Row="4" HorizontalAlignment="Left" Name="strStates"  VerticalAlignment="Center">Наведите на элемент, о которм хотите получить информацию</TextBlock>
         </Grid>
 

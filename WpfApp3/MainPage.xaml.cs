@@ -150,6 +150,9 @@ namespace WpfApp3
             if (MainWindow.access != "Администратор")
             {
                 //EditItem.IsEnabled = false;
+                AddBut.Visibility = Visibility.Hidden;
+                DelBut.Visibility = Visibility.Hidden;
+                EditBtn.Visibility = Visibility.Hidden;
             }
 
 
@@ -180,16 +183,13 @@ namespace WpfApp3
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
 
-                               //where m.M_NAME.ToLower().Contains(findWord.ToLower()) || MR.NAME.ToLower().Contains(findWord.ToLower()) || d.DISEASE.NAME.ToLower().Contains(findWord.ToLower()) || s.SYMPTOM.S_NAME.ToLower().Contains(findWord.ToLower())
-
-
                                select new
                                {
                                    name = m.M_NAME,
                                    sym = s.SYMPTOM.S_NAME,
                                    MR = MR.NAME,
-                                   Price = m.M_PRICE
-
+                                   Price = m.M_PRICE,
+                                   disease = d.DISEASE.NAME
                                };
           
 
@@ -201,7 +201,7 @@ namespace WpfApp3
             {
 
                 DgridMedicament.Items.Clear();
-                var tr = transactions.ToList().FindAll(i=> i.sym.ToLower().Contains(findWord.ToLower()) || i.name.ToLower().Contains(findWord.ToLower()));
+                var tr = transactions.ToList().FindAll(i=> i.sym.ToLower().Contains(findWord.ToLower()) || i.name.ToLower().Contains(findWord.ToLower()) || i.disease.ToLower().Contains(findWord.ToLower()));
                 foreach (var item in tr.Distinct().GroupBy(m=>m.name))
                 {
                     DgridMedicament.Items.Add(item);
@@ -588,7 +588,12 @@ namespace WpfApp3
 
         private void Button_MouseEnter_4(object sender, MouseEventArgs e)
         {
+            strStates.Text = "Выберите элемент и нажмите, чтобы отредактировать его";
+        }
 
+        private void Button_MouseLeave_4(object sender, MouseEventArgs e)
+        {
+            strStates.Text = "Наведите на элемент, о котором хотите получить информацию";
         }
     }
 }

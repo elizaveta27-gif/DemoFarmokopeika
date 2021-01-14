@@ -443,4 +443,10 @@
 
     </Style>
 
+    <Style TargetType="TabItem" x:Key="tabItem">
+        <Setter Property="Background" Value="AntiqueWhite"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        
+    </Style>
+
 </ResourceDictionary>
