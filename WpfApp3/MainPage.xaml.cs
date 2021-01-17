@@ -153,6 +153,7 @@ namespace WpfApp3
                 AddBut.Visibility = Visibility.Hidden;
                 DelBut.Visibility = Visibility.Hidden;
                 EditBtn.Visibility = Visibility.Hidden;
+                regestration.IsEnabled = false;
             }
 
 
@@ -551,18 +552,21 @@ namespace WpfApp3
 
         private void DgridMedicament_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (MainWindow.access == "Администратор")
             {
-                var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
-                var name = dbContext.MEDICAMENTs.First(m => m.M_NAME == firstSelectedCellContent);
-                var editForm = new AddForm(name, this);
-                editForm.Show();
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
+                    var name = dbContext.MEDICAMENTs.First(m => m.M_NAME == firstSelectedCellContent);
+                    var editForm = new AddForm(name, this);
+                    editForm.Show();
+                }
+                catch (Exception ex)
+                {
 
-                MessageBox.Show("Выделите объект, который хотите редактировать");
+                    MessageBox.Show("Выделите объект, который хотите редактировать");
 
+                }
             }
         }
 

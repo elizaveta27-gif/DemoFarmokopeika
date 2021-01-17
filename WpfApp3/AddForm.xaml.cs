@@ -48,7 +48,7 @@ namespace WpfApp3
             listSym.ItemsSource = FARMOKAIPKAEntities.GetContext().SYMPTOMS.ToList();
             listGroup.ItemsSource = FARMOKAIPKAEntities.GetContext().Groups.ToList();
           
-            listDisease.ItemsSource = FARMOKAIPKAEntities.GetContext().DISEASEs.ToList();
+            //listDisease.ItemsSource = FARMOKAIPKAEntities.GetContext().DISEASEs.ToList();
             var transaction = from m in dbContext.MEDICAMENTs
                               join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
                               join atx in dbContext.MEDICAMENT_has_ATX on m.M_ID equals atx.M_ID
