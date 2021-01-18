@@ -19,8 +19,7 @@ namespace WpfApp3
     /// </summary>
     public partial class registration : Window
     {
-        FARMOKAIPKAEntities dbcontext = new FARMOKAIPKAEntities();
-        List<string> listsAccess = new List<string>();
+        readonly FARMOKAIPKAEntities dbcontext = new FARMOKAIPKAEntities();
         public registration()
         {
             InitializeComponent();
@@ -53,13 +52,12 @@ namespace WpfApp3
                 this.Close();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 MessageBox.Show("Введите все данные");
             }
-           
-          
+
         }
     }
 }

@@ -20,16 +20,14 @@ namespace WpfApp3
     /// </summary>
     public partial class AddForm : Window    
     {
-        private MEDICAMENT medicament = new MEDICAMENT();
+        readonly private MEDICAMENT medicament = new MEDICAMENT();
         public static FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
-        //public int idManufacturer=0;
         public int idAtx = 0;
         public int idSym = 0;
         public int idGroup = 0;
-        List<int> atxId = new List<int>();
-        List<int> symList = new List<int>();
-        List<int> groupList = new List<int>();
-        //public List<MANUFACTURER> mANUFACTURERs = dbContext.MANUFACTURERs.ToList();
+        readonly List<int> atxId = new List<int>();
+        readonly List<int> symList = new List<int>();
+        readonly List<int> groupList = new List<int>();
         public MainPage mainPage;
         public AddForm(MEDICAMENT selectedMedicament,MainPage mainPage)
         {
@@ -39,48 +37,22 @@ namespace WpfApp3
             if (selectedMedicament != null)
             {
                 medicament = selectedMedicament;
-                //listManafacturer.Text = dbContext.MANUFACTURERs;
-                var listatx = medicament.MEDICAMENT_has_ATX;
             }
             DataContext = medicament;
             listManafacturer.ItemsSource = FARMOKAIPKAEntities._context.MANUFACTURERs.ToList();
             listATX.ItemsSource = FARMOKAIPKAEntities._context.ATXes.ToList();
             listSym.ItemsSource = FARMOKAIPKAEntities.GetContext().SYMPTOMS.ToList();
             listGroup.ItemsSource = FARMOKAIPKAEntities.GetContext().Groups.ToList();
-          
-            //listDisease.ItemsSource = FARMOKAIPKAEntities.GetContext().DISEASEs.ToList();
-            var transaction = from m in dbContext.MEDICAMENTs
-                              join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
-                              join atx in dbContext.MEDICAMENT_has_ATX on m.M_ID equals atx.M_ID
-                              select new
-                              {
-                                  MR_ID = MR.MR_ID,
-                                  ATX_ID = atx.A_ID
-                              };
-            //mANUFACTURERs = FARMOKAIPKAEntities._context.MANUFACTURERs.ToList();
             
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder errors = new StringBuilder();
-
-            //if(string.IsNullOrWhiteSpace(medicament.M_NAME))
-            //{
-            //    errors.AppendLine("Введите название лекарства");
-            //}
-            //if (string.IsNullOrWhiteSpace(medicament.M_COMPOSITION))
-            //{
-            //    errors.AppendLine("Введите название состав лекарства");
-            //}
-            //if (string.IsNullOrWhiteSpace(medicament.M_PHARMACOLOGICAL__ACTION) || string.IsNullOrWhiteSpace(medicament.M_METHOD_USE_DOSAGE ) || string.IsNullOrWhiteSpace(medicament.M_DRUG_INTERACTIONS))
-            //{
-            //    errors.AppendLine("Нельзя оставлять это поле пустым");
+           
             try
             {
                 var mANUFACTURERs = dbContext.MANUFACTURERs;
                 var nameMR = listManafacturer.Text;
-                //}
                 if (dbContext.MEDICAMENTs.Where(m => m.M_NAME.ToUpper() == TBName.Text.ToUpper()).Count() == 0)
                 {
 
@@ -90,7 +62,7 @@ namespace WpfApp3
                     var ATX = dbContext.ATXes;
                     var sYMPTOMs = dbContext.SYMPTOMS;
                     var groupId = dbContext.Groups;
-                    //сделать исключение 
+             
                     int idManufacturer = (int)(mANUFACTURERs.First(m => m.NAME == nameMR).MR_ID);
 
 
@@ -153,55 +125,45 @@ namespace WpfApp3
                     FARMOKAIPKAEntities.GetContext().MEDICAMENTOS_has_GROUP.Add(a);
                 }
 
-                if (errors.Length > 0)
-                {
-                    MessageBox.Show(errors.ToString());
-                    return;
-                }
-
-
                 if (medicament.M_ID == 0)
                 {
                     FARMOKAIPKAEntities.GetContext().MEDICAMENTs.Add(medicament);
                 }
 
-                try
+                FARMOKAIPKAEntities.GetContext().SaveChanges();
+                MessageBox.Show("Информация сохранена");
+                mainPage.Close();
+                MainPage mainPage2 = new MainPage
                 {
-                    FARMOKAIPKAEntities.GetContext().SaveChanges();
-                    MessageBox.Show("Информация сохранена");
-                    mainPage.Close();
-                    MainPage mainPage2 = new MainPage();
-                    mainPage2.WindowState = (WindowState)System.Windows.Forms.FormWindowState.Maximized;
-
-                    mainPage2.Show();
-                    
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                    WindowState = (WindowState)System.Windows.Forms.FormWindowState.Maximized
+                };
+                mainPage2.Show();
+                this.Close();
 
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message.ToString());
             }
 
-          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var nameAtx = listATX.Text;
-            var ATX = dbContext.ATXes;
-            idAtx = (int)(ATX.First(m => m.NAME == nameAtx).A_ID);
-            listATX.Text = "";
-            atxId.Add(idAtx);
+            try
+            {
+                var nameAtx = listATX.Text;
+                var ATX = dbContext.ATXes;
+                idAtx = (int)(ATX.First(m => m.NAME == nameAtx).A_ID);
+                listATX.Text = "";
+                atxId.Add(idAtx);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Выберите ATX из списка");
+                
+            }
            
-
 
         }
 
@@ -215,10 +177,9 @@ namespace WpfApp3
                 listSym.Text = "";
                 symList.Add(idSym);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                MessageBox.Show($"{ex.Message.ToString()}");
+                MessageBox.Show("Выберите симптом из списка");
             }
           
         }
@@ -233,10 +194,10 @@ namespace WpfApp3
                 listGroup.Text = "";
                 groupList.Add(idGroup);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                MessageBox.Show($"{ex.Message.ToString()}");
+                MessageBox.Show("Выберите группу лекарства из списка");
             }
            
         }
@@ -249,9 +210,6 @@ namespace WpfApp3
             
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }

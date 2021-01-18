@@ -62,7 +62,7 @@
                         <MenuItem Header="Удалить" Click="MenuItem_Click_5" ToolTip="Выделите строку,чтобы удалить данные" MouseEnter="MenuItem_MouseEnter_1" MouseLeave="MenuItem_MouseLeave_3"></MenuItem>
 
                     </MenuItem>-->
-                    <MenuItem Header="Регистрация" Click="MenuItem_Click_6" Style="{StaticResource menuItemMain}"  Margin="0,4" MouseEnter="MenuItem_MouseEnter_6" Name="regestration">
+                    <MenuItem Header="Регистрация" Click="MenuItem_Click_6" Style="{StaticResource menuItemMain}"  Margin="0,4" MouseEnter="MouseEnter_Registration" Name="regestration" MouseLeave="Regestration_MouseLeave">
                         <MenuItem.Icon>
                             <Image Source="Resources/user_check_icon_128710.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Margin="-2,-4,-6,-4" Width="29" />
                         </MenuItem.Icon>
@@ -227,7 +227,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBox Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="0" VerticalAlignment="Center" Name="wordFind" Grid.ColumnSpan="2" Grid.Row="0" LostMouseCapture="WordFind_LostMouseCapture" Height="30"></TextBox>
+            <TextBox Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="0" VerticalAlignment="Center" Name="wordFind" Grid.ColumnSpan="2" Grid.Row="0"  Height="30"></TextBox>
             <Button Content="{StaticResource resourceImage}"  Margin="0" Click="Button_Click" Style="{StaticResource RoundCorner}" Grid.Row="0" VerticalAlignment="Center" Height="30" Grid.Column="1" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
             <TextBlock Text="Введите название лекарства, симптома или болезни" Margin="0" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="#FFE42121" IsHitTestVisible="False" FontSize="14" Grid.ColumnSpan="2"  Name="explation" >
 
