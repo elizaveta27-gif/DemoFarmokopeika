@@ -149,7 +149,7 @@ namespace WpfApp3
             }
             if (MainWindow.access != "Администратор")
             {
-                //EditItem.IsEnabled = false;
+          
                 AddBut.Visibility = Visibility.Hidden;
                 DelBut.Visibility = Visibility.Hidden;
                 EditBtn.Visibility = Visibility.Hidden;
@@ -176,10 +176,7 @@ namespace WpfApp3
 
             findWord = wordFind.Text;
             var transactions = from m in dbContext.MEDICAMENTs
-
-
                                join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
-
                                join MS in dbContext.MEDICAMENT_has_SYMPTOMS on m.M_ID equals MS.M_ID
                                join s in dbContext.MEDICAMENT_has_SYMPTOMS on MS.S_ID equals s.S_ID
                                join d in dbContext.MEDICATIONs on MS.S_ID equals d.S_ID
@@ -217,12 +214,12 @@ namespace WpfApp3
         }
 
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
             
-            var form = new Medicament("");
-            form.Show();
-        }
+        //    var form = new Medicament("");
+        //    form.Show();
+        //}
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
@@ -375,14 +372,17 @@ namespace WpfApp3
             try
             {
                 var firstSelectedCellContent = ((TextBlock)(this.DgridMedicament.Columns[0].GetCellContent(DgridMedicament.SelectedItem))).Text;
-                var name = dbContext.MEDICAMENTs.Where(m => m.M_NAME == firstSelectedCellContent);
+                var name = dbContext.MEDICAMENTs.First(m => m.M_NAME == firstSelectedCellContent);
 
                 if (MessageBox.Show($"Вы точно хотите удалить следующие {firstSelectedCellContent.Count()} элементов",
                     "Внмимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     try
                     {
-                        FARMOKAIPKAEntities._context.MEDICAMENTs.RemoveRange(name);
+                        
+                        FARMOKAIPKAEntities._context.MEDICAMENTs.Remove(name);
+                   
+                        name.M_ID = 0;
                         FARMOKAIPKAEntities.GetContext().SaveChanges();
                         MessageBox.Show("Данные удалены");
                     }

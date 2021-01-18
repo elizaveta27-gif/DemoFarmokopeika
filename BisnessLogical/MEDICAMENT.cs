@@ -38,12 +38,11 @@ namespace BisnessLogical
         public string M_AVAILABILITY_PRESCRIPTIONS { get; set; }
         public string M_APPEARANCE { get; set; }
         public string M_OVERDOSE { get; set; }
-        public int MR_ID { get; set; }
+        public Nullable<int> MR_ID { get; set; }
         public Nullable<decimal> M_PRICE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTRAINDICATIONS_has_MEDICAMENT> CONTRAINDICATIONS_has_MEDICAMENT { get; set; }
-        public virtual MANUFACTURER MANUFACTURER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEDICAMENT_has_SYMPTOMS> MEDICAMENT_has_SYMPTOMS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -56,5 +55,6 @@ namespace BisnessLogical
         public virtual ICollection<MEDICAMENT_HAS_ACTIVESUBSTANCE> MEDICAMENT_HAS_ACTIVESUBSTANCE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEDICAMENT_has_ATX> MEDICAMENT_has_ATX { get; set; }
+        public virtual MANUFACTURER MANUFACTURER { get; set; }
     }
 }

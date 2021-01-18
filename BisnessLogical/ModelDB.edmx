@@ -96,7 +96,7 @@
           <Property Name="M_AVAILABILITY_PRESCRIPTIONS" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="M_APPEARANCE" Type="nvarchar(max)" Nullable="false" />
           <Property Name="M_OVERDOSE" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MR_ID" Type="int" Nullable="false" />
+          <Property Name="MR_ID" Type="int" />
           <Property Name="M_PRICE" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="MEDICAMENT_HAS_ACTIVESUBSTANCE">
@@ -264,24 +264,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" Type="Self.MEDICAMENT_HAS_ACTIVESUBSTANCE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MEDICAMENT">
-              <PropertyRef Name="M_ID" />
-            </Principal>
-            <Dependent Role="MEDICAMENT_HAS_ACTIVESUBSTANCE">
-              <PropertyRef Name="M_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MEDICAMENT_has_ATX_ATX">
-          <End Role="ATX" Type="Self.ATX" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="ATX" Type="Self.ATX" Multiplicity="0..1" />
           <End Role="MEDICAMENT_has_ATX" Type="Self.MEDICAMENT_has_ATX" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ATX">
@@ -320,7 +304,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS">
+        <Association Name="FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS1">
           <End Role="SYMPTOMS" Type="Self.SYMPTOMS" Multiplicity="1" />
           <End Role="MEDICAMENT_has_SYMPTOMS" Type="Self.MEDICAMENT_has_SYMPTOMS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -332,8 +316,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEDICAMENT_MANUFACTURER">
-          <End Role="MANUFACTURER" Type="Self.MANUFACTURER" Multiplicity="1">
+        <Association Name="FK_MEDICAMENT_MANUFACTURER1">
+          <End Role="MANUFACTURER" Type="Self.MANUFACTURER" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="*" />
@@ -347,9 +331,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENTOS_has_GROUP_Group">
-          <End Role="Group" Type="Self.Group" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
           <End Role="MEDICAMENTOS_has_GROUP" Type="Self.MEDICAMENTOS_has_GROUP" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">
@@ -542,10 +524,6 @@
             <End Role="Active_Substance" EntitySet="Active_Substance" />
             <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" EntitySet="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
           </AssociationSet>
-          <AssociationSet Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT" Association="Self.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT">
-            <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
-            <End Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" EntitySet="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
-          </AssociationSet>
           <AssociationSet Name="FK_MEDICAMENT_has_ATX_ATX" Association="Self.FK_MEDICAMENT_has_ATX_ATX">
             <End Role="ATX" EntitySet="ATX" />
             <End Role="MEDICAMENT_has_ATX" EntitySet="MEDICAMENT_has_ATX" />
@@ -558,11 +536,11 @@
             <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
             <End Role="MEDICAMENT_has_SYMPTOMS" EntitySet="MEDICAMENT_has_SYMPTOMS" />
           </AssociationSet>
-          <AssociationSet Name="FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS" Association="Self.FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS">
+          <AssociationSet Name="FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS1" Association="Self.FK_MEDICAMENT_has_SYMPTOMS_SYMPTOMS1">
             <End Role="SYMPTOMS" EntitySet="SYMPTOMS" />
             <End Role="MEDICAMENT_has_SYMPTOMS" EntitySet="MEDICAMENT_has_SYMPTOMS" />
           </AssociationSet>
-          <AssociationSet Name="FK_MEDICAMENT_MANUFACTURER" Association="Self.FK_MEDICAMENT_MANUFACTURER">
+          <AssociationSet Name="FK_MEDICAMENT_MANUFACTURER1" Association="Self.FK_MEDICAMENT_MANUFACTURER1">
             <End Role="MANUFACTURER" EntitySet="MANUFACTURER" />
             <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
           </AssociationSet>
@@ -685,7 +663,7 @@
           </Key>
           <Property Name="MR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MEDICAMENTs" Relationship="Self.FK_MEDICAMENT_MANUFACTURER" FromRole="MANUFACTURER" ToRole="MEDICAMENT" />
+          <NavigationProperty Name="MEDICAMENTs" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_MANUFACTURER" FromRole="MANUFACTURER" ToRole="MEDICAMENT" />
         </EntityType>
         <EntityType Name="MEDICAMENT">
           <Key>
@@ -703,9 +681,8 @@
           <Property Name="M_AVAILABILITY_PRESCRIPTIONS" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="M_APPEARANCE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="M_OVERDOSE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MR_ID" Type="Int32" Nullable="false" />
+          <Property Name="MR_ID" Type="Int32" />
           <NavigationProperty Name="CONTRAINDICATIONS_has_MEDICAMENT" Relationship="Self.FK_CONTRAINDICATIONS_has_MEDICAMENT_MEDICAMENT" FromRole="MEDICAMENT" ToRole="CONTRAINDICATIONS_has_MEDICAMENT" />
-          <NavigationProperty Name="MANUFACTURER" Relationship="Self.FK_MEDICAMENT_MANUFACTURER" FromRole="MEDICAMENT" ToRole="MANUFACTURER" />
           <NavigationProperty Name="MEDICAMENT_has_SYMPTOMS" Relationship="Self.FK_MEDICAMENT_has_SYMPTOMS_MEDICAMENT" FromRole="MEDICAMENT" ToRole="MEDICAMENT_has_SYMPTOMS" />
           <NavigationProperty Name="MEDICAMENTOS_has_GROUP" Relationship="Self.FK_MEDICAMENTOS_has_GROUP_MEDICAMENT" FromRole="MEDICAMENT" ToRole="MEDICAMENTOS_has_GROUP" />
           <NavigationProperty Name="Sells" Relationship="Self.FK_Sell_MEDICAMENT" FromRole="MEDICAMENT" ToRole="Sell" />
@@ -713,6 +690,7 @@
           <NavigationProperty Name="MEDICAMENT_HAS_ACTIVESUBSTANCE" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT" FromRole="MEDICAMENT" ToRole="MEDICAMENT_HAS_ACTIVESUBSTANCE" />
           <NavigationProperty Name="MEDICAMENT_has_ATX" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_MEDICAMENT" FromRole="MEDICAMENT" ToRole="MEDICAMENT_has_ATX" />
           <Property Name="M_PRICE" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="MANUFACTURER" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_MANUFACTURER" FromRole="MEDICAMENT" ToRole="MANUFACTURER" />
         </EntityType>
         <EntityType Name="MEDICAMENT_has_SYMPTOMS">
           <Key>
@@ -869,7 +847,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CONTRAINDICATIONS_has_MEDICAMENT_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CONTRAINDICATIONS_has_MEDICAMENT" Type="Self.CONTRAINDICATIONS_has_MEDICAMENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -904,20 +884,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEDICAMENT_MANUFACTURER">
-          <End Role="MANUFACTURER" Type="Self.MANUFACTURER" Multiplicity="1" />
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MANUFACTURER">
-              <PropertyRef Name="MR_ID" />
-            </Principal>
-            <Dependent Role="MEDICAMENT">
-              <PropertyRef Name="MR_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MEDICAMENT_has_SYMPTOMS_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENT_has_SYMPTOMS" Type="Self.MEDICAMENT_has_SYMPTOMS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -929,7 +899,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENTOS_has_GROUP_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MEDICAMENTOS_has_GROUP" Type="Self.MEDICAMENTOS_has_GROUP" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -941,7 +913,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sell_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Sell" Type="Self.Sell" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -953,7 +927,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIDE_EFFECT_has_MEDICAMENT_MEDICAMENT">
-          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" />
+          <End Role="MEDICAMENT" Type="Self.MEDICAMENT" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SIDE_EFFECT_has_MEDICAMENT" Type="Self.SIDE_EFFECT_has_MEDICAMENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -977,7 +953,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICATION_SYMPTOMS">
-          <End Role="SYMPTOMS" Type="Self.SYMPTOM" Multiplicity="1" />
+          <End Role="SYMPTOMS" Type="Self.SYMPTOM" Multiplicity="1" >
+          </End>
           <End Role="MEDICATION" Type="Self.MEDICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SYMPTOMS">
@@ -1051,10 +1028,6 @@
           <AssociationSet Name="FK_MEDICAMENTOS_has_GROUP_Group" Association="Self.FK_MEDICAMENTOS_has_GROUP_Group">
             <End Role="Group" EntitySet="Groups" />
             <End Role="MEDICAMENTOS_has_GROUP" EntitySet="MEDICAMENTOS_has_GROUP" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MEDICAMENT_MANUFACTURER" Association="Self.FK_MEDICAMENT_MANUFACTURER">
-            <End Role="MANUFACTURER" EntitySet="MANUFACTURERs" />
-            <End Role="MEDICAMENT" EntitySet="MEDICAMENTs" />
           </AssociationSet>
           <AssociationSet Name="FK_MEDICAMENT_has_SYMPTOMS_MEDICAMENT" Association="Self.FK_MEDICAMENT_has_SYMPTOMS_MEDICAMENT">
             <End Role="MEDICAMENT" EntitySet="MEDICAMENTs" />
@@ -1133,6 +1106,10 @@
             <End Role="MEDICAMENT" EntitySet="MEDICAMENTs" />
             <End Role="MEDICAMENT_has_ATX" EntitySet="MEDICAMENT_has_ATX" />
           </AssociationSet>
+          <AssociationSet Name="FK_MEDICAMENT_MANUFACTURER" Association="FARMOKAIPKAModel.FK_MEDICAMENT_MANUFACTURER">
+            <End Role="MANUFACTURER" EntitySet="MANUFACTURERs" />
+            <End Role="MEDICAMENT" EntitySet="MEDICAMENTs" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1176,7 +1153,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEDICAMENT_HAS_ACTIVESUBSTANCE_MEDICAMENT">
-          <End Type="FARMOKAIPKAModel.MEDICAMENT" Role="MEDICAMENT" Multiplicity="0..1" />
+          <End Type="FARMOKAIPKAModel.MEDICAMENT" Role="MEDICAMENT" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="FARMOKAIPKAModel.MEDICAMENT_HAS_ACTIVESUBSTANCE" Role="MEDICAMENT_HAS_ACTIVESUBSTANCE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEDICAMENT">
@@ -1198,7 +1177,9 @@
           <NavigationProperty Name="MEDICAMENT" Relationship="FARMOKAIPKAModel.FK_MEDICAMENT_has_ATX_MEDICAMENT" FromRole="MEDICAMENT_has_ATX" ToRole="MEDICAMENT" />
         </EntityType>
         <Association Name="FK_MEDICAMENT_has_ATX_ATX">
-          <End Type="FARMOKAIPKAModel.ATX" Role="ATX" Multiplicity="0..1" />
+          <End Type="FARMOKAIPKAModel.ATX" Role="ATX" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="FARMOKAIPKAModel.MEDICAMENT_has_ATX" Role="MEDICAMENT_has_ATX" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ATX">
@@ -1218,6 +1199,18 @@
             </Principal>
             <Dependent Role="MEDICAMENT_has_ATX">
               <PropertyRef Name="M_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEDICAMENT_MANUFACTURER">
+          <End Type="FARMOKAIPKAModel.MANUFACTURER" Role="MANUFACTURER" Multiplicity="0..1" />
+          <End Type="FARMOKAIPKAModel.MEDICAMENT" Role="MEDICAMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANUFACTURER">
+              <PropertyRef Name="MR_ID" />
+            </Principal>
+            <Dependent Role="MEDICAMENT">
+              <PropertyRef Name="MR_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

@@ -98,7 +98,7 @@ namespace WpfApp3
 
                 if (transaction.Count() == 0)
                 {
-                    MessageBox.Show("Пользователь не найден");
+                    MessageBox.Show("Неверно введен логин или пароль");
 
                 }
                 else

@@ -39,7 +39,7 @@ namespace WpfApp3
             if (selectedMedicament != null)
             {
                 medicament = selectedMedicament;
-                listManafacturer.Text = medicament.MANUFACTURER.NAME;
+                //listManafacturer.Text = dbContext.MANUFACTURERs;
                 var listatx = medicament.MEDICAMENT_has_ATX;
             }
             DataContext = medicament;
