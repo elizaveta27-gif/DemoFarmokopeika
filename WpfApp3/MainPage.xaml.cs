@@ -100,6 +100,7 @@ namespace WpfApp3
         {
 
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
             var med = from m in dbContext.MEDICAMENTs
                       join MR in dbContext.MANUFACTURERs on m.MR_ID equals MR.MR_ID
                       select new
@@ -221,7 +222,7 @@ namespace WpfApp3
         }
 
        
-
+      
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 

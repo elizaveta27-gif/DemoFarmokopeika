@@ -144,5 +144,13 @@ namespace WpfApp3
             Cost.Text = cost.ToString();
 
         }
+
+        private void ListMedicament_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            if (!(new[] { 1}).Contains(e.Column.DisplayIndex))
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

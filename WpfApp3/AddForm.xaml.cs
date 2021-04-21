@@ -37,8 +37,10 @@ namespace WpfApp3
             if (selectedMedicament != null)
             {
                 medicament = selectedMedicament;
+              
             }
             DataContext = medicament;
+           
             listManafacturer.ItemsSource = FARMOKAIPKAEntities._context.MANUFACTURERs.ToList();
             listATX.ItemsSource = FARMOKAIPKAEntities._context.ATXes.ToList();
             listSym.ItemsSource = FARMOKAIPKAEntities.GetContext().SYMPTOMS.ToList();
@@ -210,6 +212,9 @@ namespace WpfApp3
             
         }
 
-       
+        private void ListManafacturer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

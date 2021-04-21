@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         
         
-        Title="Каталог" Height="560" Width="900">
+        Title="Каталог" Height="560" Width="900" Icon="Resources/homepage_87530.png" ShowInTaskbar="False">
     <Window.Resources>
         <Image x:Key="resourceImage" Source="Resources/2849829-interface-magnifier-magnifying-multimedia-search-zoom_107980.png"/>
         <Image x:Key="res" Source="Resources/medication_pills_icon_150136.png"/>
@@ -227,7 +227,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBox Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="0" VerticalAlignment="Center" Name="wordFind" Grid.ColumnSpan="2" Grid.Row="0"  Height="30"></TextBox>
+            <TextBox Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1"  Margin="0" VerticalAlignment="Center" Name="wordFind" Grid.ColumnSpan="2" Grid.Row="0"  Height="30"/>
             <Button Content="{StaticResource resourceImage}"  Margin="0" Click="Button_Click" Style="{StaticResource RoundCorner}" Grid.Row="0" VerticalAlignment="Center" Height="30" Grid.Column="1" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
             <TextBlock Text="Введите название лекарства, симптома или болезни" Margin="0" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="#FFE42121" IsHitTestVisible="False" FontSize="14" Grid.ColumnSpan="2"  Name="explation" >
 

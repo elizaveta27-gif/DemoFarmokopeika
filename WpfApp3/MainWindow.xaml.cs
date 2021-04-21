@@ -67,19 +67,19 @@ namespace WpfApp3
         {
             FARMOKAIPKAEntities dbContext = FARMOKAIPKAEntities.GetContext();
             string Login = login.Text;
-            string Password = password.Text;
+            //string Password = password.Text;
             if (string.IsNullOrEmpty(Login))
             {
                 MessageBox.Show("Введите логин");
 
-            }else if (string.IsNullOrEmpty(Password))
+            }else if (string.IsNullOrEmpty(password.Text))
             {
                 MessageBox.Show("Введите пароль");
             }
             else
             {
                 var transaction = from user in dbContext.Sellers
-                                  where user.S_LOGIN == Login && user.S_PASSWORD == Password
+                                  where user.S_LOGIN == Login && user.S_PASSWORD == password.Text
                                   select new
                                   {
                                       name = user.S_FIRST_NAME,
