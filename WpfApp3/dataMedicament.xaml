@@ -6,17 +6,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="dataMedicament" Height="450" Width="800">
+        WindowStartupLocation ="CenterScreen"
+        Title="Подробнее" Height="450" Width="1000" WindowStyle="None" Icon="Resources/farmakopeyka.png">
+
+    <Window.Resources>
+        <Style TargetType="DataGridCell" x:Name="DGridValueCenter">
+            <Style.Setters>
+                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+
 
 
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="30*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="401*"/>
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="72" Margin="0" VerticalAlignment="Top">
+            <Image x:Name="MinButton"  Margin="0"  Stretch="Fill" Width="34" RenderTransformOrigin="0.435,1.832" MouseDown="MinButton_MouseDown" Height="42">
+                <Image.Style>
+                    <Style  TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="Resources/minus.png"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinButton}" Value="True">
+                                <Setter Property="Source" Value="Resources/minus_black.png"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+                <Image.Effect>
+                    <BlurEffect Radius="1"/>
+                </Image.Effect>
+            </Image>
+            <Image x:Name="CloseButton" Margin="0" Width="38" RenderTransformOrigin="0.542,1.759" MouseDown="CloseButton_MouseDown" Height="29">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                        <Setter Property="Source" Value="Resources/close.png"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=CloseButton}" Value="True">
+                                <Setter Property="Source" Value="Resources/close_black.png"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                        
+                    </Style>
+                </Image.Style>
+                <Image.Effect>
+                    <BlurEffect Radius="2"/>
+                </Image.Effect>
+            </Image>
+
+
+        </StackPanel>
         <TabControl   Margin="0"  Grid.Row="1"  >
 
-            <TabItem Header="Основная информация" MouseLeftButtonDown="TabItem_MouseLeftButtonDown" Style="{StaticResource tabItem}">
+            <TabItem Header="Основная информация" MouseLeftButtonDown="TabItem_MouseLeftButtonDown" Style="{StaticResource tabItem}" FontWeight="Bold">
                 <Grid x:Name="mainGrid" Grid.Row="2" IsEnabled="True" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -31,7 +77,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="173*"/>
-                       
+
                         <ColumnDefinition Width="586*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Вид лекарства" Grid.Column="0" Grid.Row="0" Name="col22" Margin="47,10,46.8,10"></TextBlock>
@@ -55,17 +101,17 @@
             </TabItem>
             <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
-                    <Label Content="Состав" MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
+                    <Label Content="Состав" MouseLeftButtonDown="Label_MouseLeftButtonDown" FontWeight="Bold"/>
 
                 </TabItem.Header>
 
-                <TextBox Grid.Row="0" Grid.Column="1" Name="Composition"></TextBox>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="Composition" ></TextBox>
 
             </TabItem>
 
             <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
-                    <Label Content="Фармакологическое действие" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"/>
+                    <Label Content="Фармакологическое действие" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontWeight="Bold"/>
                 </TabItem.Header>
                 <TextBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="FarmAction" Text="vsd"/>
 
@@ -74,7 +120,7 @@
 
             <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
-                    <Label Content="Особые указания" MouseLeftButtonDown="Label_MouseLeftButtonDown_2"/>
+                    <Label Content="Особые указания" MouseLeftButtonDown="Label_MouseLeftButtonDown_2" FontWeight="Bold"/>
                 </TabItem.Header>
                 <TextBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="MedInduction" />
 
@@ -83,7 +129,7 @@
 
             <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
-                    <Label Content="Противопоказания" MouseLeftButtonDown="Label_MouseLeftButtonDown_3"/>
+                    <Label Content="Противопоказания" MouseLeftButtonDown="Label_MouseLeftButtonDown_3" FontWeight="Bold"/>
                 </TabItem.Header>
                 <TextBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="Contraindications" />
 
@@ -91,7 +137,7 @@
 
             <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
-                    <Label Content="Побочные эффекты" MouseLeftButtonDown="Label_MouseLeftButtonDown_5"/>
+                    <Label Content="Побочные эффекты" MouseLeftButtonDown="Label_MouseLeftButtonDown_5" FontWeight="Bold"/>
                 </TabItem.Header>
                 <TextBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="SideEffect" />
 
@@ -99,7 +145,7 @@
 
             <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
-                    <Label Content="Способ применения и дозы" MouseLeftButtonDown="Label_MouseLeftButtonDown_4"/>
+                    <Label Content="Способ применения и дозы" MouseLeftButtonDown="Label_MouseLeftButtonDown_4" FontWeight="Bold"/>
                 </TabItem.Header>
                 <TextBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="MethodDose" />
 
@@ -107,27 +153,28 @@
 
             <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header>
-                    <Label Content="Передозировка" MouseLeftButtonDown="Label_MouseLeftButtonDown_6"/>
+                    <Label Content="Передозировка" MouseLeftButtonDown="Label_MouseLeftButtonDown_6" FontWeight="Bold"/>
                 </TabItem.Header>
                 <TextBox Name="overDose" TextChanged="OverDose_TextChanged"></TextBox>
             </TabItem>
 
             <TabItem Style="{StaticResource tabItem}">
                 <TabItem.Header >
-                    <Label Content="Болезнь и симптомы" MouseLeftButtonDown="Label_MouseLeftButtonDown_8"/>
+                    <Label Content="Болезнь и симптомы" MouseLeftButtonDown="Label_MouseLeftButtonDown_8" FontWeight="Bold"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="44*"/>
-                        <RowDefinition Height="117*"/>
-                        <RowDefinition Height="44*"/>
-                        <RowDefinition Height="119*"/>
+                        <RowDefinition Height="30*"/>
+                        <RowDefinition Height="140"/>
+                        <RowDefinition Height="30*"/>
+                        <RowDefinition Height="140*"/>
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Болезни"  Grid.Row="0" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Height="24" Width="75"></TextBlock>
                     <TextBlock Text="Симптомы"  Grid.Row="2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Height="24" Width="93"></TextBlock>
-                    <TextBox Grid.Row="1" Name="TBDisease" Margin="0,4,0,4.8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                    <TextBox  Grid.Row="3" Name="TBSymptom"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,2.2,0,0"></TextBox>
+                    <TextBox  Grid.Row="3" Name="TBSymptom"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,2.2,0,0" IsReadOnly="True" SelectionBrush="White" BorderBrush="White"></TextBox>
+                    <!--<TextBox  Grid.Row="1" Name="TBDname"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,2.2,0,0" IsReadOnly="True" SelectionBrush="White" BorderBrush="White"></TextBox>-->
+                    <TextBox Grid.Row="1" Name="TBDname" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="White" IsReadOnly="True" SelectionBrush="White"></TextBox>
                 </Grid>
 
             </TabItem>
@@ -135,8 +182,8 @@
 
 
         </TabControl>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Название" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Row="0" Height="16" Width="53" RenderTransformOrigin="0.675,0.4"  />
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,3,0,3.6" TextWrapping="Wrap" VerticalAlignment="Center" Name="findText" TextChanged="MedName_TextChanged" Width="328" Grid.Row="0" BorderBrush="White"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Название" VerticalAlignment="Center" Margin="20,0,0,0" Grid.Row="0" Height="16" Width="60" RenderTransformOrigin="0.675,0.4"  FontWeight="Bold"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" Margin="114,3,0,3.6" TextWrapping="Wrap" VerticalAlignment="Center" Name="findText" TextChanged="MedName_TextChanged" Width="328" Grid.Row="0" BorderBrush="White"/>
     </Grid>
 
 

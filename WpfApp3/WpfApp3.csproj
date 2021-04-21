@@ -251,6 +251,15 @@
   <ItemGroup>
     <Resource Include="Resources\usergroup_87485.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\homepage_87530.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconfinder-bl-1642-data-development-programming-coding-magnifier-4575051_121508.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Hotel-Check-In_43673.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

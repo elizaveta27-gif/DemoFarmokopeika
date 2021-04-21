@@ -86,7 +86,7 @@
 
 
             </StackPanel>
-            <Image Source="Resources/farmakopeyka.png" Margin="-17,0,-2,-14"/>
+            <!--<Image Source="Resources/farmakopeyka.png" Margin="-17,0,-2,-14"/>-->
         </Grid>
 
         <Grid Name="LogoContainer"  Grid.Row="1">
@@ -96,7 +96,7 @@
 
         <TextBlock Text="Логин" Grid.Row="2" Margin="20,61.2,24.6,89.2" FontSize="16" Grid.RowSpan="2"/>
         <TextBlock Text="Пароль" Grid.Row="2" Margin="20,104,24.6,89.2" FontSize="16" Grid.RowSpan="2"/>
-        <TextBox Grid.Row="2" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True" Margin="90,49,24.6,0" VerticalAlignment="Top" Name="login"></TextBox>
+        <TextBox Grid.Row="2" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" Margin="90,49,24.6,0" VerticalAlignment="Top" Name="login"/>
         <TextBlock IsHitTestVisible="False" FontSize="14" Text="Введите логин" Grid.Row="2" Margin="99,57.2,139.6,196" Foreground="#FFE42121" >
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
@@ -109,7 +109,8 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TextBox Grid.Row="2" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1" SpellCheck.IsEnabled="True"  Margin="90,100,25,0" VerticalAlignment="Top" Name="password"></TextBox>
+        <TextBox Grid.Row="2" Style="{StaticResource TB}" TextChanged="TextBox_TextChanged" SelectionOpacity="1"  Margin="90,100,25,0" VerticalAlignment="Top" Name="password"/>
+    
         <TextBlock IsHitTestVisible="False" FontSize="14" Text="Введите пароль" Grid.Row="2" Margin="99,108.2,139.6,145" Foreground="#FFE42121" >
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">

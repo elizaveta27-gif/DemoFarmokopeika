@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="Корзина" Height="450" Width="800">
+        WindowStartupLocation ="CenterScreen"
+        Title="Корзина" Height="450" Width="800" Icon="Resources/cart1.png" >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="326*"/>
-            <ColumnDefinition Width="467*"/>
+            <ColumnDefinition Width="86*"/>
+            <ColumnDefinition Width="240*"/>
+            <ColumnDefinition Width="336*"/>
+            <ColumnDefinition Width="131*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="39*"/>
@@ -17,8 +20,8 @@
             <RowDefinition Height="42*"/>
             <RowDefinition Height="38*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Корзина" Style="{StaticResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Margin="10.8,0,336.6,0.2"/>
-        <DataGrid Grid.Row="1" Margin="10,9.8,9.6,10" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:Name="ListMedicament" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+        <TextBlock Text="Корзина" Style="{StaticResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Margin="10.6,0,205.2,0.2"/>
+        <DataGrid Grid.Row="1" Margin="10,9.8,9.6,10" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:Name="ListMedicament" AutoGenerateColumns="False" Grid.ColumnSpan="4" BeginningEdit="ListMedicament_BeginningEdit" IsReadOnly="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="*" >
                     <DataGridTextColumn.HeaderStyle>
@@ -26,8 +29,11 @@
                             <Setter Property="HorizontalContentAlignment"
                                         Value="Center" />
                         </Style>
+                        
                     </DataGridTextColumn.HeaderStyle>
+                    
                 </DataGridTextColumn>
+                
                 <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
@@ -43,13 +49,14 @@
                                         Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    
 
                 </DataGridTextColumn>
 
             </DataGrid.Columns>
 
         </DataGrid>
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="10,0,10,0">
+        <Grid Grid.Row="2" Grid.ColumnSpan="4" Margin="10,0,9.6,0.4">
             <TextBox HorizontalAlignment="Right" Height="23" Margin="0,10,9.6,9.4" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="150" Name="Cost" Grid.Column="1" />
             <TextBlock HorizontalAlignment="Right" Margin="0,0,179.6,0" TextWrapping="Wrap" Text="Стоимость" VerticalAlignment="Center"/>
             <Button Content="Провести" HorizontalAlignment="Left" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="90" Click="Button_Click" Style="{StaticResource RoundCorner}" Height="30"/>

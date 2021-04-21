@@ -370,7 +370,7 @@ namespace WpfApp3
 
         private void Label_MouseLeftButtonDown_8(object sender, MouseButtonEventArgs e)
         {
-            TBDisease.Text = "";
+           
             TBSymptom.Text = "";
             var sym = from m in dbContext.MEDICAMENTs
                       where m.M_NAME.ToUpper() == str.ToUpper()
@@ -397,7 +397,7 @@ namespace WpfApp3
             }
             foreach (var item in disease.Distinct())
             {
-                convertStr(item.Dname, TBDisease);
+                convertStr(item.Dname, TBDname);
 
             }
         }
@@ -405,6 +405,16 @@ namespace WpfApp3
         private void TabItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void MinButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
         }
     }
 }

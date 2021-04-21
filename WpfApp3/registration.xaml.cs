@@ -30,7 +30,7 @@ namespace WpfApp3
         {
             try
             {
-                var idAccess = dbcontext.Sellers.FirstOrDefault(s => s.Access_Seller.NAME == listAccess.Text).AS_ID;
+                var idAccess = dbcontext.Sellers.First(s => s.Access_Seller.NAME == listAccess.Text).AS_ID;
                 Seller seller = new Seller()
                 {
                     S_FIRST_NAME = TBName.Text,

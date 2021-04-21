@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="registration" Height="450" Width="800">
+        Title="Регистрация" Height="450" Width="800" Icon="Resources/Hotel-Check-In_43673.png" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/>
